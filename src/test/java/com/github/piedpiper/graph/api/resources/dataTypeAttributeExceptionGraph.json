@@ -1,0 +1,20 @@
+{
+	"projectName": "TestProject",
+	"graphName": "TestGraph",
+	"nodeMap": {
+		"Node3": {
+			"nodeName": "Node3",
+			"nodeClass": "com.github.piedpiper.node.mock.MockNode3",
+			"parameterMap": {
+				"param1": {
+					"parameterName": "param1",
+					"parameterType": "CONSTANT",
+					"parameterValue": "akash",
+					"attributeMap": {
+						"DATA_TYPE": "asUnknownMethod"
+					}
+				}
+			}
+		}
+	}
+}

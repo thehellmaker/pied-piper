@@ -1,0 +1,125 @@
+{
+	"projectName": "TestProject",
+	"graphName": "TestGraph",
+	"nodeMap": {
+		"Node1": {
+			"nodeName": "Node1",
+			"nodeClass": "com.github.piedpiper.node.mock.MockNode1"
+		},
+		"Node2": {
+			"nodeName": "Node2",
+			"nodeClass": "com.github.piedpiper.node.mock.MockNode2"
+		},
+		"Node3": {
+			"nodeName": "Node3",
+			"nodeClass": "com.github.piedpiper.node.mock.MockNode3",
+			"parameterMap": {
+				"param1": {
+					"parameterName": "param1",
+					"parameterType": "CONSTANT",
+					"parameterValue": "akash/${runtimeValueParameterValueBased}/${constantValue}"
+				}, 
+				"runtimeValueParameterValueBased": {
+					"parameterName": "runtimeValueParameterValueBased",
+					"parameterType": "CONSTANT",
+					"parameterValue": "${input.runtimeValueParameterValueBasedInput}"
+				}, 
+				"constantValue": {
+					"parameterName": "constantValue",
+					"parameterType": "CONSTANT",
+					"parameterValue": "constant"
+				},
+				"param3": {
+					"parameterName": "param3",
+					"parameterType": "REFERENCE_FROM_ANOTHER_NODE",
+					"parameterValue": "$.nodeOutputList[0].output.referenceValue1",
+					"referenceNodeName": "Node1"
+				},
+				"param4": {
+					"parameterName": "param4",
+					"parameterType": "REFERENCE_FROM_ANOTHER_NODE",
+					"parameterValue": "$.nodeOutputList[0].output.referenceValue2",
+					"referenceNodeName": "Node2"
+				}, 
+				"param6": {
+					"parameterName": "param6",
+					"parameterType": "REFERENCE_FROM_ANOTHER_NODE",
+					"parameterValue": "$.nodeOutputList[0].output.jsonField",
+					"referenceNodeName": "Node2",
+					"attributeMap": {
+						"DATA_TYPE": "asJson"
+					}
+				},
+				"param7": {
+					"parameterName": "param7",
+					"parameterType": "REFERENCE_FROM_ANOTHER_NODE",
+					"parameterValue": "$.nodeOutputList[0].output.jsonField.name",
+					"referenceNodeName": "Node2",
+					"attributeMap": {
+						"DATA_TYPE": "asText"
+					}
+				}
+			}
+		},
+		"Node4": {
+			"nodeName": "Node4",
+			"nodeClass": "com.github.piedpiper.node.mock.MockNode4",
+			"parameterMap": {
+				"param1": {
+					"parameterName": "param1",
+					"parameterType": "REFERENCE_FROM_ANOTHER_NODE",
+					"parameterValue": "$.nodeOutputList[0].output.referenceValue3",
+					"referenceNodeName": "Node3"
+				}
+			}
+		},	
+		"Node5": {
+			"nodeName": "Node5",
+			"nodeClass": "com.github.piedpiper.node.mock.MockNode5",
+			"parameterMap": {
+				"param1": {
+					"parameterName": "param1",
+					"parameterType": "REFERENCE_FROM_ANOTHER_NODE",
+					"parameterValue": "$.nodeOutputList[0].output.referenceValue3",
+					"referenceNodeName": "Node3"
+				}
+			}
+		},
+		"Node6": {
+			"nodeName": "Node6",
+			"nodeClass": "com.github.piedpiper.node.mock.MockNode6",
+			"parameterMap": {
+				"param1": {
+					"parameterName": "param1",
+					"parameterType": "REFERENCE_FROM_ANOTHER_NODE",
+					"parameterValue": "$.nodeOutputList[0].output.referenceValue3",
+					"referenceNodeName": "Node3"
+				}
+			}
+		},
+		"Node7": {
+			"nodeName": "Node7",
+			"nodeClass": "com.github.piedpiper.node.mock.MockNode7",
+			"parameterMap": {
+				"param1": {
+					"parameterName": "param1",
+					"parameterType": "REFERENCE_FROM_ANOTHER_NODE",
+					"parameterValue": "$.nodeOutputList[0].output.referenceValue4",
+					"referenceNodeName": "Node4"
+				},
+				"param2": {
+					"parameterName": "param2",
+					"parameterType": "REFERENCE_FROM_ANOTHER_NODE",
+					"parameterValue": "$.nodeOutputList[0].output.referenceValue5",
+					"referenceNodeName": "Node5"
+				},
+				"param3": {
+					"parameterName": "param3",
+					"parameterType": "REFERENCE_FROM_ANOTHER_NODE",
+					"parameterValue": "$.nodeOutputList[0].output.referenceValue6",
+					"referenceNodeName": "Node6"
+				}
+			}
+		}
+	}
+}

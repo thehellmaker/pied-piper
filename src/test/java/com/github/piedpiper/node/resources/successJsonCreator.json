@@ -1,0 +1,10 @@
+{
+	"region" : {
+		"value" : "us-east-1"
+	},
+	":time" : {
+		"value" : {
+			"hello": "hellp"
+		}
+	}
+}

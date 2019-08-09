@@ -1,0 +1,10 @@
+{
+	"projectName": "TestProject",
+	"graphName": "TestGraph",
+	"nodeMap": {
+		"Node1": {
+			"nodeName": "Node1",
+			"nodeClass": "com.github.piedpiper.node.mock.MockNodeException"
+		}
+	}
+}

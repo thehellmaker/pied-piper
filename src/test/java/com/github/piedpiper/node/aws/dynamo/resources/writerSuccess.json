@@ -1,0 +1,27 @@
+{
+	"accessKey" : {
+		"value" : "ABCDEFG" 
+	},
+	"secretKey" : {
+		"value" : "ABCDEFG" 
+	},
+	"region" : {
+		"value" : "us-east-1"
+	},
+	"tableName" : {
+		"value" : "AlmightyTable"
+	},
+	"keyQueryExpression" : {
+		"value" : "id > :id"
+	},
+	"filterQueryExpression" : {
+		"value" : "time > :time"
+	},
+	":id" : {
+		"value" : "123"
+	},
+	":time" : {
+		"value" : "123324234",
+		"dataTypeName" : "java.lang.Long"
+	}
+}

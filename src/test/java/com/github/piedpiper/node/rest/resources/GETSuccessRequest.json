@@ -1,0 +1,11 @@
+{
+	"url": {
+		"value": "http://www.google.com"
+	},
+	"method": {
+		"value": "GET"
+	},
+	"outputType": {
+		"value": "asJson"
+	}
+}

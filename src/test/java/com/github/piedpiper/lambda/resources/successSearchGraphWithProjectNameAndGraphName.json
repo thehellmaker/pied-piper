@@ -1,0 +1,7 @@
+{
+  "tableName": "AlmightyTable",
+  "projectName":"PROJECT NAME",
+  "graphName":"GRAPH NAME",
+  "accessKey": "AccessKey",
+  "secretKey": "SecretKey"
+}

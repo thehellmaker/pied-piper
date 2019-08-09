@@ -1,0 +1,30 @@
+{
+	"projectName": "TestProject",
+	"graphName": "TestGraph",
+	"nodeMap": {
+		"Node1": {
+			"nodeName": "Node1",
+			"nodeClass": "com.github.piedpiper.node.mock.MockNode8",
+			"parameterMap": {
+				"param1": {
+					"parameterName": "param1",
+					"parameterType": "CONSTANT",
+					"parameterValue": "[\"a\", \"b\", \"c\"]",
+					"attributeMap": {
+						"PARALLELIZE": "true",
+						"DATA_TYPE": "asJson"
+					}
+				},
+        		"param2": {
+					"parameterName": "param2",
+					"parameterType": "CONSTANT",
+					"parameterValue": "[\"a\", \"b\", \"c\"]",
+					"attributeMap": {
+						"PARALLELIZE": "true",
+						"DATA_TYPE": "asJson"
+					}
+				}
+			}
+		}
+	}
+}

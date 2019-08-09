@@ -1,0 +1,138 @@
+{
+	"nodeMap": {
+		"RESTGETCall": {
+			"nodeClass": "com.github.piedpiper.node.rest.RESTServiceNode",
+			"parameterMetadataList": [
+				{
+					"parameterName": "url",
+					"allowedValues": [],
+					"required": true
+				},
+				{
+					"parameterName": "method",
+					"allowedValues": [
+						"GET",
+						"POST",
+						"PUT"
+					],
+					"required": true
+				}
+			],
+			"nodeName": "RESTGETCall",
+			"parameterMap": {
+				"url": {
+					"parameterName": "url",
+					"parameterType": "CONSTANT",
+					"parameterValue": "https://www.youtube.com",
+					"referenceNodeName": "",
+					"required": true,
+					"allowedValues": [],
+					"attributeMap": {
+						
+					}
+				},
+				"method": {
+					"parameterName": "method",
+					"parameterType": "CONSTANT",
+					"parameterValue": "GET",
+					"referenceNodeName": "",
+					"required": true,
+					"allowedValues": [
+						"GET",
+						"POST",
+						"PUT"
+					],
+					"attributeMap": {
+						
+					}
+				}
+			}
+		},
+		"RESTPOSTCall": {
+			"nodeClass": "com.github.piedpiper.node.rest.RESTServiceNode",
+			"parameterMetadataList": [
+				{
+					"parameterName": "url",
+					"allowedValues": [],
+					"required": true
+				},
+				{
+					"parameterName": "method",
+					"allowedValues": [
+						"GET",
+						"POST",
+						"PUT"
+					],
+					"required": true
+				},
+				{
+					"parameterName": "headers",
+					"allowedValues": [],
+					"required": false
+				},
+				{
+					"parameterName": "body",
+					"allowedValues": [],
+					"required": false
+				},
+				{
+					"parameterName": "outputType",
+					"allowedValues": [],
+					"required": false
+				}
+			],
+			"nodeName": "RESTPOSTCall",
+			"parameterMap": {
+				"url": {
+					"parameterName": "url",
+					"parameterType": "CONSTANT",
+					"parameterValue": "https://reqres.in/api/users",
+					"referenceNodeName": "",
+					"required": true,
+					"allowedValues": []
+				},
+				"method": {
+					"parameterName": "method",
+					"parameterType": "CONSTANT",
+					"parameterValue": "POST",
+					"referenceNodeName": "",
+					"required": true,
+					"allowedValues": [
+						"GET",
+						"POST",
+						"PUT"
+					]
+				},
+				"headers": {
+					"parameterName": "headers",
+					"parameterType": "CONSTANT",
+					"parameterValue": "{\n  \"content-type\": \"application/json\"\n}",
+					"referenceNodeName": "",
+					"required": false,
+					"allowedValues": [],
+					"attributeMap": {
+						"DATA_TYPE": "asJson"
+					}
+				},
+				"body": {
+					"parameterName": "body",
+					"parameterType": "CONSTANT",
+					"parameterValue": "{\"name\":\"morpheus\",\"job\":\"leader\"}",
+					"referenceNodeName": "",
+					"required": false,
+					"allowedValues": []
+				},
+				"outputType": {
+					"parameterName": "outputType",
+					"parameterType": "CONSTANT",
+					"parameterValue": "asJson",
+					"referenceNodeName": "",
+					"required": false,
+					"allowedValues": []
+				}
+			}
+		}
+	},
+	"graphName": "RESTServiceCall",
+	"projectName": "Examples"
+}

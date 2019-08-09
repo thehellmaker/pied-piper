@@ -1,0 +1,42 @@
+{
+	"projectName": "TestProject",
+	"graphName": "TestGraph",
+	"nodeMap": {
+		"Node1": {
+			"nodeName": "Node1",
+			"nodeClass": "com.github.piedpiper.node.mock.MockNode1"
+		},
+		"Node2": {
+			"nodeName": "Node2",
+			"nodeClass": "UnknownClass"
+		},
+		"Node3": {
+			"nodeName": "Node3",
+			"nodeClass": "com.github.piedpiper.node.mock.MockNode3",
+			"parameterMap": {
+				"param1": {
+					"parameterName": "param1",
+					"parameterType": "CONSTANT",
+					"parameterValue": "akash"
+				},
+				"param2": {
+					"parameterName": "param2",
+					"parameterType": "CONSTANT",
+					"parameterValue": "${input.runtimeValue}"
+				},
+				"param3": {
+					"parameterName": "param3",
+					"parameterType": "REFERENCE_FROM_ANOTHER_NODE",
+					"parameterValue": "$.nodeOutputList[0].output.referenceValue1",
+					"referenceNodeName": "Node1"
+				},
+				"param4": {
+					"parameterName": "param4",
+					"parameterType": "REFERENCE_FROM_ANOTHER_NODE",
+					"parameterValue": "$.nodeOutputList[0].output.referenceValue2",
+					"referenceNodeName": "Node2"
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,11 @@
+{
+	"accessKey" : {
+		"value" : "ABCDEFG" 
+	},
+	"secretKey" : {
+		"value" : "ABCDEFG" 
+	},
+	"region" : {
+		"value" : ""
+	}
+}

@@ -1,0 +1,9 @@
+{
+	"nodeJsBusinessLogic" : {
+		"value" : "function execute(input) { console.log(input.test.value); return { 'testValue' : input.test.value };}" 
+	},
+	"test" : {
+		"value" : "ABCDEFG" 
+	}
+}
+

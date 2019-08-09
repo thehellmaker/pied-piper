@@ -1,0 +1,52 @@
+{
+	"projectName": "TestProject",
+	"graphName": "TestGraph",
+	"nodeMap": {
+		"Node1": {
+			"nodeName": "Node1",
+			"nodeClass": "com.github.piedpiper.node.mock.MockNode8",
+			"parameterMap": {
+				"param1": {
+					"parameterName": "param1",
+					"parameterType": "CONSTANT",
+					"parameterValue": "[\"a\", \"b\", \"c\"]",
+					"attributeMap": {
+						"PARALLELIZE": "true",
+						"DATA_TYPE": "asJson"
+					}
+				}
+			}
+		},
+		"Node2": {
+			"nodeName": "Node2",
+			"nodeClass": "com.github.piedpiper.node.mock.MockNode8",
+			"parameterMap": {
+				"param1": {
+					"parameterName": "param1",
+					"parameterType": "REFERENCE_FROM_ANOTHER_NODE",
+					"parameterValue": "$.nodeOutputList..output..param1.value",
+					"referenceNodeName": "Node1",
+					"attributeMap": {
+						"DATA_TYPE": "asJson"
+					}
+				}
+			}
+		},
+		"Node3": {
+			"nodeName": "Node3",
+			"nodeClass": "com.github.piedpiper.node.mock.MockNode8",
+			"parameterMap": {
+				"param1": {
+					"parameterName": "param1",
+					"parameterType": "REFERENCE_FROM_ANOTHER_NODE",
+					"parameterValue": "$.nodeOutputList..output..param1.value",
+					"referenceNodeName": "Node1",
+					"attributeMap": {
+						"PARALLELIZE": "true",
+						"DATA_TYPE": "asJson"
+					}
+				}
+			}
+		}
+	}
+}

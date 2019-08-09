@@ -1,0 +1,22 @@
+{
+	"url": {
+		"value": "https://iot.us-east-1.amazonaws.com/keys-and-certificate"
+	},
+	"method": {
+		"value": "POST"
+	},
+	"headers": {
+		"value": {
+			"a": "b",
+			"c": "d"
+		}
+	},
+	"body": {
+		"value": {
+			"tony": "stark"
+		}
+	},
+	"outputType": {
+		"value": "asJson"
+	}
+}

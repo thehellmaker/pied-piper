@@ -1,0 +1,27 @@
+{
+	"projectName": "TestProject",
+	"graphName": "TestGraph",
+	"nodeMap": {
+		"Node1": {
+			"nodeName": "Node3",
+			"nodeClass": "com.github.piedpiper.node.mock.MockNode3",
+			"parameterMap": {
+				"param1": {
+					"parameterName": "param1",
+					"parameterType": "CONSTANT",
+					"parameterValue": "akash/${runtimeValueParameterValueBased}/${constantValue}"
+				}, 
+				"runtimeValueParameterValueBased": {
+					"parameterName": "runtimeValueParameterValueBased",
+					"parameterType": "CONSTANT",
+					"parameterValue": "${input.runtimeValueParameterValueBasedInput}"
+				}, 
+				"constantValue": {
+					"parameterName": "constantValue",
+					"parameterType": "CONSTANT",
+					"parameterValue": "constant"
+				}
+			}
+		}
+	}
+}

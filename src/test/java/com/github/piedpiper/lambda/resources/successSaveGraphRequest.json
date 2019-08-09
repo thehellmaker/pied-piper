@@ -1,0 +1,57 @@
+{
+  "tableName": "AlmightyTable",
+  "graph": {
+      "nodeMap": {
+            "Node1": {
+              "nodeClass": "com.github.piedpiper.node.aws.dynamo.DynamoDBReaderNode",
+              "nodeName": "Node1",
+              "parameterMap": {
+                "tableName": {
+                  "parameterName": "tableName",
+                  "parameterType": "CONSTANT",
+                  "parameterValue": "",
+                  "referenceNodeName": "",
+                  "required": true
+                },
+                "keyQueryExpression": {
+                  "parameterName": "keyQueryExpression",
+                  "parameterType": "CONSTANT",
+                  "parameterValue": "",
+                  "referenceNodeName": "",
+                  "required": false
+                },
+                "filterQueryExpression": {
+                  "parameterName": "filterQueryExpression",
+                  "parameterType": "CONSTANT",
+                  "parameterValue": "",
+                  "referenceNodeName": "",
+                  "required": false
+                },
+                "accessKey": {
+                  "parameterName": "accessKey",
+                  "parameterType": "CONSTANT",
+                  "parameterValue": "",
+                  "referenceNodeName": "",
+                  "required": true
+                },
+                "secretKey": {
+                  "parameterName": "secretKey",
+                  "parameterType": "CONSTANT",
+                  "parameterValue": "",
+                  "referenceNodeName": "",
+                  "required": true
+                },
+                "region": {
+                  "parameterName": "region",
+                  "parameterType": "CONSTANT",
+                  "parameterValue": "",
+                  "referenceNodeName": "",
+                  "required": true
+                }
+              }
+            }
+        },
+        "projectName":"PROJECT NAME",
+        "graphName":"GRAPH NAME"
+    }
+}

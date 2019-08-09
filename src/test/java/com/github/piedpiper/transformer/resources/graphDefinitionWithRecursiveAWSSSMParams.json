@@ -1,0 +1,5565 @@
+{
+	"projectName": "Atom8",
+	"graphName": "ListThingsInThingGroup",
+	"nodeMap": {
+		"ListThingsInThingGroupRESTNode": {
+			"nodeName": "ListThingsInThingGroupRESTNode",
+			"nodeClass": "com.github.piedpiper.node.rest.RESTServiceNode",
+			"nodeSpecification": null,
+			"parameterMap": {
+				"url": {
+					"parameterName": "url",
+					"parameterType": "CONSTANT",
+					"parameterFormat": null,
+					"parameterValue": "https://iot.us-east-1.amazonaws.com/thing-groups/${thingGroupName}/things",
+					"referenceNodeName": "",
+					"attributeMap": null
+				},
+				"method": {
+					"parameterName": "method",
+					"parameterType": "CONSTANT",
+					"parameterFormat": null,
+					"parameterValue": "GET",
+					"referenceNodeName": "",
+					"attributeMap": null
+				},
+				"headers": {
+					"parameterName": "headers",
+					"parameterType": "CONSTANT",
+					"parameterFormat": null,
+					"parameterValue": "{\n\"Authorization\": \"${authorizationHeaderValue}\",\n\"x-amz-date\": \"${x-amz-header-value}\",\n\"host\": \"iot.us-east-1.amazonaws.com\",\n\"Content-Type\": \"application/x-www-form-urlencoded\"\n}",
+					"referenceNodeName": "",
+					"attributeMap": {
+						"DATA_TYPE": "asJson"
+					}
+				},
+				"body": {
+					"parameterName": "body",
+					"parameterType": "CONSTANT",
+					"parameterFormat": null,
+					"parameterValue": "",
+					"referenceNodeName": "",
+					"attributeMap": null
+				},
+				"outputType": {
+					"parameterName": "outputType",
+					"parameterType": "CONSTANT",
+					"parameterFormat": null,
+					"parameterValue": "asJson",
+					"referenceNodeName": "",
+					"attributeMap": null
+				},
+				"thingGroupName": {
+					"parameterName": "thingGroupName",
+					"parameterType": "CONSTANT",
+					"parameterFormat": null,
+					"parameterValue": "${input.thingGroupName}",
+					"referenceNodeName": "",
+					"attributeMap": null
+				},
+				"authorizationHeaderValue": {
+					"parameterName": "authorizationHeaderValue",
+					"parameterType": "REFERENCE_FROM_ANOTHER_NODE",
+					"parameterFormat": null,
+					"parameterValue": "$.nodeOutputList[0].output.body.nodeMap.AWSSignatureLambdaFunction.nodeOutputList[0].output.stringPayload",
+					"referenceNodeName": "CreateAWSSignatureForListThingsInThingGroup",
+					"attributeMap": null
+				},
+				"x-amz-header-value": {
+					"parameterName": "x-amz-header-value",
+					"parameterType": "REFERENCE_FROM_ANOTHER_NODE",
+					"parameterFormat": null,
+					"parameterValue": "$.nodeOutputList[0].output.body.nodeMap.DateHeaderGenerator.nodeOutputList[0].output.jsonPayload.x-amz-date",
+					"referenceNodeName": "CreateAWSSignatureForListThingsInThingGroup",
+					"attributeMap": null
+				},
+				"uid": {
+					"parameterName": "uid",
+					"parameterType": "REFERENCE_FROM_ANOTHER_NODE",
+					"parameterFormat": null,
+					"parameterValue": "$.nodeOutputList[0].output.body.nodeMap.IsAuthorizedBusinessLogicNode.nodeOutputList[0].output.uid",
+					"referenceNodeName": "Authorize",
+					"attributeMap": null
+				},
+				"accessKey": {
+					"parameterName": "accessKey",
+					"parameterType": "REFERENCE_FROM_ANOTHER_NODE",
+					"parameterFormat": null,
+					"parameterValue": "$.nodeOutputList[0].output.secureValue",
+					"referenceNodeName": "AWSSSMNode",
+					"attributeMap": null
+				}
+			},
+			"nodeInputList": [
+				{
+					"nodeSpecification": null,
+					"input": {
+						"url": {
+							"value": "https://iot.us-east-1.amazonaws.com/thing-groups/Akash_Home/things"
+						},
+						"method": {
+							"value": "GET"
+						},
+						"headers": {
+							"value": {
+								"Authorization": "AWS4-HMAC-SHA256 Credential=/20190303/us-east-1/execute-api/aws4_request, SignedHeaders=content-type;host;x-amz-date, Signature=1800c6a411e4342f48b991af1066104623a5c54b6c6ca6328b337c35b9e2a810",
+								"x-amz-date": "20190303T154820Z",
+								"host": "iot.us-east-1.amazonaws.com",
+								"Content-Type": "application/x-www-form-urlencoded"
+							}
+						},
+						"body": {
+							"value": ""
+						},
+						"outputType": {
+							"value": "asJson"
+						},
+						"thingGroupName": {
+							"value": "Akash_Home"
+						},
+						"authorizationHeaderValue": {
+							"value": "AWS4-HMAC-SHA256 Credential=/20190303/us-east-1/execute-api/aws4_request, SignedHeaders=content-type;host;x-amz-date, Signature=1800c6a411e4342f48b991af1066104623a5c54b6c6ca6328b337c35b9e2a810"
+						},
+						"x-amz-header-value": {
+							"value": "20190303T154820Z"
+						},
+						"uid": {
+							"value": "811e42d137d812b35480238f3a5744b6dd5014a0"
+						},
+						"accessKey": {
+							"value": "ABC"
+						}
+					}
+				}
+			],
+			"nodeExecutorList": [],
+			"nodeOutputList": [
+				{
+					"nodeName": "ListThingsInThingGroupRESTNode",
+					"nodeSpecification": null,
+					"output": {
+						"statusText": "OK",
+						"headers": {
+							"x-amz-apigw-id": [
+								"V-OTJEjUIAMFxnA="
+							],
+							"Access-Control-Allow-Origin": [
+								"*"
+							],
+							"Connection": [
+								"keep-alive"
+							],
+							"x-amzn-RequestId": [
+								"c6c538fc-3dcb-11e9-84ab-b72b90b898cc"
+							],
+							"Content-Length": [
+								"113"
+							],
+							"Date": [
+								"Sun, 03 Mar 2019 15:48:23 GMT"
+							],
+							"X-Amzn-Trace-Id": [
+								"Root=1-5c7bf747-1b4db746070f8e740cf485c2"
+							],
+							"Content-Type": [
+								"application/json"
+							]
+						},
+						"rawBody": {
+							
+						},
+						"body": {
+							"nextToken": null,
+							"things": [
+								"Atom8-020459fc4a24",
+								"Atom8-018459fc4a24",
+								"Atom8-030459fc4a24",
+								"Atom8-0a0469fc4a24"
+							]
+						},
+						"status": 200
+					},
+					"stackTrace": null,
+					"auditInfo": {
+						"startTimestamp": 16385325831783,
+						"endTimestamp": 16385395805347
+					}
+				}
+			]
+		},
+		"CreateAWSSignatureForListThingsInThingGroup": {
+			"nodeName": "CreateAWSSignatureForListThingsInThingGroup",
+			"nodeClass": "com.github.piedpiper.node.piedpiper.SubGraphNode",
+			"nodeSpecification": null,
+			"parameterMap": {
+				"projectName": {
+					"parameterName": "projectName",
+					"parameterType": "CONSTANT",
+					"parameterFormat": null,
+					"parameterValue": "Atom8",
+					"referenceNodeName": "",
+					"attributeMap": null
+				},
+				"graphName": {
+					"parameterName": "graphName",
+					"parameterType": "CONSTANT",
+					"parameterFormat": null,
+					"parameterValue": "CreateAWSSignature",
+					"referenceNodeName": "",
+					"attributeMap": null
+				},
+				"tableName": {
+					"parameterName": "tableName",
+					"parameterType": "CONSTANT",
+					"parameterFormat": null,
+					"parameterValue": "AlmightyTable",
+					"referenceNodeName": "",
+					"attributeMap": null
+				},
+				"region": {
+					"parameterName": "region",
+					"parameterType": "CONSTANT",
+					"parameterFormat": null,
+					"parameterValue": "us-east-1",
+					"referenceNodeName": "",
+					"attributeMap": null
+				},
+				"method": {
+					"parameterName": "method",
+					"parameterType": "CONSTANT",
+					"parameterFormat": null,
+					"parameterValue": "GET",
+					"referenceNodeName": "",
+					"attributeMap": null
+				},
+				"host": {
+					"parameterName": "host",
+					"parameterType": "CONSTANT",
+					"parameterFormat": null,
+					"parameterValue": "iot.us-east-1.amazonaws.com",
+					"referenceNodeName": "",
+					"attributeMap": null
+				},
+				"path": {
+					"parameterName": "path",
+					"parameterType": "CONSTANT",
+					"parameterFormat": null,
+					"parameterValue": "/thing-groups/${thingGroupName}/things",
+					"referenceNodeName": "",
+					"attributeMap": null
+				},
+				"service": {
+					"parameterName": "service",
+					"parameterType": "CONSTANT",
+					"parameterFormat": null,
+					"parameterValue": "execute-api",
+					"referenceNodeName": "",
+					"attributeMap": null
+				},
+				"contentType": {
+					"parameterName": "contentType",
+					"parameterType": "CONSTANT",
+					"parameterFormat": null,
+					"parameterValue": "application/x-www-form-urlencoded",
+					"referenceNodeName": "",
+					"attributeMap": null
+				},
+				"jsonPayload": {
+					"parameterName": "jsonPayload",
+					"parameterType": "CONSTANT",
+					"parameterFormat": null,
+					"parameterValue": "{}",
+					"referenceNodeName": "",
+					"attributeMap": null
+				},
+				"stringPayload": {
+					"parameterName": "stringPayload",
+					"parameterType": "CONSTANT",
+					"parameterFormat": null,
+					"parameterValue": "\"\"",
+					"referenceNodeName": "",
+					"attributeMap": null
+				},
+				"thingGroupName": {
+					"parameterName": "thingGroupName",
+					"parameterType": "CONSTANT",
+					"parameterFormat": null,
+					"parameterValue": "${input.thingGroupName}",
+					"referenceNodeName": "",
+					"attributeMap": null
+				}
+			},
+			"nodeInputList": [
+				{
+					"nodeSpecification": null,
+					"input": {
+						"projectName": {
+							"value": "Atom8"
+						},
+						"graphName": {
+							"value": "CreateAWSSignature"
+						},
+						"tableName": {
+							"value": "AlmightyTable"
+						},
+						"region": {
+							"value": "us-east-1"
+						},
+						"method": {
+							"value": "GET"
+						},
+						"host": {
+							"value": "iot.us-east-1.amazonaws.com"
+						},
+						"path": {
+							"value": "/thing-groups/Akash_Home/things"
+						},
+						"service": {
+							"value": "execute-api"
+						},
+						"contentType": {
+							"value": "application/x-www-form-urlencoded"
+						},
+						"jsonPayload": {
+							"value": "{}"
+						},
+						"stringPayload": {
+							"value": ""
+						},
+						"thingGroupName": {
+							"value": "Akash_Home"
+						}
+					}
+				}
+			],
+			"nodeExecutorList": [],
+			"nodeOutputList": [
+				{
+					"nodeName": "CreateAWSSignatureForListThingsInThingGroup",
+					"nodeSpecification": null,
+					"output": {
+						"statusText": "OK",
+						"headers": {
+							"x-amz-apigw-id": [
+								"V-OSqG3OoAMF95g="
+							],
+							"Access-Control-Allow-Origin": [
+								"*"
+							],
+							"Connection": [
+								"keep-alive"
+							],
+							"x-amzn-RequestId": [
+								"c4e8ff19-3dcb-11e9-92d7-7fbe4b80eafb"
+							],
+							"Content-Length": [
+								"7719"
+							],
+							"Date": [
+								"Sun, 03 Mar 2019 15:48:20 GMT"
+							],
+							"X-Amzn-Trace-Id": [
+								"Root=1-5c7bf744-8499131834bbbabcb713bbb0;Sampled=0"
+							],
+							"Content-Type": [
+								"application/json"
+							]
+						},
+						"rawBody": {
+							
+						},
+						"body": {
+							"exceptionTrace": null,
+							"graphName": "CreateAWSSignature",
+							"projectName": "Atom8",
+							"nodeMap": {
+								"DateHeaderGenerator": {
+									"nodeName": "DateHeaderGenerator",
+									"nodeClass": "com.github.piedpiper.node.aws.AWSLambdaNode",
+									"nodeExecutorList": [],
+									"nodeInputList": [
+										{
+											"input": {
+												"secretKey": {
+													"value": ""
+												},
+												"payload": {
+													"value": ""
+												},
+												"functionName": {
+													"value": "AWSHeaderGenerator"
+												},
+												"accessKey": {
+													"value": ""
+												},
+												"region": {
+													"value": "us-east-1"
+												}
+											},
+											"nodeSpecification": null
+										}
+									],
+									"nodeSpecification": null,
+									"parameterMap": {
+										"secretKey": {
+											"parameterType": "AWS_SSM",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "secretKey",
+											"parameterValue": "SecretKey",
+											"parameterFormat": null
+										},
+										"payload": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "payload",
+											"parameterValue": "",
+											"parameterFormat": null
+										},
+										"functionName": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "functionName",
+											"parameterValue": "AWSHeaderGenerator",
+											"parameterFormat": null
+										},
+										"accessKey": {
+											"parameterType": "AWS_SSM",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "accessKey",
+											"parameterValue": "AccessKey",
+											"parameterFormat": null
+										},
+										"region": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "region",
+											"parameterValue": "${input.region}",
+											"parameterFormat": null
+										}
+									},
+									"nodeOutputList": [
+										{
+											"nodeName": "DateHeaderGenerator",
+											"output": {
+												"executedVersion": "$LATEST",
+												"logResult": null,
+												"payload": "eyJ4LWFtei1kYXRlIjoiMjAxOTAzMDNUMTU0ODIwWiJ9",
+												"jsonPayload": {
+													"x-amz-date": "20190303T154820Z"
+												},
+												"functionError": null,
+												"stringPayload": "{\"x-amz-date\":\"20190303T154820Z\"}",
+												"sdkResponseMetadata": {
+													"requestId": "209494c2-23aa-48b3-87cc-3d2486b4a369"
+												},
+												"sdkHttpMetadata": {
+													"httpHeaders": {
+														"X-Amz-Executed-Version": "$LATEST",
+														"x-amzn-Remapped-Content-Length": "0",
+														"Connection": "keep-alive",
+														"x-amzn-RequestId": "209494c2-23aa-48b3-87cc-3d2486b4a369",
+														"Content-Length": "33",
+														"Date": "Sun, 03 Mar 2019 15:48:20 GMT",
+														"X-Amzn-Trace-Id": "root=1-5c7bf744-3bf3d9e0c7f848947c6d2648;sampled=0",
+														"Content-Type": "application/json"
+													},
+													"httpStatusCode": 200
+												},
+												"statusCode": 200
+											},
+											"auditInfo": {
+												"endTimestamp": 9667331104485,
+												"startTimestamp": 9667222625526
+											},
+											"stackTrace": null,
+											"nodeSpecification": null
+										}
+									]
+								},
+								"AWSSignatureLambdaFunction": {
+									"nodeName": "AWSSignatureLambdaFunction",
+									"nodeClass": "com.github.piedpiper.node.aws.AWSLambdaNode",
+									"nodeExecutorList": [],
+									"nodeInputList": [
+										{
+											"input": {
+												"headers": {
+													"value": "{\"x-amz-date\":\"20190303T154820Z\",\"host\":\"iot.us-east-1.amazonaws.com\",\"Content-Type\":\"application/x-www-form-urlencoded\"}"
+												},
+												"secretKey": {
+													"value": ""
+												},
+												"method": {
+													"value": "GET"
+												},
+												"functionName": {
+													"value": "AWSV4SignerFunction"
+												},
+												"x-amz-date-header-value": {
+													"value": "20190303T154820Z"
+												},
+												"path": {
+													"value": "/thing-groups/Akash_Home/things"
+												},
+												"payload": {
+													"value": {
+														"path": "/thing-groups/Akash_Home/things",
+														"headers": {
+															"x-amz-date": "20190303T154820Z",
+															"host": "iot.us-east-1.amazonaws.com",
+															"Content-Type": "application/x-www-form-urlencoded"
+														},
+														"method": "GET",
+														"secretKey": "",
+														"accessKey": "",
+														"service": "execute-api",
+														"jsonPayload": {
+															
+														},
+														"host": "iot.us-east-1.amazonaws.com",
+														"stringPayload": "",
+														"region": "us-east-1"
+													}
+												},
+												"accessKey": {
+													"value": ""
+												},
+												"service": {
+													"value": "execute-api"
+												},
+												"jsonPayload": {
+													"value": {
+														
+													}
+												},
+												"host": {
+													"value": "iot.us-east-1.amazonaws.com"
+												},
+												"stringPayload": {
+													"value": ""
+												},
+												"region": {
+													"value": "us-east-1"
+												},
+												"contentType": {
+													"value": "application/x-www-form-urlencoded"
+												}
+											},
+											"nodeSpecification": null
+										}
+									],
+									"nodeSpecification": null,
+									"parameterMap": {
+										"headers": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "headers",
+											"parameterValue": "{\n\"x-amz-date\": \"${x-amz-date-header-value}\",\n\"host\": \"${host}\",\n\"Content-Type\": \"${contentType}\"\n}",
+											"parameterFormat": null
+										},
+										"secretKey": {
+											"parameterType": "AWS_SSM",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "secretKey",
+											"parameterValue": "SecretKey",
+											"parameterFormat": null
+										},
+										"method": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "method",
+											"parameterValue": "${input.method}",
+											"parameterFormat": null
+										},
+										"functionName": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "functionName",
+											"parameterValue": "AWSV4SignerFunction",
+											"parameterFormat": null
+										},
+										"x-amz-date-header-value": {
+											"parameterType": "REFERENCE_FROM_ANOTHER_NODE",
+											"referenceNodeName": "DateHeaderGenerator",
+											"attributeMap": null,
+											"parameterName": "x-amz-date-header-value",
+											"parameterValue": "$.nodeOutputList[0].output.jsonPayload.x-amz-date",
+											"parameterFormat": null
+										},
+										"path": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "path",
+											"parameterValue": "${input.path}",
+											"parameterFormat": null
+										},
+										"payload": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": {
+												"DATA_TYPE": "asJson"
+											},
+											"parameterName": "payload",
+											"parameterValue": "{\n\"region\": \"${region}\",\n\"method\": \"${method}\",\n\"host\": \"${host}\",\n\"path\": \"${path}\",\n\"headers\": ${headers},\n\"accessKey\": \"${accessKey}\",\n\"secretKey\": \"${secretKey}\",\n\"service\": \"${service}\",\n\"jsonPayload\": ${jsonPayload},\n\"stringPayload\": \"${stringPayload}\"\n}",
+											"parameterFormat": null
+										},
+										"accessKey": {
+											"parameterType": "AWS_SSM",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "accessKey",
+											"parameterValue": "AccessKey",
+											"parameterFormat": null
+										},
+										"service": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "service",
+											"parameterValue": "${input.service}",
+											"parameterFormat": null
+										},
+										"jsonPayload": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": {
+												"DATA_TYPE": "asJson"
+											},
+											"parameterName": "jsonPayload",
+											"parameterValue": "${input.jsonPayload}",
+											"parameterFormat": null
+										},
+										"host": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "host",
+											"parameterValue": "${input.host}",
+											"parameterFormat": null
+										},
+										"stringPayload": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": {
+												
+											},
+											"parameterName": "stringPayload",
+											"parameterValue": "${input.stringPayload}",
+											"parameterFormat": null
+										},
+										"region": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "region",
+											"parameterValue": "${input.region}",
+											"parameterFormat": null
+										},
+										"contentType": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "contentType",
+											"parameterValue": "${input.contentType}",
+											"parameterFormat": null
+										}
+									},
+									"nodeOutputList": [
+										{
+											"nodeName": "AWSSignatureLambdaFunction",
+											"output": {
+												"executedVersion": "$LATEST",
+												"logResult": null,
+												"payload": "IkFXUzQtSE1BQy1TSEEyNTYgQ3JlZGVudGlhbD1BS0lBSkVTSzNQMlo3WUE1VUdBQS8yMDE5MDMwMy91cy1lYXN0LTEvZXhlY3V0ZS1hcGkvYXdzNF9yZXF1ZXN0LCBTaWduZWRIZWFkZXJzPWNvbnRlbnQtdHlwZTtob3N0O3gtYW16LWRhdGUsIFNpZ25hdHVyZT0xODAwYzZhNDExZTQzNDJmNDhiOTkxYWYxMDY2MTA0NjIzYTVjNTRiNmM2Y2E2MzI4YjMzN2MzNWI5ZTJhODEwIg==",
+												"functionError": null,
+												"stringPayload": "AWS4-HMAC-SHA256 Credential=/20190303/us-east-1/execute-api/aws4_request, SignedHeaders=content-type;host;x-amz-date, Signature=1800c6a411e4342f48b991af1066104623a5c54b6c6ca6328b337c35b9e2a810",
+												"sdkResponseMetadata": {
+													"requestId": "953f47ff-24fd-401e-b409-905a671c5367"
+												},
+												"sdkHttpMetadata": {
+													"httpHeaders": {
+														"X-Amz-Executed-Version": "$LATEST",
+														"x-amzn-Remapped-Content-Length": "0",
+														"Connection": "keep-alive",
+														"x-amzn-RequestId": "953f47ff-24fd-401e-b409-905a671c5367",
+														"Content-Length": "214",
+														"Date": "Sun, 03 Mar 2019 15:48:20 GMT",
+														"X-Amzn-Trace-Id": "root=1-5c7bf744-dc93fc800520584e8ca2151e;sampled=0",
+														"Content-Type": "application/json"
+													},
+													"httpStatusCode": 200
+												},
+												"statusCode": 200
+											},
+											"auditInfo": {
+												"endTimestamp": 9667443497857,
+												"startTimestamp": 9667368433169
+											},
+											"stackTrace": null,
+											"nodeSpecification": null
+										}
+									]
+								}
+							}
+						},
+						"status": 200
+					},
+					"stackTrace": null,
+					"auditInfo": {
+						"startTimestamp": 16382220147965,
+						"endTimestamp": 16382686158793
+					}
+				}
+			]
+		},
+		"GetThingShadowForThings": {
+			"nodeName": "GetThingShadowForThings",
+			"nodeClass": "com.github.piedpiper.node.piedpiper.SubGraphNode",
+			"nodeSpecification": null,
+			"parameterMap": {
+				"projectName": {
+					"parameterName": "projectName",
+					"parameterType": "CONSTANT",
+					"parameterFormat": null,
+					"parameterValue": "Atom8",
+					"referenceNodeName": "",
+					"attributeMap": null
+				},
+				"graphName": {
+					"parameterName": "graphName",
+					"parameterType": "CONSTANT",
+					"parameterFormat": null,
+					"parameterValue": "GetThingShadow",
+					"referenceNodeName": "",
+					"attributeMap": null
+				},
+				"tableName": {
+					"parameterName": "tableName",
+					"parameterType": "CONSTANT",
+					"parameterFormat": null,
+					"parameterValue": "AlmightyTable",
+					"referenceNodeName": "",
+					"attributeMap": null
+				},
+				"thingName": {
+					"parameterName": "thingName",
+					"parameterType": "REFERENCE_FROM_ANOTHER_NODE",
+					"parameterFormat": null,
+					"parameterValue": "$.nodeOutputList[0].output.body.things",
+					"referenceNodeName": "ListThingsInThingGroupRESTNode",
+					"attributeMap": {
+						"PARALLELIZE": "true",
+						"DATA_TYPE": "asJson"
+					}
+				}
+			},
+			"nodeInputList": [
+				{
+					"nodeSpecification": null,
+					"input": {
+						"projectName": {
+							"value": "Atom8"
+						},
+						"graphName": {
+							"value": "GetThingShadow"
+						},
+						"tableName": {
+							"value": "AlmightyTable"
+						},
+						"thingName": {
+							"value": "Atom8-020459fc4a24"
+						}
+					}
+				},
+				{
+					"nodeSpecification": null,
+					"input": {
+						"projectName": {
+							"value": "Atom8"
+						},
+						"graphName": {
+							"value": "GetThingShadow"
+						},
+						"tableName": {
+							"value": "AlmightyTable"
+						},
+						"thingName": {
+							"value": "Atom8-018459fc4a24"
+						}
+					}
+				},
+				{
+					"nodeSpecification": null,
+					"input": {
+						"projectName": {
+							"value": "Atom8"
+						},
+						"graphName": {
+							"value": "GetThingShadow"
+						},
+						"tableName": {
+							"value": "AlmightyTable"
+						},
+						"thingName": {
+							"value": "Atom8-030459fc4a24"
+						}
+					}
+				},
+				{
+					"nodeSpecification": null,
+					"input": {
+						"projectName": {
+							"value": "Atom8"
+						},
+						"graphName": {
+							"value": "GetThingShadow"
+						},
+						"tableName": {
+							"value": "AlmightyTable"
+						},
+						"thingName": {
+							"value": "Atom8-0a0469fc4a24"
+						}
+					}
+				}
+			],
+			"nodeExecutorList": [],
+			"nodeOutputList": [
+				{
+					"nodeName": "GetThingShadowForThings",
+					"nodeSpecification": null,
+					"output": {
+						"statusText": "OK",
+						"headers": {
+							"x-amz-apigw-id": [
+								"V-OTKGTToAMFjZQ="
+							],
+							"Access-Control-Allow-Origin": [
+								"*"
+							],
+							"Connection": [
+								"keep-alive"
+							],
+							"x-amzn-RequestId": [
+								"c6d0f908-3dcb-11e9-85dc-97e7f05806f6"
+							],
+							"Content-Length": [
+								"15727"
+							],
+							"Date": [
+								"Sun, 03 Mar 2019 15:48:24 GMT"
+							],
+							"X-Amzn-Trace-Id": [
+								"Root=1-5c7bf747-4c90bc159db61de70ee8023f;Sampled=0"
+							],
+							"Content-Type": [
+								"application/json"
+							]
+						},
+						"rawBody": {
+							
+						},
+						"body": {
+							"exceptionTrace": null,
+							"graphName": "GetThingShadow",
+							"projectName": "Atom8",
+							"nodeMap": {
+								"CreateAWSSignatureForGetDeviceShadow": {
+									"nodeName": "CreateAWSSignatureForGetDeviceShadow",
+									"nodeClass": "com.github.piedpiper.node.piedpiper.SubGraphNode",
+									"nodeExecutorList": [],
+									"nodeInputList": [
+										{
+											"input": {
+												"graphName": {
+													"value": "CreateAWSSignature"
+												},
+												"path": {
+													"value": "/things/Atom8-030459fc4a24/shadow"
+												},
+												"method": {
+													"value": "GET"
+												},
+												"service": {
+													"value": "iotdata"
+												},
+												"jsonPayload": {
+													"value": "{}"
+												},
+												"host": {
+													"value": "data.iot.us-east-1.amazonaws.com"
+												},
+												"thingName": {
+													"value": "Atom8-030459fc4a24"
+												},
+												"stringPayload": {
+													"value": ""
+												},
+												"projectName": {
+													"value": "Atom8"
+												},
+												"region": {
+													"value": "us-east-1"
+												},
+												"contentType": {
+													"value": "application/x-www-form-urlencoded"
+												},
+												"tableName": {
+													"value": "AlmightyTable"
+												}
+											},
+											"nodeSpecification": null
+										}
+									],
+									"nodeSpecification": null,
+									"parameterMap": {
+										"graphName": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "graphName",
+											"parameterValue": "CreateAWSSignature",
+											"parameterFormat": null
+										},
+										"path": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "path",
+											"parameterValue": "/things/${thingName}/shadow",
+											"parameterFormat": null
+										},
+										"method": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "method",
+											"parameterValue": "GET",
+											"parameterFormat": null
+										},
+										"service": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "service",
+											"parameterValue": "iotdata",
+											"parameterFormat": null
+										},
+										"jsonPayload": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "jsonPayload",
+											"parameterValue": "{}",
+											"parameterFormat": null
+										},
+										"host": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "host",
+											"parameterValue": "data.iot.us-east-1.amazonaws.com",
+											"parameterFormat": null
+										},
+										"thingName": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "thingName",
+											"parameterValue": "${input.thingName}",
+											"parameterFormat": null
+										},
+										"stringPayload": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "stringPayload",
+											"parameterValue": "\"\"",
+											"parameterFormat": null
+										},
+										"projectName": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "projectName",
+											"parameterValue": "Atom8",
+											"parameterFormat": null
+										},
+										"region": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "region",
+											"parameterValue": "us-east-1",
+											"parameterFormat": null
+										},
+										"contentType": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "contentType",
+											"parameterValue": "application/x-www-form-urlencoded",
+											"parameterFormat": null
+										},
+										"tableName": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "tableName",
+											"parameterValue": "AlmightyTable",
+											"parameterFormat": null
+										}
+									},
+									"nodeOutputList": [
+										{
+											"nodeName": "CreateAWSSignatureForGetDeviceShadow",
+											"output": {
+												"headers": {
+													"x-amz-apigw-id": [
+														"V-OTNHuBoAMF6dQ="
+													],
+													"Access-Control-Allow-Origin": [
+														"*"
+													],
+													"Connection": [
+														"keep-alive"
+													],
+													"x-amzn-RequestId": [
+														"c6f8a4be-3dcb-11e9-9083-e7a12190057f"
+													],
+													"Content-Length": [
+														"7715"
+													],
+													"Date": [
+														"Sun, 03 Mar 2019 15:48:24 GMT"
+													],
+													"X-Amzn-Trace-Id": [
+														"Root=1-5c7bf747-c1206d4094a1cf00c025a600;Sampled=0"
+													],
+													"Content-Type": [
+														"application/json"
+													]
+												},
+												"rawBody": {
+													
+												},
+												"statusText": "OK",
+												"body": {
+													"exceptionTrace": null,
+													"graphName": "CreateAWSSignature",
+													"projectName": "Atom8",
+													"nodeMap": {
+														"DateHeaderGenerator": {
+															"nodeName": "DateHeaderGenerator",
+															"nodeClass": "com.github.piedpiper.node.aws.AWSLambdaNode",
+															"nodeExecutorList": [],
+															"nodeInputList": [
+																{
+																	"input": {
+																		"secretKey": {
+																			"value": ""
+																		},
+																		"payload": {
+																			"value": ""
+																		},
+																		"functionName": {
+																			"value": "AWSHeaderGenerator"
+																		},
+																		"accessKey": {
+																			"value": ""
+																		},
+																		"region": {
+																			"value": "us-east-1"
+																		}
+																	},
+																	"nodeSpecification": null
+																}
+															],
+															"nodeSpecification": null,
+															"parameterMap": {
+																"secretKey": {
+																	"parameterType": "AWS_SSM",
+																	"referenceNodeName": "",
+																	"attributeMap": null,
+																	"parameterName": "secretKey",
+																	"parameterValue": "SecretKey",
+																	"parameterFormat": null
+																},
+																"payload": {
+																	"parameterType": "CONSTANT",
+																	"referenceNodeName": "",
+																	"attributeMap": null,
+																	"parameterName": "payload",
+																	"parameterValue": "",
+																	"parameterFormat": null
+																},
+																"functionName": {
+																	"parameterType": "CONSTANT",
+																	"referenceNodeName": "",
+																	"attributeMap": null,
+																	"parameterName": "functionName",
+																	"parameterValue": "AWSHeaderGenerator",
+																	"parameterFormat": null
+																},
+																"accessKey": {
+																	"parameterType": "AWS_SSM",
+																	"referenceNodeName": "",
+																	"attributeMap": null,
+																	"parameterName": "accessKey",
+																	"parameterValue": "AccessKey",
+																	"parameterFormat": null
+																},
+																"region": {
+																	"parameterType": "CONSTANT",
+																	"referenceNodeName": "",
+																	"attributeMap": null,
+																	"parameterName": "region",
+																	"parameterValue": "${input.region}",
+																	"parameterFormat": null
+																}
+															},
+															"nodeOutputList": [
+																{
+																	"nodeName": "DateHeaderGenerator",
+																	"output": {
+																		"executedVersion": "$LATEST",
+																		"logResult": null,
+																		"payload": "eyJ4LWFtei1kYXRlIjoiMjAxOTAzMDNUMTU0ODI0WiJ9",
+																		"jsonPayload": {
+																			"x-amz-date": "20190303T154824Z"
+																		},
+																		"functionError": null,
+																		"stringPayload": "{\"x-amz-date\":\"20190303T154824Z\"}",
+																		"sdkResponseMetadata": {
+																			"requestId": "a0e53b18-0b10-4088-9993-9e3a2555228c"
+																		},
+																		"sdkHttpMetadata": {
+																			"httpHeaders": {
+																				"X-Amz-Executed-Version": "$LATEST",
+																				"x-amzn-Remapped-Content-Length": "0",
+																				"Connection": "keep-alive",
+																				"x-amzn-RequestId": "a0e53b18-0b10-4088-9993-9e3a2555228c",
+																				"Content-Length": "33",
+																				"Date": "Sun, 03 Mar 2019 15:48:24 GMT",
+																				"X-Amzn-Trace-Id": "root=1-5c7bf748-5ddbac75e8153976fde7ceb3;sampled=0",
+																				"Content-Type": "application/json"
+																			},
+																			"httpStatusCode": 200
+																		},
+																		"statusCode": 200
+																	},
+																	"auditInfo": {
+																		"endTimestamp": 77402891743,
+																		"startTimestamp": 77305849204
+																	},
+																	"stackTrace": null,
+																	"nodeSpecification": null
+																}
+															]
+														},
+														"AWSSignatureLambdaFunction": {
+															"nodeName": "AWSSignatureLambdaFunction",
+															"nodeClass": "com.github.piedpiper.node.aws.AWSLambdaNode",
+															"nodeExecutorList": [],
+															"nodeInputList": [
+																{
+																	"input": {
+																		"headers": {
+																			"value": "{\"x-amz-date\":\"20190303T154824Z\",\"host\":\"data.iot.us-east-1.amazonaws.com\",\"Content-Type\":\"application/x-www-form-urlencoded\"}"
+																		},
+																		"secretKey": {
+																			"value": ""
+																		},
+																		"method": {
+																			"value": "GET"
+																		},
+																		"functionName": {
+																			"value": "AWSV4SignerFunction"
+																		},
+																		"x-amz-date-header-value": {
+																			"value": "20190303T154824Z"
+																		},
+																		"path": {
+																			"value": "/things/Atom8-030459fc4a24/shadow"
+																		},
+																		"payload": {
+																			"value": {
+																				"path": "/things/Atom8-030459fc4a24/shadow",
+																				"headers": {
+																					"x-amz-date": "20190303T154824Z",
+																					"host": "data.iot.us-east-1.amazonaws.com",
+																					"Content-Type": "application/x-www-form-urlencoded"
+																				},
+																				"method": "GET",
+																				"secretKey": "",
+																				"accessKey": "",
+																				"service": "iotdata",
+																				"jsonPayload": {
+																					
+																				},
+																				"host": "data.iot.us-east-1.amazonaws.com",
+																				"stringPayload": "",
+																				"region": "us-east-1"
+																			}
+																		},
+																		"accessKey": {
+																			"value": ""
+																		},
+																		"service": {
+																			"value": "iotdata"
+																		},
+																		"jsonPayload": {
+																			"value": {
+																				
+																			}
+																		},
+																		"host": {
+																			"value": "data.iot.us-east-1.amazonaws.com"
+																		},
+																		"stringPayload": {
+																			"value": ""
+																		},
+																		"region": {
+																			"value": "us-east-1"
+																		},
+																		"contentType": {
+																			"value": "application/x-www-form-urlencoded"
+																		}
+																	},
+																	"nodeSpecification": null
+																}
+															],
+															"nodeSpecification": null,
+															"parameterMap": {
+																"headers": {
+																	"parameterType": "CONSTANT",
+																	"referenceNodeName": "",
+																	"attributeMap": null,
+																	"parameterName": "headers",
+																	"parameterValue": "{\n\"x-amz-date\": \"${x-amz-date-header-value}\",\n\"host\": \"${host}\",\n\"Content-Type\": \"${contentType}\"\n}",
+																	"parameterFormat": null
+																},
+																"secretKey": {
+																	"parameterType": "AWS_SSM",
+																	"referenceNodeName": "",
+																	"attributeMap": null,
+																	"parameterName": "secretKey",
+																	"parameterValue": "SecretKey",
+																	"parameterFormat": null
+																},
+																"method": {
+																	"parameterType": "CONSTANT",
+																	"referenceNodeName": "",
+																	"attributeMap": null,
+																	"parameterName": "method",
+																	"parameterValue": "${input.method}",
+																	"parameterFormat": null
+																},
+																"functionName": {
+																	"parameterType": "CONSTANT",
+																	"referenceNodeName": "",
+																	"attributeMap": null,
+																	"parameterName": "functionName",
+																	"parameterValue": "AWSV4SignerFunction",
+																	"parameterFormat": null
+																},
+																"x-amz-date-header-value": {
+																	"parameterType": "REFERENCE_FROM_ANOTHER_NODE",
+																	"referenceNodeName": "DateHeaderGenerator",
+																	"attributeMap": null,
+																	"parameterName": "x-amz-date-header-value",
+																	"parameterValue": "$.nodeOutputList[0].output.jsonPayload.x-amz-date",
+																	"parameterFormat": null
+																},
+																"path": {
+																	"parameterType": "CONSTANT",
+																	"referenceNodeName": "",
+																	"attributeMap": null,
+																	"parameterName": "path",
+																	"parameterValue": "${input.path}",
+																	"parameterFormat": null
+																},
+																"payload": {
+																	"parameterType": "CONSTANT",
+																	"referenceNodeName": "",
+																	"attributeMap": {
+																		"DATA_TYPE": "asJson"
+																	},
+																	"parameterName": "payload",
+																	"parameterValue": "{\n\"region\": \"${region}\",\n\"method\": \"${method}\",\n\"host\": \"${host}\",\n\"path\": \"${path}\",\n\"headers\": ${headers},\n\"accessKey\": \"${accessKey}\",\n\"secretKey\": \"${secretKey}\",\n\"service\": \"${service}\",\n\"jsonPayload\": ${jsonPayload},\n\"stringPayload\": \"${stringPayload}\"\n}",
+																	"parameterFormat": null
+																},
+																"accessKey": {
+																	"parameterType": "AWS_SSM",
+																	"referenceNodeName": "",
+																	"attributeMap": null,
+																	"parameterName": "accessKey",
+																	"parameterValue": "AccessKey",
+																	"parameterFormat": null
+																},
+																"service": {
+																	"parameterType": "CONSTANT",
+																	"referenceNodeName": "",
+																	"attributeMap": null,
+																	"parameterName": "service",
+																	"parameterValue": "${input.service}",
+																	"parameterFormat": null
+																},
+																"jsonPayload": {
+																	"parameterType": "CONSTANT",
+																	"referenceNodeName": "",
+																	"attributeMap": {
+																		"DATA_TYPE": "asJson"
+																	},
+																	"parameterName": "jsonPayload",
+																	"parameterValue": "${input.jsonPayload}",
+																	"parameterFormat": null
+																},
+																"host": {
+																	"parameterType": "CONSTANT",
+																	"referenceNodeName": "",
+																	"attributeMap": null,
+																	"parameterName": "host",
+																	"parameterValue": "${input.host}",
+																	"parameterFormat": null
+																},
+																"stringPayload": {
+																	"parameterType": "CONSTANT",
+																	"referenceNodeName": "",
+																	"attributeMap": {
+																		
+																	},
+																	"parameterName": "stringPayload",
+																	"parameterValue": "${input.stringPayload}",
+																	"parameterFormat": null
+																},
+																"region": {
+																	"parameterType": "CONSTANT",
+																	"referenceNodeName": "",
+																	"attributeMap": null,
+																	"parameterName": "region",
+																	"parameterValue": "${input.region}",
+																	"parameterFormat": null
+																},
+																"contentType": {
+																	"parameterType": "CONSTANT",
+																	"referenceNodeName": "",
+																	"attributeMap": null,
+																	"parameterName": "contentType",
+																	"parameterValue": "${input.contentType}",
+																	"parameterFormat": null
+																}
+															},
+															"nodeOutputList": [
+																{
+																	"nodeName": "AWSSignatureLambdaFunction",
+																	"output": {
+																		"executedVersion": "$LATEST",
+																		"logResult": null,
+																		"payload": "IkFXUzQtSE1BQy1TSEEyNTYgQ3JlZGVudGlhbD1BS0lBSkVTSzNQMlo3WUE1VUdBQS8yMDE5MDMwMy91cy1lYXN0LTEvaW90ZGF0YS9hd3M0X3JlcXVlc3QsIFNpZ25lZEhlYWRlcnM9Y29udGVudC10eXBlO2hvc3Q7eC1hbXotZGF0ZSwgU2lnbmF0dXJlPWNjZWVmODI3ZjY5YzY0NTdjMTQyNTMxYzQxMjZhOTM4ZWQxYjc1NTVkN2RhYzAxMDExZDAzNmEyZjMxYzQyYjMi",
+																		"functionError": null,
+																		"stringPayload": "AWS4-HMAC-SHA256 Credential=/20190303/us-east-1/iotdata/aws4_request, SignedHeaders=content-type;host;x-amz-date, Signature=cceef827f69c6457c142531c4126a938ed1b7555d7dac01011d036a2f31c42b3",
+																		"sdkResponseMetadata": {
+																			"requestId": "5a991398-005d-4008-8918-1c6dbb33ecec"
+																		},
+																		"sdkHttpMetadata": {
+																			"httpHeaders": {
+																				"X-Amz-Executed-Version": "$LATEST",
+																				"x-amzn-Remapped-Content-Length": "0",
+																				"Connection": "keep-alive",
+																				"x-amzn-RequestId": "5a991398-005d-4008-8918-1c6dbb33ecec",
+																				"Content-Length": "210",
+																				"Date": "Sun, 03 Mar 2019 15:48:24 GMT",
+																				"X-Amzn-Trace-Id": "root=1-5c7bf748-f83afe32bef91e19ee9eeb25;sampled=0",
+																				"Content-Type": "application/json"
+																			},
+																			"httpStatusCode": 200
+																		},
+																		"statusCode": 200
+																	},
+																	"auditInfo": {
+																		"endTimestamp": 77643099530,
+																		"startTimestamp": 77520690022
+																	},
+																	"stackTrace": null,
+																	"nodeSpecification": null
+																}
+															]
+														}
+													}
+												},
+												"status": 200
+											},
+											"auditInfo": {
+												"endTimestamp": 9671146681810,
+												"startTimestamp": 9670520757576
+											},
+											"stackTrace": null,
+											"nodeSpecification": null
+										}
+									]
+								},
+								"GetDeviceShadow": {
+									"nodeName": "GetDeviceShadow",
+									"nodeClass": "com.github.piedpiper.node.rest.RESTServiceNode",
+									"nodeSpecification": {
+										"includeOutput": false
+									},
+									"nodeExecutorList": [],
+									"nodeInputList": [
+										{
+											"input": {
+												"headers": {
+													"value": {
+														"Authorization": "AWS4-HMAC-SHA256 Credential=/20190303/us-east-1/iotdata/aws4_request, SignedHeaders=content-type;host;x-amz-date, Signature=cceef827f69c6457c142531c4126a938ed1b7555d7dac01011d036a2f31c42b3",
+														"x-amz-date": "20190303T154824Z",
+														"host": "data.iot.us-east-1.amazonaws.com",
+														"Content-Type": "application/x-www-form-urlencoded"
+													}
+												},
+												"authorizationHeaderValue": {
+													"value": "AWS4-HMAC-SHA256 Credential=/20190303/us-east-1/iotdata/aws4_request, SignedHeaders=content-type;host;x-amz-date, Signature=cceef827f69c6457c142531c4126a938ed1b7555d7dac01011d036a2f31c42b3"
+												},
+												"method": {
+													"value": "GET"
+												},
+												"x-amz-header-value": {
+													"value": "20190303T154824Z"
+												},
+												"outputType": {
+													"value": "asJson"
+												},
+												"thingName": {
+													"value": "Atom8-030459fc4a24"
+												},
+												"body": {
+													"value": ""
+												},
+												"url": {
+													"value": "https://data.iot.us-east-1.amazonaws.com/things/Atom8-030459fc4a24/shadow"
+												}
+											},
+											"nodeSpecification": null
+										}
+									],
+									"parameterMap": {
+										"headers": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": {
+												"DATA_TYPE": "asJson"
+											},
+											"parameterName": "headers",
+											"parameterValue": "{\n\"Authorization\": \"${authorizationHeaderValue}\",\n\"x-amz-date\": \"${x-amz-header-value}\",\n\"host\": \"data.iot.us-east-1.amazonaws.com\",\n\"Content-Type\": \"application/x-www-form-urlencoded\"\n}",
+											"parameterFormat": null
+										},
+										"authorizationHeaderValue": {
+											"parameterType": "REFERENCE_FROM_ANOTHER_NODE",
+											"referenceNodeName": "CreateAWSSignatureForGetDeviceShadow",
+											"attributeMap": null,
+											"parameterName": "authorizationHeaderValue",
+											"parameterValue": "$.nodeOutputList[0].output.body.nodeMap.AWSSignatureLambdaFunction.nodeOutputList[0].output.stringPayload",
+											"parameterFormat": null
+										},
+										"method": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "method",
+											"parameterValue": "GET",
+											"parameterFormat": null
+										},
+										"x-amz-header-value": {
+											"parameterType": "REFERENCE_FROM_ANOTHER_NODE",
+											"referenceNodeName": "CreateAWSSignatureForGetDeviceShadow",
+											"attributeMap": null,
+											"parameterName": "x-amz-header-value",
+											"parameterValue": "$.nodeOutputList[0].output.body.nodeMap.DateHeaderGenerator.nodeOutputList[0].output.jsonPayload.x-amz-date",
+											"parameterFormat": null
+										},
+										"outputType": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "outputType",
+											"parameterValue": "asJson",
+											"parameterFormat": null
+										},
+										"thingName": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "thingName",
+											"parameterValue": "${input.thingName}",
+											"parameterFormat": null
+										},
+										"body": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "body",
+											"parameterValue": "",
+											"parameterFormat": null
+										},
+										"url": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "url",
+											"parameterValue": "https://data.iot.us-east-1.amazonaws.com/things/${thingName}/shadow",
+											"parameterFormat": null
+										}
+									},
+									"nodeOutputList": [
+										{
+											"nodeName": "GetDeviceShadow",
+											"output": {
+												"headers": {
+													"date": [
+														"Sun, 03 Mar 2019 15:48:24 GMT"
+													],
+													"content-length": [
+														"1127"
+													],
+													"x-amzn-RequestId": [
+														"4db8076b-ec40-8402-5b9b-b134a039c607"
+													],
+													"content-type": [
+														"application/json"
+													],
+													"connection": [
+														"keep-alive"
+													]
+												},
+												"rawBody": {
+													
+												},
+												"statusText": "OK",
+												"body": {
+													"metadata": {
+														"desired": {
+															"freeHeap": {
+																"timestamp": 1551615065
+															},
+															"instances": {
+																"0": {
+																	"lastAction": {
+																		"timestamp": 1551612031
+																	},
+																	"value": {
+																		"timestamp": 1551612031
+																	}
+																},
+																"1": {
+																	"lastAction": {
+																		"timestamp": 1551615065
+																	},
+																	"value": {
+																		"timestamp": 1551615065
+																	}
+																}
+															},
+															"deviceName": {
+																"timestamp": 1551615065
+															},
+															"ssid": {
+																"timestamp": 1551615065
+															},
+															"versionCode": {
+																"timestamp": 1551612030
+															}
+														},
+														"reported": {
+															"freeHeap": {
+																"timestamp": 1551615065
+															},
+															"instances": {
+																"0": {
+																	"lastAction": {
+																		"timestamp": 1551612031
+																	},
+																	"value": {
+																		"timestamp": 1551612031
+																	}
+																},
+																"1": {
+																	"lastAction": {
+																		"timestamp": 1551615065
+																	},
+																	"value": {
+																		"timestamp": 1551615065
+																	}
+																}
+															},
+															"deviceName": {
+																"timestamp": 1551615065
+															},
+															"ssid": {
+																"timestamp": 1551615065
+															},
+															"versionCode": {
+																"timestamp": 1551612030
+															}
+														}
+													},
+													"state": {
+														"desired": {
+															"freeHeap": -1,
+															"instances": {
+																"0": {
+																	"lastAction": "sync_state_restart",
+																	"value": 1
+																},
+																"1": {
+																	"lastAction": "local_network",
+																	"value": 1
+																}
+															},
+															"deviceName": "Atom8-030459fc4a24",
+															"ssid": "warpdrive",
+															"versionCode": 2.03
+														},
+														"reported": {
+															"freeHeap": -1,
+															"instances": {
+																"0": {
+																	"lastAction": "sync_state_restart",
+																	"value": 1
+																},
+																"1": {
+																	"lastAction": "local_network",
+																	"value": 1
+																}
+															},
+															"deviceName": "Atom8-030459fc4a24",
+															"ssid": "warpdrive",
+															"versionCode": 2.03
+														}
+													},
+													"version": 153,
+													"timestamp": 1551628104
+												},
+												"status": 200
+											},
+											"auditInfo": {
+												"endTimestamp": 9671442852705,
+												"startTimestamp": 9671245401192
+											},
+											"stackTrace": null,
+											"nodeSpecification": null
+										}
+									]
+								}
+							}
+						},
+						"status": 200
+					},
+					"stackTrace": null,
+					"auditInfo": {
+						"startTimestamp": 16385408566584,
+						"endTimestamp": 16386631986844
+					}
+				},
+				{
+					"nodeName": "GetThingShadowForThings",
+					"nodeSpecification": null,
+					"output": {
+						"statusText": "OK",
+						"headers": {
+							"x-amz-apigw-id": [
+								"V-OTKFVUIAMFzew="
+							],
+							"Access-Control-Allow-Origin": [
+								"*"
+							],
+							"Connection": [
+								"keep-alive"
+							],
+							"x-amzn-RequestId": [
+								"c6d16db4-3dcb-11e9-8b73-e5f0e5de9794"
+							],
+							"Content-Length": [
+								"16417"
+							],
+							"Date": [
+								"Sun, 03 Mar 2019 15:48:24 GMT"
+							],
+							"X-Amzn-Trace-Id": [
+								"Root=1-5c7bf747-83ca079261861a96a0660d1a;Sampled=0"
+							],
+							"Content-Type": [
+								"application/json"
+							]
+						},
+						"rawBody": {
+							
+						},
+						"body": {
+							"exceptionTrace": null,
+							"graphName": "GetThingShadow",
+							"projectName": "Atom8",
+							"nodeMap": {
+								"CreateAWSSignatureForGetDeviceShadow": {
+									"nodeName": "CreateAWSSignatureForGetDeviceShadow",
+									"nodeClass": "com.github.piedpiper.node.piedpiper.SubGraphNode",
+									"nodeExecutorList": [],
+									"nodeInputList": [
+										{
+											"input": {
+												"graphName": {
+													"value": "CreateAWSSignature"
+												},
+												"path": {
+													"value": "/things/Atom8-018459fc4a24/shadow"
+												},
+												"method": {
+													"value": "GET"
+												},
+												"service": {
+													"value": "iotdata"
+												},
+												"jsonPayload": {
+													"value": "{}"
+												},
+												"host": {
+													"value": "data.iot.us-east-1.amazonaws.com"
+												},
+												"thingName": {
+													"value": "Atom8-018459fc4a24"
+												},
+												"stringPayload": {
+													"value": ""
+												},
+												"projectName": {
+													"value": "Atom8"
+												},
+												"region": {
+													"value": "us-east-1"
+												},
+												"contentType": {
+													"value": "application/x-www-form-urlencoded"
+												},
+												"tableName": {
+													"value": "AlmightyTable"
+												}
+											},
+											"nodeSpecification": null
+										}
+									],
+									"nodeSpecification": null,
+									"parameterMap": {
+										"graphName": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "graphName",
+											"parameterValue": "CreateAWSSignature",
+											"parameterFormat": null
+										},
+										"path": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "path",
+											"parameterValue": "/things/${thingName}/shadow",
+											"parameterFormat": null
+										},
+										"method": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "method",
+											"parameterValue": "GET",
+											"parameterFormat": null
+										},
+										"service": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "service",
+											"parameterValue": "iotdata",
+											"parameterFormat": null
+										},
+										"jsonPayload": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "jsonPayload",
+											"parameterValue": "{}",
+											"parameterFormat": null
+										},
+										"host": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "host",
+											"parameterValue": "data.iot.us-east-1.amazonaws.com",
+											"parameterFormat": null
+										},
+										"thingName": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "thingName",
+											"parameterValue": "${input.thingName}",
+											"parameterFormat": null
+										},
+										"stringPayload": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "stringPayload",
+											"parameterValue": "\"\"",
+											"parameterFormat": null
+										},
+										"projectName": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "projectName",
+											"parameterValue": "Atom8",
+											"parameterFormat": null
+										},
+										"region": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "region",
+											"parameterValue": "us-east-1",
+											"parameterFormat": null
+										},
+										"contentType": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "contentType",
+											"parameterValue": "application/x-www-form-urlencoded",
+											"parameterFormat": null
+										},
+										"tableName": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "tableName",
+											"parameterValue": "AlmightyTable",
+											"parameterFormat": null
+										}
+									},
+									"nodeOutputList": [
+										{
+											"nodeName": "CreateAWSSignatureForGetDeviceShadow",
+											"output": {
+												"headers": {
+													"x-amz-apigw-id": [
+														"V-OTOGAAIAMFeKw="
+													],
+													"Access-Control-Allow-Origin": [
+														"*"
+													],
+													"Connection": [
+														"keep-alive"
+													],
+													"x-amzn-RequestId": [
+														"c70464f1-3dcb-11e9-95f0-cf294062c675"
+													],
+													"Content-Length": [
+														"7723"
+													],
+													"Date": [
+														"Sun, 03 Mar 2019 15:48:24 GMT"
+													],
+													"X-Amzn-Trace-Id": [
+														"Root=1-5c7bf747-e68b5d88512ca00094e82c38;Sampled=0"
+													],
+													"Content-Type": [
+														"application/json"
+													]
+												},
+												"rawBody": {
+													
+												},
+												"statusText": "OK",
+												"body": {
+													"exceptionTrace": null,
+													"graphName": "CreateAWSSignature",
+													"projectName": "Atom8",
+													"nodeMap": {
+														"DateHeaderGenerator": {
+															"nodeName": "DateHeaderGenerator",
+															"nodeClass": "com.github.piedpiper.node.aws.AWSLambdaNode",
+															"nodeExecutorList": [],
+															"nodeInputList": [
+																{
+																	"input": {
+																		"secretKey": {
+																			"value": ""
+																		},
+																		"payload": {
+																			"value": ""
+																		},
+																		"functionName": {
+																			"value": "AWSHeaderGenerator"
+																		},
+																		"accessKey": {
+																			"value": ""
+																		},
+																		"region": {
+																			"value": "us-east-1"
+																		}
+																	},
+																	"nodeSpecification": null
+																}
+															],
+															"nodeSpecification": null,
+															"parameterMap": {
+																"secretKey": {
+																	"parameterType": "AWS_SSM",
+																	"referenceNodeName": "",
+																	"attributeMap": null,
+																	"parameterName": "secretKey",
+																	"parameterValue": "SecretKey",
+																	"parameterFormat": null
+																},
+																"payload": {
+																	"parameterType": "CONSTANT",
+																	"referenceNodeName": "",
+																	"attributeMap": null,
+																	"parameterName": "payload",
+																	"parameterValue": "",
+																	"parameterFormat": null
+																},
+																"functionName": {
+																	"parameterType": "CONSTANT",
+																	"referenceNodeName": "",
+																	"attributeMap": null,
+																	"parameterName": "functionName",
+																	"parameterValue": "AWSHeaderGenerator",
+																	"parameterFormat": null
+																},
+																"accessKey": {
+																	"parameterType": "AWS_SSM",
+																	"referenceNodeName": "",
+																	"attributeMap": null,
+																	"parameterName": "accessKey",
+																	"parameterValue": "AccessKey",
+																	"parameterFormat": null
+																},
+																"region": {
+																	"parameterType": "CONSTANT",
+																	"referenceNodeName": "",
+																	"attributeMap": null,
+																	"parameterName": "region",
+																	"parameterValue": "${input.region}",
+																	"parameterFormat": null
+																}
+															},
+															"nodeOutputList": [
+																{
+																	"nodeName": "DateHeaderGenerator",
+																	"output": {
+																		"executedVersion": "$LATEST",
+																		"logResult": null,
+																		"payload": "eyJ4LWFtei1kYXRlIjoiMjAxOTAzMDNUMTU0ODI0WiJ9",
+																		"jsonPayload": {
+																			"x-amz-date": "20190303T154824Z"
+																		},
+																		"functionError": null,
+																		"stringPayload": "{\"x-amz-date\":\"20190303T154824Z\"}",
+																		"sdkResponseMetadata": {
+																			"requestId": "abd73fe1-691e-4323-89ab-bb8ae1224662"
+																		},
+																		"sdkHttpMetadata": {
+																			"httpHeaders": {
+																				"X-Amz-Executed-Version": "$LATEST",
+																				"x-amzn-Remapped-Content-Length": "0",
+																				"Connection": "keep-alive",
+																				"x-amzn-RequestId": "abd73fe1-691e-4323-89ab-bb8ae1224662",
+																				"Content-Length": "33",
+																				"Date": "Sun, 03 Mar 2019 15:48:24 GMT",
+																				"X-Amzn-Trace-Id": "root=1-5c7bf748-f31a62d815e50b10ad83cf38;sampled=0",
+																				"Content-Type": "application/json"
+																			},
+																			"httpStatusCode": 200
+																		},
+																		"statusCode": 200
+																	},
+																	"auditInfo": {
+																		"endTimestamp": 8571363145535,
+																		"startTimestamp": 8571166032785
+																	},
+																	"stackTrace": null,
+																	"nodeSpecification": null
+																}
+															]
+														},
+														"AWSSignatureLambdaFunction": {
+															"nodeName": "AWSSignatureLambdaFunction",
+															"nodeClass": "com.github.piedpiper.node.aws.AWSLambdaNode",
+															"nodeExecutorList": [],
+															"nodeInputList": [
+																{
+																	"input": {
+																		"headers": {
+																			"value": "{\"x-amz-date\":\"20190303T154824Z\",\"host\":\"data.iot.us-east-1.amazonaws.com\",\"Content-Type\":\"application/x-www-form-urlencoded\"}"
+																		},
+																		"secretKey": {
+																			"value": ""
+																		},
+																		"method": {
+																			"value": "GET"
+																		},
+																		"functionName": {
+																			"value": "AWSV4SignerFunction"
+																		},
+																		"x-amz-date-header-value": {
+																			"value": "20190303T154824Z"
+																		},
+																		"path": {
+																			"value": "/things/Atom8-018459fc4a24/shadow"
+																		},
+																		"payload": {
+																			"value": {
+																				"path": "/things/Atom8-018459fc4a24/shadow",
+																				"headers": {
+																					"x-amz-date": "20190303T154824Z",
+																					"host": "data.iot.us-east-1.amazonaws.com",
+																					"Content-Type": "application/x-www-form-urlencoded"
+																				},
+																				"method": "GET",
+																				"secretKey": "",
+																				"accessKey": "",
+																				"service": "iotdata",
+																				"jsonPayload": {
+																					
+																				},
+																				"host": "data.iot.us-east-1.amazonaws.com",
+																				"stringPayload": "",
+																				"region": "us-east-1"
+																			}
+																		},
+																		"accessKey": {
+																			"value": ""
+																		},
+																		"service": {
+																			"value": "iotdata"
+																		},
+																		"jsonPayload": {
+																			"value": {
+																				
+																			}
+																		},
+																		"host": {
+																			"value": "data.iot.us-east-1.amazonaws.com"
+																		},
+																		"stringPayload": {
+																			"value": ""
+																		},
+																		"region": {
+																			"value": "us-east-1"
+																		},
+																		"contentType": {
+																			"value": "application/x-www-form-urlencoded"
+																		}
+																	},
+																	"nodeSpecification": null
+																}
+															],
+															"nodeSpecification": null,
+															"parameterMap": {
+																"headers": {
+																	"parameterType": "CONSTANT",
+																	"referenceNodeName": "",
+																	"attributeMap": null,
+																	"parameterName": "headers",
+																	"parameterValue": "{\n\"x-amz-date\": \"${x-amz-date-header-value}\",\n\"host\": \"${host}\",\n\"Content-Type\": \"${contentType}\"\n}",
+																	"parameterFormat": null
+																},
+																"secretKey": {
+																	"parameterType": "AWS_SSM",
+																	"referenceNodeName": "",
+																	"attributeMap": null,
+																	"parameterName": "secretKey",
+																	"parameterValue": "SecretKey",
+																	"parameterFormat": null
+																},
+																"method": {
+																	"parameterType": "CONSTANT",
+																	"referenceNodeName": "",
+																	"attributeMap": null,
+																	"parameterName": "method",
+																	"parameterValue": "${input.method}",
+																	"parameterFormat": null
+																},
+																"functionName": {
+																	"parameterType": "CONSTANT",
+																	"referenceNodeName": "",
+																	"attributeMap": null,
+																	"parameterName": "functionName",
+																	"parameterValue": "AWSV4SignerFunction",
+																	"parameterFormat": null
+																},
+																"x-amz-date-header-value": {
+																	"parameterType": "REFERENCE_FROM_ANOTHER_NODE",
+																	"referenceNodeName": "DateHeaderGenerator",
+																	"attributeMap": null,
+																	"parameterName": "x-amz-date-header-value",
+																	"parameterValue": "$.nodeOutputList[0].output.jsonPayload.x-amz-date",
+																	"parameterFormat": null
+																},
+																"path": {
+																	"parameterType": "CONSTANT",
+																	"referenceNodeName": "",
+																	"attributeMap": null,
+																	"parameterName": "path",
+																	"parameterValue": "${input.path}",
+																	"parameterFormat": null
+																},
+																"payload": {
+																	"parameterType": "CONSTANT",
+																	"referenceNodeName": "",
+																	"attributeMap": {
+																		"DATA_TYPE": "asJson"
+																	},
+																	"parameterName": "payload",
+																	"parameterValue": "{\n\"region\": \"${region}\",\n\"method\": \"${method}\",\n\"host\": \"${host}\",\n\"path\": \"${path}\",\n\"headers\": ${headers},\n\"accessKey\": \"${accessKey}\",\n\"secretKey\": \"${secretKey}\",\n\"service\": \"${service}\",\n\"jsonPayload\": ${jsonPayload},\n\"stringPayload\": \"${stringPayload}\"\n}",
+																	"parameterFormat": null
+																},
+																"accessKey": {
+																	"parameterType": "AWS_SSM",
+																	"referenceNodeName": "",
+																	"attributeMap": null,
+																	"parameterName": "accessKey",
+																	"parameterValue": "AccessKey",
+																	"parameterFormat": null
+																},
+																"service": {
+																	"parameterType": "CONSTANT",
+																	"referenceNodeName": "",
+																	"attributeMap": null,
+																	"parameterName": "service",
+																	"parameterValue": "${input.service}",
+																	"parameterFormat": null
+																},
+																"jsonPayload": {
+																	"parameterType": "CONSTANT",
+																	"referenceNodeName": "",
+																	"attributeMap": {
+																		"DATA_TYPE": "asJson"
+																	},
+																	"parameterName": "jsonPayload",
+																	"parameterValue": "${input.jsonPayload}",
+																	"parameterFormat": null
+																},
+																"host": {
+																	"parameterType": "CONSTANT",
+																	"referenceNodeName": "",
+																	"attributeMap": null,
+																	"parameterName": "host",
+																	"parameterValue": "${input.host}",
+																	"parameterFormat": null
+																},
+																"stringPayload": {
+																	"parameterType": "CONSTANT",
+																	"referenceNodeName": "",
+																	"attributeMap": {
+																		
+																	},
+																	"parameterName": "stringPayload",
+																	"parameterValue": "${input.stringPayload}",
+																	"parameterFormat": null
+																},
+																"region": {
+																	"parameterType": "CONSTANT",
+																	"referenceNodeName": "",
+																	"attributeMap": null,
+																	"parameterName": "region",
+																	"parameterValue": "${input.region}",
+																	"parameterFormat": null
+																},
+																"contentType": {
+																	"parameterType": "CONSTANT",
+																	"referenceNodeName": "",
+																	"attributeMap": null,
+																	"parameterName": "contentType",
+																	"parameterValue": "${input.contentType}",
+																	"parameterFormat": null
+																}
+															},
+															"nodeOutputList": [
+																{
+																	"nodeName": "AWSSignatureLambdaFunction",
+																	"output": {
+																		"executedVersion": "$LATEST",
+																		"logResult": null,
+																		"payload": "IkFXUzQtSE1BQy1TSEEyNTYgQ3JlZGVudGlhbD1BS0lBSkVTSzNQMlo3WUE1VUdBQS8yMDE5MDMwMy91cy1lYXN0LTEvaW90ZGF0YS9hd3M0X3JlcXVlc3QsIFNpZ25lZEhlYWRlcnM9Y29udGVudC10eXBlO2hvc3Q7eC1hbXotZGF0ZSwgU2lnbmF0dXJlPTAwNTc0ZWY0MzAzYTZjNDFlOTg3ZWM4Yzk3OTc5MGQ5N2VlNDgzZmM4ODM4MTBmNGU1ZTk4YjFhNjY2YTA5ZDci",
+																		"functionError": null,
+																		"stringPayload": "AWS4-HMAC-SHA256 Credential=/20190303/us-east-1/iotdata/aws4_request, SignedHeaders=content-type;host;x-amz-date, Signature=00574ef4303a6c41e987ec8c979790d97ee483fc883810f4e5e98b1a666a09d7",
+																		"sdkResponseMetadata": {
+																			"requestId": "5145754c-de88-43da-a7c2-a6b936563d7b"
+																		},
+																		"sdkHttpMetadata": {
+																			"httpHeaders": {
+																				"X-Amz-Executed-Version": "$LATEST",
+																				"x-amzn-Remapped-Content-Length": "0",
+																				"Connection": "keep-alive",
+																				"x-amzn-RequestId": "5145754c-de88-43da-a7c2-a6b936563d7b",
+																				"Content-Length": "210",
+																				"Date": "Sun, 03 Mar 2019 15:48:24 GMT",
+																				"X-Amzn-Trace-Id": "root=1-5c7bf748-80916c76eab4927ec0d94320;sampled=0",
+																				"Content-Type": "application/json"
+																			},
+																			"httpStatusCode": 200
+																		},
+																		"statusCode": 200
+																	},
+																	"auditInfo": {
+																		"endTimestamp": 8571577692559,
+																		"startTimestamp": 8571482154516
+																	},
+																	"stackTrace": null,
+																	"nodeSpecification": null
+																}
+															]
+														}
+													}
+												},
+												"status": 200
+											},
+											"auditInfo": {
+												"endTimestamp": 77846044498,
+												"startTimestamp": 77086257101
+											},
+											"stackTrace": null,
+											"nodeSpecification": null
+										}
+									]
+								},
+								"GetDeviceShadow": {
+									"nodeName": "GetDeviceShadow",
+									"nodeClass": "com.github.piedpiper.node.rest.RESTServiceNode",
+									"nodeExecutorList": [],
+									"nodeInputList": [
+										{
+											"input": {
+												"headers": {
+													"value": {
+														"Authorization": "AWS4-HMAC-SHA256 Credential=/20190303/us-east-1/iotdata/aws4_request, SignedHeaders=content-type;host;x-amz-date, Signature=00574ef4303a6c41e987ec8c979790d97ee483fc883810f4e5e98b1a666a09d7",
+														"x-amz-date": "20190303T154824Z",
+														"host": "data.iot.us-east-1.amazonaws.com",
+														"Content-Type": "application/x-www-form-urlencoded"
+													}
+												},
+												"authorizationHeaderValue": {
+													"value": "AWS4-HMAC-SHA256 Credential=/20190303/us-east-1/iotdata/aws4_request, SignedHeaders=content-type;host;x-amz-date, Signature=00574ef4303a6c41e987ec8c979790d97ee483fc883810f4e5e98b1a666a09d7"
+												},
+												"method": {
+													"value": "GET"
+												},
+												"x-amz-header-value": {
+													"value": "20190303T154824Z"
+												},
+												"outputType": {
+													"value": "asJson"
+												},
+												"thingName": {
+													"value": "Atom8-018459fc4a24"
+												},
+												"body": {
+													"value": ""
+												},
+												"url": {
+													"value": "https://data.iot.us-east-1.amazonaws.com/things/Atom8-018459fc4a24/shadow"
+												}
+											},
+											"nodeSpecification": null
+										}
+									],
+									"nodeSpecification": null,
+									"parameterMap": {
+										"headers": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": {
+												"DATA_TYPE": "asJson"
+											},
+											"parameterName": "headers",
+											"parameterValue": "{\n\"Authorization\": \"${authorizationHeaderValue}\",\n\"x-amz-date\": \"${x-amz-header-value}\",\n\"host\": \"data.iot.us-east-1.amazonaws.com\",\n\"Content-Type\": \"application/x-www-form-urlencoded\"\n}",
+											"parameterFormat": null
+										},
+										"authorizationHeaderValue": {
+											"parameterType": "REFERENCE_FROM_ANOTHER_NODE",
+											"referenceNodeName": "CreateAWSSignatureForGetDeviceShadow",
+											"attributeMap": null,
+											"parameterName": "authorizationHeaderValue",
+											"parameterValue": "$.nodeOutputList[0].output.body.nodeMap.AWSSignatureLambdaFunction.nodeOutputList[0].output.stringPayload",
+											"parameterFormat": null
+										},
+										"method": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "method",
+											"parameterValue": "GET",
+											"parameterFormat": null
+										},
+										"x-amz-header-value": {
+											"parameterType": "REFERENCE_FROM_ANOTHER_NODE",
+											"referenceNodeName": "CreateAWSSignatureForGetDeviceShadow",
+											"attributeMap": null,
+											"parameterName": "x-amz-header-value",
+											"parameterValue": "$.nodeOutputList[0].output.body.nodeMap.DateHeaderGenerator.nodeOutputList[0].output.jsonPayload.x-amz-date",
+											"parameterFormat": null
+										},
+										"outputType": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "outputType",
+											"parameterValue": "asJson",
+											"parameterFormat": null
+										},
+										"thingName": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "thingName",
+											"parameterValue": "${input.thingName}",
+											"parameterFormat": null
+										},
+										"body": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "body",
+											"parameterValue": "",
+											"parameterFormat": null
+										},
+										"url": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "url",
+											"parameterValue": "https://data.iot.us-east-1.amazonaws.com/things/${thingName}/shadow",
+											"parameterFormat": null
+										}
+									},
+									"nodeOutputList": [
+										{
+											"nodeName": "GetDeviceShadow",
+											"output": {
+												"headers": {
+													"date": [
+														"Sun, 03 Mar 2019 15:48:24 GMT"
+													],
+													"content-length": [
+														"1817"
+													],
+													"x-amzn-RequestId": [
+														"daee0803-9adf-789b-cfcf-8d9a83a32608"
+													],
+													"content-type": [
+														"application/json"
+													],
+													"connection": [
+														"keep-alive"
+													]
+												},
+												"rawBody": {
+													
+												},
+												"statusText": "OK",
+												"body": {
+													"metadata": {
+														"desired": {
+															"freeHeap": {
+																"timestamp": 1551624467
+															},
+															"instances": {
+																"0": {
+																	"instanceId": {
+																		"timestamp": 1547015074
+																	},
+																	"lastAction": {
+																		"timestamp": 1551624467
+																	},
+																	"instanceName": {
+																		"timestamp": 1547015074
+																	},
+																	"value": {
+																		"timestamp": 1551624467
+																	}
+																},
+																"1": {
+																	"instanceId": {
+																		"timestamp": 1547086035
+																	},
+																	"lastAction": {
+																		"timestamp": 1551612762
+																	},
+																	"instanceName": {
+																		"timestamp": 1547086035
+																	},
+																	"value": {
+																		"timestamp": 1551612762
+																	}
+																}
+															},
+															"deviceId": {
+																"timestamp": 1547086035
+															},
+															"deviceName": {
+																"timestamp": 1551624467
+															},
+															"ssid": {
+																"timestamp": 1551624467
+															},
+															"versionCode": {
+																"timestamp": 1551612760
+															},
+															"timestamp": {
+																"timestamp": 1550911233
+															}
+														},
+														"reported": {
+															"freeHeap": {
+																"timestamp": 1551624467
+															},
+															"instances": {
+																"0": {
+																	"instanceId": {
+																		"timestamp": 1547015074
+																	},
+																	"lastAction": {
+																		"timestamp": 1551624467
+																	},
+																	"instanceName": {
+																		"timestamp": 1547015074
+																	},
+																	"value": {
+																		"timestamp": 1551624467
+																	}
+																},
+																"1": {
+																	"instanceId": {
+																		"timestamp": 1547086035
+																	},
+																	"lastAction": {
+																		"timestamp": 1551612762
+																	},
+																	"instanceName": {
+																		"timestamp": 1547086035
+																	},
+																	"value": {
+																		"timestamp": 1551612762
+																	}
+																}
+															},
+															"deviceId": {
+																"timestamp": 1547086035
+															},
+															"deviceName": {
+																"timestamp": 1551624467
+															},
+															"ssid": {
+																"timestamp": 1551624467
+															},
+															"versionCode": {
+																"timestamp": 1551612760
+															},
+															"timestamp": {
+																"timestamp": 1550911233
+															}
+														}
+													},
+													"state": {
+														"desired": {
+															"freeHeap": -1,
+															"instances": {
+																"0": {
+																	"instanceId": 0,
+																	"lastAction": "physical",
+																	"instanceName": "",
+																	"value": 0
+																},
+																"1": {
+																	"instanceId": 1,
+																	"lastAction": "sync_state_restart",
+																	"instanceName": "",
+																	"value": 1
+																}
+															},
+															"deviceId": "Atom8-018459fc4a24",
+															"deviceName": "Atom8-018459fc4a24",
+															"ssid": "warpdrive-tp-1",
+															"versionCode": 2.03,
+															"timestamp": 11264
+														},
+														"reported": {
+															"freeHeap": -1,
+															"instances": {
+																"0": {
+																	"instanceId": 0,
+																	"lastAction": "physical",
+																	"instanceName": "",
+																	"value": 0
+																},
+																"1": {
+																	"instanceId": 1,
+																	"lastAction": "sync_state_restart",
+																	"instanceName": "",
+																	"value": 1
+																}
+															},
+															"deviceId": "Atom8-018459fc4a24",
+															"deviceName": "Atom8-018459fc4a24",
+															"ssid": "warpdrive-tp-1",
+															"versionCode": 2.03,
+															"timestamp": 11264
+														}
+													},
+													"version": 686,
+													"timestamp": 1551628104
+												},
+												"status": 200
+											},
+											"auditInfo": {
+												"endTimestamp": 78235735323,
+												"startTimestamp": 77965274471
+											},
+											"stackTrace": null,
+											"nodeSpecification": null
+										}
+									]
+								}
+							}
+						},
+						"status": 200
+					},
+					"stackTrace": null,
+					"auditInfo": {
+						"startTimestamp": 16385404915507,
+						"endTimestamp": 16386892628395
+					}
+				},
+				{
+					"nodeName": "GetThingShadowForThings",
+					"nodeSpecification": null,
+					"output": {
+						"statusText": "OK",
+						"headers": {
+							"x-amz-apigw-id": [
+								"V-OTKH_RoAMF0TQ="
+							],
+							"Access-Control-Allow-Origin": [
+								"*"
+							],
+							"Connection": [
+								"keep-alive"
+							],
+							"x-amzn-RequestId": [
+								"c6d12036-3dcb-11e9-8e56-9f3343322f08"
+							],
+							"Content-Length": [
+								"15754"
+							],
+							"Date": [
+								"Sun, 03 Mar 2019 15:48:24 GMT"
+							],
+							"X-Amzn-Trace-Id": [
+								"Root=1-5c7bf747-81c118379b3cd7e3eb6da87b;Sampled=0"
+							],
+							"Content-Type": [
+								"application/json"
+							]
+						},
+						"rawBody": {
+							
+						},
+						"body": {
+							"exceptionTrace": null,
+							"graphName": "GetThingShadow",
+							"projectName": "Atom8",
+							"nodeMap": {
+								"CreateAWSSignatureForGetDeviceShadow": {
+									"nodeName": "CreateAWSSignatureForGetDeviceShadow",
+									"nodeClass": "com.github.piedpiper.node.piedpiper.SubGraphNode",
+									"nodeExecutorList": [],
+									"nodeInputList": [
+										{
+											"input": {
+												"graphName": {
+													"value": "CreateAWSSignature"
+												},
+												"path": {
+													"value": "/things/Atom8-0a0469fc4a24/shadow"
+												},
+												"method": {
+													"value": "GET"
+												},
+												"service": {
+													"value": "iotdata"
+												},
+												"jsonPayload": {
+													"value": "{}"
+												},
+												"host": {
+													"value": "data.iot.us-east-1.amazonaws.com"
+												},
+												"thingName": {
+													"value": "Atom8-0a0469fc4a24"
+												},
+												"stringPayload": {
+													"value": ""
+												},
+												"projectName": {
+													"value": "Atom8"
+												},
+												"region": {
+													"value": "us-east-1"
+												},
+												"contentType": {
+													"value": "application/x-www-form-urlencoded"
+												},
+												"tableName": {
+													"value": "AlmightyTable"
+												}
+											},
+											"nodeSpecification": null
+										}
+									],
+									"nodeSpecification": null,
+									"parameterMap": {
+										"graphName": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "graphName",
+											"parameterValue": "CreateAWSSignature",
+											"parameterFormat": null
+										},
+										"path": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "path",
+											"parameterValue": "/things/${thingName}/shadow",
+											"parameterFormat": null
+										},
+										"method": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "method",
+											"parameterValue": "GET",
+											"parameterFormat": null
+										},
+										"service": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "service",
+											"parameterValue": "iotdata",
+											"parameterFormat": null
+										},
+										"jsonPayload": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "jsonPayload",
+											"parameterValue": "{}",
+											"parameterFormat": null
+										},
+										"host": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "host",
+											"parameterValue": "data.iot.us-east-1.amazonaws.com",
+											"parameterFormat": null
+										},
+										"thingName": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "thingName",
+											"parameterValue": "${input.thingName}",
+											"parameterFormat": null
+										},
+										"stringPayload": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "stringPayload",
+											"parameterValue": "\"\"",
+											"parameterFormat": null
+										},
+										"projectName": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "projectName",
+											"parameterValue": "Atom8",
+											"parameterFormat": null
+										},
+										"region": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "region",
+											"parameterValue": "us-east-1",
+											"parameterFormat": null
+										},
+										"contentType": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "contentType",
+											"parameterValue": "application/x-www-form-urlencoded",
+											"parameterFormat": null
+										},
+										"tableName": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "tableName",
+											"parameterValue": "AlmightyTable",
+											"parameterFormat": null
+										}
+									},
+									"nodeOutputList": [
+										{
+											"nodeName": "CreateAWSSignatureForGetDeviceShadow",
+											"output": {
+												"headers": {
+													"x-amz-apigw-id": [
+														"V-OTNGkLoAMFpbw="
+													],
+													"Access-Control-Allow-Origin": [
+														"*"
+													],
+													"Connection": [
+														"keep-alive"
+													],
+													"x-amzn-RequestId": [
+														"c6fc276f-3dcb-11e9-938d-0b77068aacb1"
+													],
+													"Content-Length": [
+														"7727"
+													],
+													"Date": [
+														"Sun, 03 Mar 2019 15:48:24 GMT"
+													],
+													"X-Amzn-Trace-Id": [
+														"Root=1-5c7bf747-689cc95fce97f200531d99e3;Sampled=0"
+													],
+													"Content-Type": [
+														"application/json"
+													]
+												},
+												"rawBody": {
+													
+												},
+												"statusText": "OK",
+												"body": {
+													"exceptionTrace": null,
+													"graphName": "CreateAWSSignature",
+													"projectName": "Atom8",
+													"nodeMap": {
+														"DateHeaderGenerator": {
+															"nodeName": "DateHeaderGenerator",
+															"nodeClass": "com.github.piedpiper.node.aws.AWSLambdaNode",
+															"nodeExecutorList": [],
+															"nodeInputList": [
+																{
+																	"input": {
+																		"secretKey": {
+																			"value": ""
+																		},
+																		"payload": {
+																			"value": ""
+																		},
+																		"functionName": {
+																			"value": "AWSHeaderGenerator"
+																		},
+																		"accessKey": {
+																			"value": ""
+																		},
+																		"region": {
+																			"value": "us-east-1"
+																		}
+																	},
+																	"nodeSpecification": null
+																}
+															],
+															"nodeSpecification": null,
+															"parameterMap": {
+																"secretKey": {
+																	"parameterType": "AWS_SSM",
+																	"referenceNodeName": "",
+																	"attributeMap": null,
+																	"parameterName": "secretKey",
+																	"parameterValue": "SecretKey",
+																	"parameterFormat": null
+																},
+																"payload": {
+																	"parameterType": "CONSTANT",
+																	"referenceNodeName": "",
+																	"attributeMap": null,
+																	"parameterName": "payload",
+																	"parameterValue": "",
+																	"parameterFormat": null
+																},
+																"functionName": {
+																	"parameterType": "CONSTANT",
+																	"referenceNodeName": "",
+																	"attributeMap": null,
+																	"parameterName": "functionName",
+																	"parameterValue": "AWSHeaderGenerator",
+																	"parameterFormat": null
+																},
+																"accessKey": {
+																	"parameterType": "AWS_SSM",
+																	"referenceNodeName": "",
+																	"attributeMap": null,
+																	"parameterName": "accessKey",
+																	"parameterValue": "AccessKey",
+																	"parameterFormat": null
+																},
+																"region": {
+																	"parameterType": "CONSTANT",
+																	"referenceNodeName": "",
+																	"attributeMap": null,
+																	"parameterName": "region",
+																	"parameterValue": "${input.region}",
+																	"parameterFormat": null
+																}
+															},
+															"nodeOutputList": [
+																{
+																	"nodeName": "DateHeaderGenerator",
+																	"output": {
+																		"executedVersion": "$LATEST",
+																		"logResult": null,
+																		"payload": "eyJ4LWFtei1kYXRlIjoiMjAxOTAzMDNUMTU0ODI0WiJ9",
+																		"jsonPayload": {
+																			"x-amz-date": "20190303T154824Z"
+																		},
+																		"functionError": null,
+																		"stringPayload": "{\"x-amz-date\":\"20190303T154824Z\"}",
+																		"sdkResponseMetadata": {
+																			"requestId": "b4d90740-aba6-4cd6-a1b1-98d48f52bf7c"
+																		},
+																		"sdkHttpMetadata": {
+																			"httpHeaders": {
+																				"X-Amz-Executed-Version": "$LATEST",
+																				"x-amzn-Remapped-Content-Length": "0",
+																				"Connection": "keep-alive",
+																				"x-amzn-RequestId": "b4d90740-aba6-4cd6-a1b1-98d48f52bf7c",
+																				"Content-Length": "33",
+																				"Date": "Sun, 03 Mar 2019 15:48:24 GMT",
+																				"X-Amzn-Trace-Id": "root=1-5c7bf748-4501780fb80a7013585acbcc;sampled=0",
+																				"Content-Type": "application/json"
+																			},
+																			"httpStatusCode": 200
+																		},
+																		"statusCode": 200
+																	},
+																	"auditInfo": {
+																		"endTimestamp": 16386641066432,
+																		"startTimestamp": 16386526067956
+																	},
+																	"stackTrace": null,
+																	"nodeSpecification": null
+																}
+															]
+														},
+														"AWSSignatureLambdaFunction": {
+															"nodeName": "AWSSignatureLambdaFunction",
+															"nodeClass": "com.github.piedpiper.node.aws.AWSLambdaNode",
+															"nodeExecutorList": [],
+															"nodeInputList": [
+																{
+																	"input": {
+																		"headers": {
+																			"value": "{\"x-amz-date\":\"20190303T154824Z\",\"host\":\"data.iot.us-east-1.amazonaws.com\",\"Content-Type\":\"application/x-www-form-urlencoded\"}"
+																		},
+																		"secretKey": {
+																			"value": ""
+																		},
+																		"method": {
+																			"value": "GET"
+																		},
+																		"functionName": {
+																			"value": "AWSV4SignerFunction"
+																		},
+																		"x-amz-date-header-value": {
+																			"value": "20190303T154824Z"
+																		},
+																		"path": {
+																			"value": "/things/Atom8-0a0469fc4a24/shadow"
+																		},
+																		"payload": {
+																			"value": {
+																				"path": "/things/Atom8-0a0469fc4a24/shadow",
+																				"headers": {
+																					"x-amz-date": "20190303T154824Z",
+																					"host": "data.iot.us-east-1.amazonaws.com",
+																					"Content-Type": "application/x-www-form-urlencoded"
+																				},
+																				"method": "GET",
+																				"secretKey": "",
+																				"accessKey": "",
+																				"service": "iotdata",
+																				"jsonPayload": {
+																					
+																				},
+																				"host": "data.iot.us-east-1.amazonaws.com",
+																				"stringPayload": "",
+																				"region": "us-east-1"
+																			}
+																		},
+																		"accessKey": {
+																			"value": ""
+																		},
+																		"service": {
+																			"value": "iotdata"
+																		},
+																		"jsonPayload": {
+																			"value": {
+																				
+																			}
+																		},
+																		"host": {
+																			"value": "data.iot.us-east-1.amazonaws.com"
+																		},
+																		"stringPayload": {
+																			"value": ""
+																		},
+																		"region": {
+																			"value": "us-east-1"
+																		},
+																		"contentType": {
+																			"value": "application/x-www-form-urlencoded"
+																		}
+																	},
+																	"nodeSpecification": null
+																}
+															],
+															"nodeSpecification": null,
+															"parameterMap": {
+																"headers": {
+																	"parameterType": "CONSTANT",
+																	"referenceNodeName": "",
+																	"attributeMap": null,
+																	"parameterName": "headers",
+																	"parameterValue": "{\n\"x-amz-date\": \"${x-amz-date-header-value}\",\n\"host\": \"${host}\",\n\"Content-Type\": \"${contentType}\"\n}",
+																	"parameterFormat": null
+																},
+																"secretKey": {
+																	"parameterType": "AWS_SSM",
+																	"referenceNodeName": "",
+																	"attributeMap": null,
+																	"parameterName": "secretKey",
+																	"parameterValue": "SecretKey",
+																	"parameterFormat": null
+																},
+																"method": {
+																	"parameterType": "CONSTANT",
+																	"referenceNodeName": "",
+																	"attributeMap": null,
+																	"parameterName": "method",
+																	"parameterValue": "${input.method}",
+																	"parameterFormat": null
+																},
+																"functionName": {
+																	"parameterType": "CONSTANT",
+																	"referenceNodeName": "",
+																	"attributeMap": null,
+																	"parameterName": "functionName",
+																	"parameterValue": "AWSV4SignerFunction",
+																	"parameterFormat": null
+																},
+																"x-amz-date-header-value": {
+																	"parameterType": "REFERENCE_FROM_ANOTHER_NODE",
+																	"referenceNodeName": "DateHeaderGenerator",
+																	"attributeMap": null,
+																	"parameterName": "x-amz-date-header-value",
+																	"parameterValue": "$.nodeOutputList[0].output.jsonPayload.x-amz-date",
+																	"parameterFormat": null
+																},
+																"path": {
+																	"parameterType": "CONSTANT",
+																	"referenceNodeName": "",
+																	"attributeMap": null,
+																	"parameterName": "path",
+																	"parameterValue": "${input.path}",
+																	"parameterFormat": null
+																},
+																"payload": {
+																	"parameterType": "CONSTANT",
+																	"referenceNodeName": "",
+																	"attributeMap": {
+																		"DATA_TYPE": "asJson"
+																	},
+																	"parameterName": "payload",
+																	"parameterValue": "{\n\"region\": \"${region}\",\n\"method\": \"${method}\",\n\"host\": \"${host}\",\n\"path\": \"${path}\",\n\"headers\": ${headers},\n\"accessKey\": \"${accessKey}\",\n\"secretKey\": \"${secretKey}\",\n\"service\": \"${service}\",\n\"jsonPayload\": ${jsonPayload},\n\"stringPayload\": \"${stringPayload}\"\n}",
+																	"parameterFormat": null
+																},
+																"accessKey": {
+																	"parameterType": "AWS_SSM",
+																	"referenceNodeName": "",
+																	"attributeMap": null,
+																	"parameterName": "accessKey",
+																	"parameterValue": "AccessKey",
+																	"parameterFormat": null
+																},
+																"service": {
+																	"parameterType": "CONSTANT",
+																	"referenceNodeName": "",
+																	"attributeMap": null,
+																	"parameterName": "service",
+																	"parameterValue": "${input.service}",
+																	"parameterFormat": null
+																},
+																"jsonPayload": {
+																	"parameterType": "CONSTANT",
+																	"referenceNodeName": "",
+																	"attributeMap": {
+																		"DATA_TYPE": "asJson"
+																	},
+																	"parameterName": "jsonPayload",
+																	"parameterValue": "${input.jsonPayload}",
+																	"parameterFormat": null
+																},
+																"host": {
+																	"parameterType": "CONSTANT",
+																	"referenceNodeName": "",
+																	"attributeMap": null,
+																	"parameterName": "host",
+																	"parameterValue": "${input.host}",
+																	"parameterFormat": null
+																},
+																"stringPayload": {
+																	"parameterType": "CONSTANT",
+																	"referenceNodeName": "",
+																	"attributeMap": {
+																		
+																	},
+																	"parameterName": "stringPayload",
+																	"parameterValue": "${input.stringPayload}",
+																	"parameterFormat": null
+																},
+																"region": {
+																	"parameterType": "CONSTANT",
+																	"referenceNodeName": "",
+																	"attributeMap": null,
+																	"parameterName": "region",
+																	"parameterValue": "${input.region}",
+																	"parameterFormat": null
+																},
+																"contentType": {
+																	"parameterType": "CONSTANT",
+																	"referenceNodeName": "",
+																	"attributeMap": null,
+																	"parameterName": "contentType",
+																	"parameterValue": "${input.contentType}",
+																	"parameterFormat": null
+																}
+															},
+															"nodeOutputList": [
+																{
+																	"nodeName": "AWSSignatureLambdaFunction",
+																	"output": {
+																		"executedVersion": "$LATEST",
+																		"logResult": null,
+																		"payload": "IkFXUzQtSE1BQy1TSEEyNTYgQ3JlZGVudGlhbD1BS0lBSkVTSzNQMlo3WUE1VUdBQS8yMDE5MDMwMy91cy1lYXN0LTEvaW90ZGF0YS9hd3M0X3JlcXVlc3QsIFNpZ25lZEhlYWRlcnM9Y29udGVudC10eXBlO2hvc3Q7eC1hbXotZGF0ZSwgU2lnbmF0dXJlPWUwYTBjZGIyNWQ1NWIxN2QxMTc4ZWFiMjc0MjE2ODQ2ZTIyOTk2MjZiYjIxMzcxNGUxNDc4NThiZDNjNjgyMmYi",
+																		"functionError": null,
+																		"stringPayload": "AWS4-HMAC-SHA256 Credential=/20190303/us-east-1/iotdata/aws4_request, SignedHeaders=content-type;host;x-amz-date, Signature=e0a0cdb25d55b17d1178eab274216846e2299626bb213714e147858bd3c6822f",
+																		"sdkResponseMetadata": {
+																			"requestId": "9d07d988-2284-4770-afd1-4901f961f2da"
+																		},
+																		"sdkHttpMetadata": {
+																			"httpHeaders": {
+																				"X-Amz-Executed-Version": "$LATEST",
+																				"x-amzn-Remapped-Content-Length": "0",
+																				"Connection": "keep-alive",
+																				"x-amzn-RequestId": "9d07d988-2284-4770-afd1-4901f961f2da",
+																				"Content-Length": "210",
+																				"Date": "Sun, 03 Mar 2019 15:48:24 GMT",
+																				"X-Amzn-Trace-Id": "root=1-5c7bf748-e3ab26d8cfa996ef2b3b2a45;sampled=0",
+																				"Content-Type": "application/json"
+																			},
+																			"httpStatusCode": 200
+																		},
+																		"statusCode": 200
+																	},
+																	"auditInfo": {
+																		"endTimestamp": 16386845432566,
+																		"startTimestamp": 16386747971604
+																	},
+																	"stackTrace": null,
+																	"nodeSpecification": null
+																}
+															]
+														}
+													}
+												},
+												"status": 200
+											},
+											"auditInfo": {
+												"endTimestamp": 16386871148202,
+												"startTimestamp": 16385704998083
+											},
+											"stackTrace": null,
+											"nodeSpecification": null
+										}
+									]
+								},
+								"GetDeviceShadow": {
+									"nodeName": "GetDeviceShadow",
+									"nodeClass": "com.github.piedpiper.node.rest.RESTServiceNode",
+									"nodeExecutorList": [],
+									"nodeInputList": [
+										{
+											"input": {
+												"headers": {
+													"value": {
+														"Authorization": "AWS4-HMAC-SHA256 Credential=/20190303/us-east-1/iotdata/aws4_request, SignedHeaders=content-type;host;x-amz-date, Signature=e0a0cdb25d55b17d1178eab274216846e2299626bb213714e147858bd3c6822f",
+														"x-amz-date": "20190303T154824Z",
+														"host": "data.iot.us-east-1.amazonaws.com",
+														"Content-Type": "application/x-www-form-urlencoded"
+													}
+												},
+												"authorizationHeaderValue": {
+													"value": "AWS4-HMAC-SHA256 Credential=/20190303/us-east-1/iotdata/aws4_request, SignedHeaders=content-type;host;x-amz-date, Signature=e0a0cdb25d55b17d1178eab274216846e2299626bb213714e147858bd3c6822f"
+												},
+												"method": {
+													"value": "GET"
+												},
+												"x-amz-header-value": {
+													"value": "20190303T154824Z"
+												},
+												"outputType": {
+													"value": "asJson"
+												},
+												"thingName": {
+													"value": "Atom8-0a0469fc4a24"
+												},
+												"body": {
+													"value": ""
+												},
+												"url": {
+													"value": "https://data.iot.us-east-1.amazonaws.com/things/Atom8-0a0469fc4a24/shadow"
+												}
+											},
+											"nodeSpecification": null
+										}
+									],
+									"nodeSpecification": null,
+									"parameterMap": {
+										"headers": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": {
+												"DATA_TYPE": "asJson"
+											},
+											"parameterName": "headers",
+											"parameterValue": "{\n\"Authorization\": \"${authorizationHeaderValue}\",\n\"x-amz-date\": \"${x-amz-header-value}\",\n\"host\": \"data.iot.us-east-1.amazonaws.com\",\n\"Content-Type\": \"application/x-www-form-urlencoded\"\n}",
+											"parameterFormat": null
+										},
+										"authorizationHeaderValue": {
+											"parameterType": "REFERENCE_FROM_ANOTHER_NODE",
+											"referenceNodeName": "CreateAWSSignatureForGetDeviceShadow",
+											"attributeMap": null,
+											"parameterName": "authorizationHeaderValue",
+											"parameterValue": "$.nodeOutputList[0].output.body.nodeMap.AWSSignatureLambdaFunction.nodeOutputList[0].output.stringPayload",
+											"parameterFormat": null
+										},
+										"method": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "method",
+											"parameterValue": "GET",
+											"parameterFormat": null
+										},
+										"x-amz-header-value": {
+											"parameterType": "REFERENCE_FROM_ANOTHER_NODE",
+											"referenceNodeName": "CreateAWSSignatureForGetDeviceShadow",
+											"attributeMap": null,
+											"parameterName": "x-amz-header-value",
+											"parameterValue": "$.nodeOutputList[0].output.body.nodeMap.DateHeaderGenerator.nodeOutputList[0].output.jsonPayload.x-amz-date",
+											"parameterFormat": null
+										},
+										"outputType": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "outputType",
+											"parameterValue": "asJson",
+											"parameterFormat": null
+										},
+										"thingName": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "thingName",
+											"parameterValue": "${input.thingName}",
+											"parameterFormat": null
+										},
+										"body": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "body",
+											"parameterValue": "",
+											"parameterFormat": null
+										},
+										"url": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "url",
+											"parameterValue": "https://data.iot.us-east-1.amazonaws.com/things/${thingName}/shadow",
+											"parameterFormat": null
+										}
+									},
+									"nodeOutputList": [
+										{
+											"nodeName": "GetDeviceShadow",
+											"output": {
+												"headers": {
+													"date": [
+														"Sun, 03 Mar 2019 15:48:24 GMT"
+													],
+													"content-length": [
+														"1138"
+													],
+													"x-amzn-RequestId": [
+														"6bc99de6-23b7-6a2b-725f-536bb3e8fc12"
+													],
+													"content-type": [
+														"application/json"
+													],
+													"connection": [
+														"keep-alive"
+													]
+												},
+												"rawBody": {
+													
+												},
+												"statusText": "OK",
+												"body": {
+													"metadata": {
+														"desired": {
+															"instances": {
+																"0": {
+																	"lastAction": {
+																		"timestamp": 1551506906
+																	},
+																	"value": {
+																		"timestamp": 1551506906
+																	}
+																},
+																"1": {
+																	"lastAction": {
+																		"timestamp": 1551506908
+																	},
+																	"value": {
+																		"timestamp": 1551506908
+																	}
+																}
+															},
+															"deviceName": {
+																"timestamp": 1551506482
+															},
+															"ssid": {
+																"timestamp": 1551506482
+															},
+															"versionCode": {
+																"timestamp": 1551506482
+															},
+															"timestamp": {
+																"timestamp": 1550896391
+															}
+														},
+														"reported": {
+															"instances": {
+																"0": {
+																	"lastAction": {
+																		"timestamp": 1551506906
+																	},
+																	"value": {
+																		"timestamp": 1551506906
+																	}
+																},
+																"1": {
+																	"lastAction": {
+																		"timestamp": 1551506908
+																	},
+																	"value": {
+																		"timestamp": 1551506908
+																	}
+																}
+															},
+															"deviceName": {
+																"timestamp": 1551506482
+															},
+															"ssid": {
+																"timestamp": 1551506482
+															},
+															"versionCode": {
+																"timestamp": 1551506482
+															},
+															"timestamp": {
+																"timestamp": 1550896391
+															}
+														}
+													},
+													"state": {
+														"desired": {
+															"instances": {
+																"0": {
+																	"lastAction": "local_network",
+																	"value": 0
+																},
+																"1": {
+																	"lastAction": "local_network",
+																	"value": 0
+																}
+															},
+															"deviceName": "Atom8-0a0469fc4a24",
+															"ssid": "warpdrive-tp-1",
+															"versionCode": 2.02,
+															"timestamp": 21679
+														},
+														"reported": {
+															"instances": {
+																"0": {
+																	"lastAction": "local_network",
+																	"value": 0
+																},
+																"1": {
+																	"lastAction": "local_network",
+																	"value": 0
+																}
+															},
+															"deviceName": "Atom8-0a0469fc4a24",
+															"ssid": "warpdrive-tp-1",
+															"versionCode": 2.02,
+															"timestamp": 21679
+														}
+													},
+													"version": 5439,
+													"timestamp": 1551628104
+												},
+												"status": 200
+											},
+											"auditInfo": {
+												"endTimestamp": 16386939803379,
+												"startTimestamp": 16386920199388
+											},
+											"stackTrace": null,
+											"nodeSpecification": null
+										}
+									]
+								}
+							}
+						},
+						"status": 200
+					},
+					"stackTrace": null,
+					"auditInfo": {
+						"startTimestamp": 16385420381369,
+						"endTimestamp": 16386951231844
+					}
+				},
+				{
+					"nodeName": "GetThingShadowForThings",
+					"nodeSpecification": null,
+					"output": {
+						"statusText": "OK",
+						"headers": {
+							"x-amz-apigw-id": [
+								"V-OTKFp5oAMF6_Q="
+							],
+							"Access-Control-Allow-Origin": [
+								"*"
+							],
+							"Connection": [
+								"keep-alive"
+							],
+							"x-amzn-RequestId": [
+								"c6d0aaf2-3dcb-11e9-a213-03038bd692fd"
+							],
+							"Content-Length": [
+								"15818"
+							],
+							"Date": [
+								"Sun, 03 Mar 2019 15:48:26 GMT"
+							],
+							"X-Amzn-Trace-Id": [
+								"Root=1-5c7bf747-35afe3f8f821346a8d5a1c4f;Sampled=0"
+							],
+							"Content-Type": [
+								"application/json"
+							]
+						},
+						"rawBody": {
+							
+						},
+						"body": {
+							"exceptionTrace": null,
+							"graphName": "GetThingShadow",
+							"projectName": "Atom8",
+							"nodeMap": {
+								"CreateAWSSignatureForGetDeviceShadow": {
+									"nodeName": "CreateAWSSignatureForGetDeviceShadow",
+									"nodeClass": "com.github.piedpiper.node.piedpiper.SubGraphNode",
+									"nodeExecutorList": [],
+									"nodeInputList": [
+										{
+											"input": {
+												"graphName": {
+													"value": "CreateAWSSignature"
+												},
+												"path": {
+													"value": "/things/Atom8-020459fc4a24/shadow"
+												},
+												"method": {
+													"value": "GET"
+												},
+												"service": {
+													"value": "iotdata"
+												},
+												"jsonPayload": {
+													"value": "{}"
+												},
+												"host": {
+													"value": "data.iot.us-east-1.amazonaws.com"
+												},
+												"thingName": {
+													"value": "Atom8-020459fc4a24"
+												},
+												"stringPayload": {
+													"value": ""
+												},
+												"projectName": {
+													"value": "Atom8"
+												},
+												"region": {
+													"value": "us-east-1"
+												},
+												"contentType": {
+													"value": "application/x-www-form-urlencoded"
+												},
+												"tableName": {
+													"value": "AlmightyTable"
+												}
+											},
+											"nodeSpecification": null
+										}
+									],
+									"nodeSpecification": null,
+									"parameterMap": {
+										"graphName": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "graphName",
+											"parameterValue": "CreateAWSSignature",
+											"parameterFormat": null
+										},
+										"path": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "path",
+											"parameterValue": "/things/${thingName}/shadow",
+											"parameterFormat": null
+										},
+										"method": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "method",
+											"parameterValue": "GET",
+											"parameterFormat": null
+										},
+										"service": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "service",
+											"parameterValue": "iotdata",
+											"parameterFormat": null
+										},
+										"jsonPayload": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "jsonPayload",
+											"parameterValue": "{}",
+											"parameterFormat": null
+										},
+										"host": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "host",
+											"parameterValue": "data.iot.us-east-1.amazonaws.com",
+											"parameterFormat": null
+										},
+										"thingName": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "thingName",
+											"parameterValue": "${input.thingName}",
+											"parameterFormat": null
+										},
+										"stringPayload": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "stringPayload",
+											"parameterValue": "\"\"",
+											"parameterFormat": null
+										},
+										"projectName": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "projectName",
+											"parameterValue": "Atom8",
+											"parameterFormat": null
+										},
+										"region": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "region",
+											"parameterValue": "us-east-1",
+											"parameterFormat": null
+										},
+										"contentType": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "contentType",
+											"parameterValue": "application/x-www-form-urlencoded",
+											"parameterFormat": null
+										},
+										"tableName": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "tableName",
+											"parameterValue": "AlmightyTable",
+											"parameterFormat": null
+										}
+									},
+									"nodeOutputList": [
+										{
+											"nodeName": "CreateAWSSignatureForGetDeviceShadow",
+											"output": {
+												"headers": {
+													"x-amz-apigw-id": [
+														"V-OTNGRyIAMF7YA="
+													],
+													"Access-Control-Allow-Origin": [
+														"*"
+													],
+													"Connection": [
+														"keep-alive"
+													],
+													"x-amzn-RequestId": [
+														"c700bb16-3dcb-11e9-ba09-a1a2515b7e6b"
+													],
+													"Content-Length": [
+														"7723"
+													],
+													"Date": [
+														"Sun, 03 Mar 2019 15:48:25 GMT"
+													],
+													"X-Amzn-Trace-Id": [
+														"Root=1-5c7bf747-f77b60e071a0b52f51bc96fb;Sampled=0"
+													],
+													"Content-Type": [
+														"application/json"
+													]
+												},
+												"rawBody": {
+													
+												},
+												"statusText": "OK",
+												"body": {
+													"exceptionTrace": null,
+													"graphName": "CreateAWSSignature",
+													"projectName": "Atom8",
+													"nodeMap": {
+														"DateHeaderGenerator": {
+															"nodeName": "DateHeaderGenerator",
+															"nodeClass": "com.github.piedpiper.node.aws.AWSLambdaNode",
+															"nodeExecutorList": [],
+															"nodeInputList": [
+																{
+																	"input": {
+																		"secretKey": {
+																			"value": ""
+																		},
+																		"payload": {
+																			"value": ""
+																		},
+																		"functionName": {
+																			"value": "AWSHeaderGenerator"
+																		},
+																		"accessKey": {
+																			"value": ""
+																		},
+																		"region": {
+																			"value": "us-east-1"
+																		}
+																	},
+																	"nodeSpecification": null
+																}
+															],
+															"nodeSpecification": null,
+															"parameterMap": {
+																"secretKey": {
+																	"parameterType": "AWS_SSM",
+																	"referenceNodeName": "",
+																	"attributeMap": null,
+																	"parameterName": "secretKey",
+																	"parameterValue": "SecretKey",
+																	"parameterFormat": null
+																},
+																"payload": {
+																	"parameterType": "CONSTANT",
+																	"referenceNodeName": "",
+																	"attributeMap": null,
+																	"parameterName": "payload",
+																	"parameterValue": "",
+																	"parameterFormat": null
+																},
+																"functionName": {
+																	"parameterType": "CONSTANT",
+																	"referenceNodeName": "",
+																	"attributeMap": null,
+																	"parameterName": "functionName",
+																	"parameterValue": "AWSHeaderGenerator",
+																	"parameterFormat": null
+																},
+																"accessKey": {
+																	"parameterType": "AWS_SSM",
+																	"referenceNodeName": "",
+																	"attributeMap": null,
+																	"parameterName": "accessKey",
+																	"parameterValue": "AccessKey",
+																	"parameterFormat": null
+																},
+																"region": {
+																	"parameterType": "CONSTANT",
+																	"referenceNodeName": "",
+																	"attributeMap": null,
+																	"parameterName": "region",
+																	"parameterValue": "${input.region}",
+																	"parameterFormat": null
+																}
+															},
+															"nodeOutputList": [
+																{
+																	"nodeName": "DateHeaderGenerator",
+																	"output": {
+																		"executedVersion": "$LATEST",
+																		"logResult": null,
+																		"payload": "eyJ4LWFtei1kYXRlIjoiMjAxOTAzMDNUMTU0ODI1WiJ9",
+																		"jsonPayload": {
+																			"x-amz-date": "20190303T154825Z"
+																		},
+																		"functionError": null,
+																		"stringPayload": "{\"x-amz-date\":\"20190303T154825Z\"}",
+																		"sdkResponseMetadata": {
+																			"requestId": "b4d3cf12-3f67-4de7-9a1f-bf55f6301ea3"
+																		},
+																		"sdkHttpMetadata": {
+																			"httpHeaders": {
+																				"X-Amz-Executed-Version": "$LATEST",
+																				"x-amzn-Remapped-Content-Length": "0",
+																				"Connection": "keep-alive",
+																				"x-amzn-RequestId": "b4d3cf12-3f67-4de7-9a1f-bf55f6301ea3",
+																				"Content-Length": "33",
+																				"Date": "Sun, 03 Mar 2019 15:48:25 GMT",
+																				"X-Amzn-Trace-Id": "root=1-5c7bf749-07d95fc0fe0bc1009d0afd10;sampled=0",
+																				"Content-Type": "application/json"
+																			},
+																			"httpStatusCode": 200
+																		},
+																		"statusCode": 200
+																	},
+																	"auditInfo": {
+																		"endTimestamp": 2451626784948,
+																		"startTimestamp": 2451370315740
+																	},
+																	"stackTrace": null,
+																	"nodeSpecification": null
+																}
+															]
+														},
+														"AWSSignatureLambdaFunction": {
+															"nodeName": "AWSSignatureLambdaFunction",
+															"nodeClass": "com.github.piedpiper.node.aws.AWSLambdaNode",
+															"nodeExecutorList": [],
+															"nodeInputList": [
+																{
+																	"input": {
+																		"headers": {
+																			"value": "{\"x-amz-date\":\"20190303T154825Z\",\"host\":\"data.iot.us-east-1.amazonaws.com\",\"Content-Type\":\"application/x-www-form-urlencoded\"}"
+																		},
+																		"secretKey": {
+																			"value": ""
+																		},
+																		"method": {
+																			"value": "GET"
+																		},
+																		"functionName": {
+																			"value": "AWSV4SignerFunction"
+																		},
+																		"x-amz-date-header-value": {
+																			"value": "20190303T154825Z"
+																		},
+																		"path": {
+																			"value": "/things/Atom8-020459fc4a24/shadow"
+																		},
+																		"payload": {
+																			"value": {
+																				"path": "/things/Atom8-020459fc4a24/shadow",
+																				"headers": {
+																					"x-amz-date": "20190303T154825Z",
+																					"host": "data.iot.us-east-1.amazonaws.com",
+																					"Content-Type": "application/x-www-form-urlencoded"
+																				},
+																				"method": "GET",
+																				"secretKey": "",
+																				"accessKey": "",
+																				"service": "iotdata",
+																				"jsonPayload": {
+																					
+																				},
+																				"host": "data.iot.us-east-1.amazonaws.com",
+																				"stringPayload": "",
+																				"region": "us-east-1"
+																			}
+																		},
+																		"accessKey": {
+																			"value": ""
+																		},
+																		"service": {
+																			"value": "iotdata"
+																		},
+																		"jsonPayload": {
+																			"value": {
+																				
+																			}
+																		},
+																		"host": {
+																			"value": "data.iot.us-east-1.amazonaws.com"
+																		},
+																		"stringPayload": {
+																			"value": ""
+																		},
+																		"region": {
+																			"value": "us-east-1"
+																		},
+																		"contentType": {
+																			"value": "application/x-www-form-urlencoded"
+																		}
+																	},
+																	"nodeSpecification": null
+																}
+															],
+															"nodeSpecification": null,
+															"parameterMap": {
+																"headers": {
+																	"parameterType": "CONSTANT",
+																	"referenceNodeName": "",
+																	"attributeMap": null,
+																	"parameterName": "headers",
+																	"parameterValue": "{\n\"x-amz-date\": \"${x-amz-date-header-value}\",\n\"host\": \"${host}\",\n\"Content-Type\": \"${contentType}\"\n}",
+																	"parameterFormat": null
+																},
+																"secretKey": {
+																	"parameterType": "AWS_SSM",
+																	"referenceNodeName": "",
+																	"attributeMap": null,
+																	"parameterName": "secretKey",
+																	"parameterValue": "SecretKey",
+																	"parameterFormat": null
+																},
+																"method": {
+																	"parameterType": "CONSTANT",
+																	"referenceNodeName": "",
+																	"attributeMap": null,
+																	"parameterName": "method",
+																	"parameterValue": "${input.method}",
+																	"parameterFormat": null
+																},
+																"functionName": {
+																	"parameterType": "CONSTANT",
+																	"referenceNodeName": "",
+																	"attributeMap": null,
+																	"parameterName": "functionName",
+																	"parameterValue": "AWSV4SignerFunction",
+																	"parameterFormat": null
+																},
+																"x-amz-date-header-value": {
+																	"parameterType": "REFERENCE_FROM_ANOTHER_NODE",
+																	"referenceNodeName": "DateHeaderGenerator",
+																	"attributeMap": null,
+																	"parameterName": "x-amz-date-header-value",
+																	"parameterValue": "$.nodeOutputList[0].output.jsonPayload.x-amz-date",
+																	"parameterFormat": null
+																},
+																"path": {
+																	"parameterType": "CONSTANT",
+																	"referenceNodeName": "",
+																	"attributeMap": null,
+																	"parameterName": "path",
+																	"parameterValue": "${input.path}",
+																	"parameterFormat": null
+																},
+																"payload": {
+																	"parameterType": "CONSTANT",
+																	"referenceNodeName": "",
+																	"attributeMap": {
+																		"DATA_TYPE": "asJson"
+																	},
+																	"parameterName": "payload",
+																	"parameterValue": "{\n\"region\": \"${region}\",\n\"method\": \"${method}\",\n\"host\": \"${host}\",\n\"path\": \"${path}\",\n\"headers\": ${headers},\n\"accessKey\": \"${accessKey}\",\n\"secretKey\": \"${secretKey}\",\n\"service\": \"${service}\",\n\"jsonPayload\": ${jsonPayload},\n\"stringPayload\": \"${stringPayload}\"\n}",
+																	"parameterFormat": null
+																},
+																"accessKey": {
+																	"parameterType": "AWS_SSM",
+																	"referenceNodeName": "",
+																	"attributeMap": null,
+																	"parameterName": "accessKey",
+																	"parameterValue": "AccessKey",
+																	"parameterFormat": null
+																},
+																"service": {
+																	"parameterType": "CONSTANT",
+																	"referenceNodeName": "",
+																	"attributeMap": null,
+																	"parameterName": "service",
+																	"parameterValue": "${input.service}",
+																	"parameterFormat": null
+																},
+																"jsonPayload": {
+																	"parameterType": "CONSTANT",
+																	"referenceNodeName": "",
+																	"attributeMap": {
+																		"DATA_TYPE": "asJson"
+																	},
+																	"parameterName": "jsonPayload",
+																	"parameterValue": "${input.jsonPayload}",
+																	"parameterFormat": null
+																},
+																"host": {
+																	"parameterType": "CONSTANT",
+																	"referenceNodeName": "",
+																	"attributeMap": null,
+																	"parameterName": "host",
+																	"parameterValue": "${input.host}",
+																	"parameterFormat": null
+																},
+																"stringPayload": {
+																	"parameterType": "CONSTANT",
+																	"referenceNodeName": "",
+																	"attributeMap": {
+																		
+																	},
+																	"parameterName": "stringPayload",
+																	"parameterValue": "${input.stringPayload}",
+																	"parameterFormat": null
+																},
+																"region": {
+																	"parameterType": "CONSTANT",
+																	"referenceNodeName": "",
+																	"attributeMap": null,
+																	"parameterName": "region",
+																	"parameterValue": "${input.region}",
+																	"parameterFormat": null
+																},
+																"contentType": {
+																	"parameterType": "CONSTANT",
+																	"referenceNodeName": "",
+																	"attributeMap": null,
+																	"parameterName": "contentType",
+																	"parameterValue": "${input.contentType}",
+																	"parameterFormat": null
+																}
+															},
+															"nodeOutputList": [
+																{
+																	"nodeName": "AWSSignatureLambdaFunction",
+																	"output": {
+																		"executedVersion": "$LATEST",
+																		"logResult": null,
+																		"payload": "IkFXUzQtSE1BQy1TSEEyNTYgQ3JlZGVudGlhbD1BS0lBSkVTSzNQMlo3WUE1VUdBQS8yMDE5MDMwMy91cy1lYXN0LTEvaW90ZGF0YS9hd3M0X3JlcXVlc3QsIFNpZ25lZEhlYWRlcnM9Y29udGVudC10eXBlO2hvc3Q7eC1hbXotZGF0ZSwgU2lnbmF0dXJlPWRlOWNlZDk3OWEzMjUzZjE1YjdhYjM4ZWNhODRkNmQzM2JhZjcwYTI4YjM1ZWUwNTFmZWVjODA0YjVmMGE5NmMi",
+																		"functionError": null,
+																		"stringPayload": "AWS4-HMAC-SHA256 Credential=/20190303/us-east-1/iotdata/aws4_request, SignedHeaders=content-type;host;x-amz-date, Signature=de9ced979a3253f15b7ab38eca84d6d33baf70a28b35ee051feec804b5f0a96c",
+																		"sdkResponseMetadata": {
+																			"requestId": "5c07eda9-3272-4a4c-b04f-58a7c7e2f01d"
+																		},
+																		"sdkHttpMetadata": {
+																			"httpHeaders": {
+																				"X-Amz-Executed-Version": "$LATEST",
+																				"x-amzn-Remapped-Content-Length": "0",
+																				"Connection": "keep-alive",
+																				"x-amzn-RequestId": "5c07eda9-3272-4a4c-b04f-58a7c7e2f01d",
+																				"Content-Length": "210",
+																				"Date": "Sun, 03 Mar 2019 15:48:25 GMT",
+																				"X-Amzn-Trace-Id": "root=1-5c7bf749-dae67ca80b5b12943528c200;sampled=0",
+																				"Content-Type": "application/json"
+																			},
+																			"httpStatusCode": 200
+																		},
+																		"statusCode": 200
+																	},
+																	"auditInfo": {
+																		"endTimestamp": 2452021775285,
+																		"startTimestamp": 2451861314631
+																	},
+																	"stackTrace": null,
+																	"nodeSpecification": null
+																}
+															]
+														}
+													}
+												},
+												"status": 200
+											},
+											"auditInfo": {
+												"endTimestamp": 79150264253,
+												"startTimestamp": 77089818483
+											},
+											"stackTrace": null,
+											"nodeSpecification": null
+										}
+									]
+								},
+								"GetDeviceShadow": {
+									"nodeName": "GetDeviceShadow",
+									"nodeClass": "com.github.piedpiper.node.rest.RESTServiceNode",
+									"nodeExecutorList": [],
+									"nodeInputList": [
+										{
+											"input": {
+												"headers": {
+													"value": {
+														"Authorization": "AWS4-HMAC-SHA256 Credential=/20190303/us-east-1/iotdata/aws4_request, SignedHeaders=content-type;host;x-amz-date, Signature=de9ced979a3253f15b7ab38eca84d6d33baf70a28b35ee051feec804b5f0a96c",
+														"x-amz-date": "20190303T154825Z",
+														"host": "data.iot.us-east-1.amazonaws.com",
+														"Content-Type": "application/x-www-form-urlencoded"
+													}
+												},
+												"authorizationHeaderValue": {
+													"value": "AWS4-HMAC-SHA256 Credential=/20190303/us-east-1/iotdata/aws4_request, SignedHeaders=content-type;host;x-amz-date, Signature=de9ced979a3253f15b7ab38eca84d6d33baf70a28b35ee051feec804b5f0a96c"
+												},
+												"method": {
+													"value": "GET"
+												},
+												"x-amz-header-value": {
+													"value": "20190303T154825Z"
+												},
+												"outputType": {
+													"value": "asJson"
+												},
+												"thingName": {
+													"value": "Atom8-020459fc4a24"
+												},
+												"body": {
+													"value": ""
+												},
+												"url": {
+													"value": "https://data.iot.us-east-1.amazonaws.com/things/Atom8-020459fc4a24/shadow"
+												}
+											},
+											"nodeSpecification": null
+										}
+									],
+									"nodeSpecification": null,
+									"parameterMap": {
+										"headers": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": {
+												"DATA_TYPE": "asJson"
+											},
+											"parameterName": "headers",
+											"parameterValue": "{\n\"Authorization\": \"${authorizationHeaderValue}\",\n\"x-amz-date\": \"${x-amz-header-value}\",\n\"host\": \"data.iot.us-east-1.amazonaws.com\",\n\"Content-Type\": \"application/x-www-form-urlencoded\"\n}",
+											"parameterFormat": null
+										},
+										"authorizationHeaderValue": {
+											"parameterType": "REFERENCE_FROM_ANOTHER_NODE",
+											"referenceNodeName": "CreateAWSSignatureForGetDeviceShadow",
+											"attributeMap": null,
+											"parameterName": "authorizationHeaderValue",
+											"parameterValue": "$.nodeOutputList[0].output.body.nodeMap.AWSSignatureLambdaFunction.nodeOutputList[0].output.stringPayload",
+											"parameterFormat": null
+										},
+										"method": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "method",
+											"parameterValue": "GET",
+											"parameterFormat": null
+										},
+										"x-amz-header-value": {
+											"parameterType": "REFERENCE_FROM_ANOTHER_NODE",
+											"referenceNodeName": "CreateAWSSignatureForGetDeviceShadow",
+											"attributeMap": null,
+											"parameterName": "x-amz-header-value",
+											"parameterValue": "$.nodeOutputList[0].output.body.nodeMap.DateHeaderGenerator.nodeOutputList[0].output.jsonPayload.x-amz-date",
+											"parameterFormat": null
+										},
+										"outputType": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "outputType",
+											"parameterValue": "asJson",
+											"parameterFormat": null
+										},
+										"thingName": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "thingName",
+											"parameterValue": "${input.thingName}",
+											"parameterFormat": null
+										},
+										"body": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "body",
+											"parameterValue": "",
+											"parameterFormat": null
+										},
+										"url": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "url",
+											"parameterValue": "https://data.iot.us-east-1.amazonaws.com/things/${thingName}/shadow",
+											"parameterFormat": null
+										}
+									},
+									"nodeOutputList": [
+										{
+											"nodeName": "GetDeviceShadow",
+											"output": {
+												"headers": {
+													"date": [
+														"Sun, 03 Mar 2019 15:48:25 GMT"
+													],
+													"content-length": [
+														"1218"
+													],
+													"x-amzn-RequestId": [
+														"14bb937d-778e-4006-d14f-10530660a2e1"
+													],
+													"content-type": [
+														"application/json"
+													],
+													"connection": [
+														"keep-alive"
+													]
+												},
+												"rawBody": {
+													
+												},
+												"statusText": "OK",
+												"body": {
+													"metadata": {
+														"desired": {
+															"freeHeap": {
+																"timestamp": 1551627270
+															},
+															"instances": {
+																"0": {
+																	"lastAction": {
+																		"timestamp": 1551627270
+																	},
+																	"value": {
+																		"timestamp": 1551627270
+																	}
+																},
+																"1": {
+																	"lastAction": {
+																		"timestamp": 1551627270
+																	},
+																	"value": {
+																		"timestamp": 1551627270
+																	}
+																}
+															},
+															"deviceName": {
+																"timestamp": 1551627270
+															},
+															"ssid": {
+																"timestamp": 1551627270
+															},
+															"versionCode": {
+																"timestamp": 1551612537
+															},
+															"timestamp": {
+																"timestamp": 1550911283
+															}
+														},
+														"reported": {
+															"freeHeap": {
+																"timestamp": 1551627270
+															},
+															"instances": {
+																"0": {
+																	"lastAction": {
+																		"timestamp": 1551627270
+																	},
+																	"value": {
+																		"timestamp": 1551627270
+																	}
+																},
+																"1": {
+																	"lastAction": {
+																		"timestamp": 1551627270
+																	},
+																	"value": {
+																		"timestamp": 1551627270
+																	}
+																}
+															},
+															"deviceName": {
+																"timestamp": 1551627270
+															},
+															"ssid": {
+																"timestamp": 1551627270
+															},
+															"versionCode": {
+																"timestamp": 1551612537
+															},
+															"timestamp": {
+																"timestamp": 1550911283
+															}
+														}
+													},
+													"state": {
+														"desired": {
+															"freeHeap": -1,
+															"instances": {
+																"0": {
+																	"lastAction": "physical",
+																	"value": 0
+																},
+																"1": {
+																	"lastAction": "physical",
+																	"value": 0
+																}
+															},
+															"deviceName": "Atom8-020459fc4a24",
+															"ssid": "warpdrive-tp-1",
+															"versionCode": 2.03,
+															"timestamp": 16612
+														},
+														"reported": {
+															"freeHeap": -1,
+															"instances": {
+																"0": {
+																	"lastAction": "physical",
+																	"value": 0
+																},
+																"1": {
+																	"lastAction": "physical",
+																	"value": 0
+																}
+															},
+															"deviceName": "Atom8-020459fc4a24",
+															"ssid": "warpdrive-tp-1",
+															"versionCode": 2.03,
+															"timestamp": 16612
+														}
+													},
+													"version": 1449,
+													"timestamp": 1551628105
+												},
+												"status": 200
+											},
+											"auditInfo": {
+												"endTimestamp": 79282374999,
+												"startTimestamp": 79245789193
+											},
+											"stackTrace": null,
+											"nodeSpecification": null
+										}
+									]
+								}
+							}
+						},
+						"status": 200
+					},
+					"stackTrace": null,
+					"auditInfo": {
+						"startTimestamp": 16385404003501,
+						"endTimestamp": 16387969983225
+					}
+				}
+			]
+		},
+		"OutputNode": {
+			"nodeName": "OutputNode",
+			"nodeClass": "com.github.piedpiper.node.JsonCreatorNode",
+			"nodeSpecification": null,
+			"parameterMap": {
+				"things": {
+					"parameterName": "things",
+					"parameterType": "REFERENCE_FROM_ANOTHER_NODE",
+					"parameterFormat": null,
+					"parameterValue": "$..GetDeviceShadow.nodeOutputList[0].output.body",
+					"referenceNodeName": "GetThingShadowForThings",
+					"attributeMap": {
+						"DATA_TYPE": "asJson"
+					}
+				}
+			},
+			"nodeInputList": [
+				{
+					"nodeSpecification": null,
+					"input": {
+						"things": {
+							"value": [
+								{
+									"metadata": {
+										"desired": {
+											"freeHeap": {
+												"timestamp": 1551615065
+											},
+											"instances": {
+												"0": {
+													"lastAction": {
+														"timestamp": 1551612031
+													},
+													"value": {
+														"timestamp": 1551612031
+													}
+												},
+												"1": {
+													"lastAction": {
+														"timestamp": 1551615065
+													},
+													"value": {
+														"timestamp": 1551615065
+													}
+												}
+											},
+											"deviceName": {
+												"timestamp": 1551615065
+											},
+											"ssid": {
+												"timestamp": 1551615065
+											},
+											"versionCode": {
+												"timestamp": 1551612030
+											}
+										},
+										"reported": {
+											"freeHeap": {
+												"timestamp": 1551615065
+											},
+											"instances": {
+												"0": {
+													"lastAction": {
+														"timestamp": 1551612031
+													},
+													"value": {
+														"timestamp": 1551612031
+													}
+												},
+												"1": {
+													"lastAction": {
+														"timestamp": 1551615065
+													},
+													"value": {
+														"timestamp": 1551615065
+													}
+												}
+											},
+											"deviceName": {
+												"timestamp": 1551615065
+											},
+											"ssid": {
+												"timestamp": 1551615065
+											},
+											"versionCode": {
+												"timestamp": 1551612030
+											}
+										}
+									},
+									"state": {
+										"desired": {
+											"freeHeap": -1,
+											"instances": {
+												"0": {
+													"lastAction": "sync_state_restart",
+													"value": 1
+												},
+												"1": {
+													"lastAction": "local_network",
+													"value": 1
+												}
+											},
+											"deviceName": "Atom8-030459fc4a24",
+											"ssid": "warpdrive",
+											"versionCode": 2.03
+										},
+										"reported": {
+											"freeHeap": -1,
+											"instances": {
+												"0": {
+													"lastAction": "sync_state_restart",
+													"value": 1
+												},
+												"1": {
+													"lastAction": "local_network",
+													"value": 1
+												}
+											},
+											"deviceName": "Atom8-030459fc4a24",
+											"ssid": "warpdrive",
+											"versionCode": 2.03
+										}
+									},
+									"version": 153,
+									"timestamp": 1551628104
+								},
+								{
+									"metadata": {
+										"desired": {
+											"freeHeap": {
+												"timestamp": 1551624467
+											},
+											"instances": {
+												"0": {
+													"instanceId": {
+														"timestamp": 1547015074
+													},
+													"lastAction": {
+														"timestamp": 1551624467
+													},
+													"instanceName": {
+														"timestamp": 1547015074
+													},
+													"value": {
+														"timestamp": 1551624467
+													}
+												},
+												"1": {
+													"instanceId": {
+														"timestamp": 1547086035
+													},
+													"lastAction": {
+														"timestamp": 1551612762
+													},
+													"instanceName": {
+														"timestamp": 1547086035
+													},
+													"value": {
+														"timestamp": 1551612762
+													}
+												}
+											},
+											"deviceId": {
+												"timestamp": 1547086035
+											},
+											"deviceName": {
+												"timestamp": 1551624467
+											},
+											"ssid": {
+												"timestamp": 1551624467
+											},
+											"versionCode": {
+												"timestamp": 1551612760
+											},
+											"timestamp": {
+												"timestamp": 1550911233
+											}
+										},
+										"reported": {
+											"freeHeap": {
+												"timestamp": 1551624467
+											},
+											"instances": {
+												"0": {
+													"instanceId": {
+														"timestamp": 1547015074
+													},
+													"lastAction": {
+														"timestamp": 1551624467
+													},
+													"instanceName": {
+														"timestamp": 1547015074
+													},
+													"value": {
+														"timestamp": 1551624467
+													}
+												},
+												"1": {
+													"instanceId": {
+														"timestamp": 1547086035
+													},
+													"lastAction": {
+														"timestamp": 1551612762
+													},
+													"instanceName": {
+														"timestamp": 1547086035
+													},
+													"value": {
+														"timestamp": 1551612762
+													}
+												}
+											},
+											"deviceId": {
+												"timestamp": 1547086035
+											},
+											"deviceName": {
+												"timestamp": 1551624467
+											},
+											"ssid": {
+												"timestamp": 1551624467
+											},
+											"versionCode": {
+												"timestamp": 1551612760
+											},
+											"timestamp": {
+												"timestamp": 1550911233
+											}
+										}
+									},
+									"state": {
+										"desired": {
+											"freeHeap": -1,
+											"instances": {
+												"0": {
+													"instanceId": 0,
+													"lastAction": "physical",
+													"instanceName": "",
+													"value": 0
+												},
+												"1": {
+													"instanceId": 1,
+													"lastAction": "sync_state_restart",
+													"instanceName": "",
+													"value": 1
+												}
+											},
+											"deviceId": "Atom8-018459fc4a24",
+											"deviceName": "Atom8-018459fc4a24",
+											"ssid": "warpdrive-tp-1",
+											"versionCode": 2.03,
+											"timestamp": 11264
+										},
+										"reported": {
+											"freeHeap": -1,
+											"instances": {
+												"0": {
+													"instanceId": 0,
+													"lastAction": "physical",
+													"instanceName": "",
+													"value": 0
+												},
+												"1": {
+													"instanceId": 1,
+													"lastAction": "sync_state_restart",
+													"instanceName": "",
+													"value": 1
+												}
+											},
+											"deviceId": "Atom8-018459fc4a24",
+											"deviceName": "Atom8-018459fc4a24",
+											"ssid": "warpdrive-tp-1",
+											"versionCode": 2.03,
+											"timestamp": 11264
+										}
+									},
+									"version": 686,
+									"timestamp": 1551628104
+								},
+								{
+									"metadata": {
+										"desired": {
+											"instances": {
+												"0": {
+													"lastAction": {
+														"timestamp": 1551506906
+													},
+													"value": {
+														"timestamp": 1551506906
+													}
+												},
+												"1": {
+													"lastAction": {
+														"timestamp": 1551506908
+													},
+													"value": {
+														"timestamp": 1551506908
+													}
+												}
+											},
+											"deviceName": {
+												"timestamp": 1551506482
+											},
+											"ssid": {
+												"timestamp": 1551506482
+											},
+											"versionCode": {
+												"timestamp": 1551506482
+											},
+											"timestamp": {
+												"timestamp": 1550896391
+											}
+										},
+										"reported": {
+											"instances": {
+												"0": {
+													"lastAction": {
+														"timestamp": 1551506906
+													},
+													"value": {
+														"timestamp": 1551506906
+													}
+												},
+												"1": {
+													"lastAction": {
+														"timestamp": 1551506908
+													},
+													"value": {
+														"timestamp": 1551506908
+													}
+												}
+											},
+											"deviceName": {
+												"timestamp": 1551506482
+											},
+											"ssid": {
+												"timestamp": 1551506482
+											},
+											"versionCode": {
+												"timestamp": 1551506482
+											},
+											"timestamp": {
+												"timestamp": 1550896391
+											}
+										}
+									},
+									"state": {
+										"desired": {
+											"instances": {
+												"0": {
+													"lastAction": "local_network",
+													"value": 0
+												},
+												"1": {
+													"lastAction": "local_network",
+													"value": 0
+												}
+											},
+											"deviceName": "Atom8-0a0469fc4a24",
+											"ssid": "warpdrive-tp-1",
+											"versionCode": 2.02,
+											"timestamp": 21679
+										},
+										"reported": {
+											"instances": {
+												"0": {
+													"lastAction": "local_network",
+													"value": 0
+												},
+												"1": {
+													"lastAction": "local_network",
+													"value": 0
+												}
+											},
+											"deviceName": "Atom8-0a0469fc4a24",
+											"ssid": "warpdrive-tp-1",
+											"versionCode": 2.02,
+											"timestamp": 21679
+										}
+									},
+									"version": 5439,
+									"timestamp": 1551628104
+								},
+								{
+									"metadata": {
+										"desired": {
+											"freeHeap": {
+												"timestamp": 1551627270
+											},
+											"instances": {
+												"0": {
+													"lastAction": {
+														"timestamp": 1551627270
+													},
+													"value": {
+														"timestamp": 1551627270
+													}
+												},
+												"1": {
+													"lastAction": {
+														"timestamp": 1551627270
+													},
+													"value": {
+														"timestamp": 1551627270
+													}
+												}
+											},
+											"deviceName": {
+												"timestamp": 1551627270
+											},
+											"ssid": {
+												"timestamp": 1551627270
+											},
+											"versionCode": {
+												"timestamp": 1551612537
+											},
+											"timestamp": {
+												"timestamp": 1550911283
+											}
+										},
+										"reported": {
+											"freeHeap": {
+												"timestamp": 1551627270
+											},
+											"instances": {
+												"0": {
+													"lastAction": {
+														"timestamp": 1551627270
+													},
+													"value": {
+														"timestamp": 1551627270
+													}
+												},
+												"1": {
+													"lastAction": {
+														"timestamp": 1551627270
+													},
+													"value": {
+														"timestamp": 1551627270
+													}
+												}
+											},
+											"deviceName": {
+												"timestamp": 1551627270
+											},
+											"ssid": {
+												"timestamp": 1551627270
+											},
+											"versionCode": {
+												"timestamp": 1551612537
+											},
+											"timestamp": {
+												"timestamp": 1550911283
+											}
+										}
+									},
+									"state": {
+										"desired": {
+											"freeHeap": -1,
+											"instances": {
+												"0": {
+													"lastAction": "physical",
+													"value": 0
+												},
+												"1": {
+													"lastAction": "physical",
+													"value": 0
+												}
+											},
+											"deviceName": "Atom8-020459fc4a24",
+											"ssid": "warpdrive-tp-1",
+											"versionCode": 2.03,
+											"timestamp": 16612
+										},
+										"reported": {
+											"freeHeap": -1,
+											"instances": {
+												"0": {
+													"lastAction": "physical",
+													"value": 0
+												},
+												"1": {
+													"lastAction": "physical",
+													"value": 0
+												}
+											},
+											"deviceName": "Atom8-020459fc4a24",
+											"ssid": "warpdrive-tp-1",
+											"versionCode": 2.03,
+											"timestamp": 16612
+										}
+									},
+									"version": 1449,
+									"timestamp": 1551628105
+								}
+							]
+						}
+					}
+				}
+			],
+			"nodeExecutorList": [],
+			"nodeOutputList": [
+				{
+					"nodeName": "OutputNode",
+					"nodeSpecification": null,
+					"output": {
+						"things": {
+							"value": [
+								{
+									"metadata": {
+										"desired": {
+											"freeHeap": {
+												"timestamp": 1551615065
+											},
+											"instances": {
+												"0": {
+													"lastAction": {
+														"timestamp": 1551612031
+													},
+													"value": {
+														"timestamp": 1551612031
+													}
+												},
+												"1": {
+													"lastAction": {
+														"timestamp": 1551615065
+													},
+													"value": {
+														"timestamp": 1551615065
+													}
+												}
+											},
+											"deviceName": {
+												"timestamp": 1551615065
+											},
+											"ssid": {
+												"timestamp": 1551615065
+											},
+											"versionCode": {
+												"timestamp": 1551612030
+											}
+										},
+										"reported": {
+											"freeHeap": {
+												"timestamp": 1551615065
+											},
+											"instances": {
+												"0": {
+													"lastAction": {
+														"timestamp": 1551612031
+													},
+													"value": {
+														"timestamp": 1551612031
+													}
+												},
+												"1": {
+													"lastAction": {
+														"timestamp": 1551615065
+													},
+													"value": {
+														"timestamp": 1551615065
+													}
+												}
+											},
+											"deviceName": {
+												"timestamp": 1551615065
+											},
+											"ssid": {
+												"timestamp": 1551615065
+											},
+											"versionCode": {
+												"timestamp": 1551612030
+											}
+										}
+									},
+									"state": {
+										"desired": {
+											"freeHeap": -1,
+											"instances": {
+												"0": {
+													"lastAction": "sync_state_restart",
+													"value": 1
+												},
+												"1": {
+													"lastAction": "local_network",
+													"value": 1
+												}
+											},
+											"deviceName": "Atom8-030459fc4a24",
+											"ssid": "warpdrive",
+											"versionCode": 2.03
+										},
+										"reported": {
+											"freeHeap": -1,
+											"instances": {
+												"0": {
+													"lastAction": "sync_state_restart",
+													"value": 1
+												},
+												"1": {
+													"lastAction": "local_network",
+													"value": 1
+												}
+											},
+											"deviceName": "Atom8-030459fc4a24",
+											"ssid": "warpdrive",
+											"versionCode": 2.03
+										}
+									},
+									"version": 153,
+									"timestamp": 1551628104
+								},
+								{
+									"metadata": {
+										"desired": {
+											"freeHeap": {
+												"timestamp": 1551624467
+											},
+											"instances": {
+												"0": {
+													"instanceId": {
+														"timestamp": 1547015074
+													},
+													"lastAction": {
+														"timestamp": 1551624467
+													},
+													"instanceName": {
+														"timestamp": 1547015074
+													},
+													"value": {
+														"timestamp": 1551624467
+													}
+												},
+												"1": {
+													"instanceId": {
+														"timestamp": 1547086035
+													},
+													"lastAction": {
+														"timestamp": 1551612762
+													},
+													"instanceName": {
+														"timestamp": 1547086035
+													},
+													"value": {
+														"timestamp": 1551612762
+													}
+												}
+											},
+											"deviceId": {
+												"timestamp": 1547086035
+											},
+											"deviceName": {
+												"timestamp": 1551624467
+											},
+											"ssid": {
+												"timestamp": 1551624467
+											},
+											"versionCode": {
+												"timestamp": 1551612760
+											},
+											"timestamp": {
+												"timestamp": 1550911233
+											}
+										},
+										"reported": {
+											"freeHeap": {
+												"timestamp": 1551624467
+											},
+											"instances": {
+												"0": {
+													"instanceId": {
+														"timestamp": 1547015074
+													},
+													"lastAction": {
+														"timestamp": 1551624467
+													},
+													"instanceName": {
+														"timestamp": 1547015074
+													},
+													"value": {
+														"timestamp": 1551624467
+													}
+												},
+												"1": {
+													"instanceId": {
+														"timestamp": 1547086035
+													},
+													"lastAction": {
+														"timestamp": 1551612762
+													},
+													"instanceName": {
+														"timestamp": 1547086035
+													},
+													"value": {
+														"timestamp": 1551612762
+													}
+												}
+											},
+											"deviceId": {
+												"timestamp": 1547086035
+											},
+											"deviceName": {
+												"timestamp": 1551624467
+											},
+											"ssid": {
+												"timestamp": 1551624467
+											},
+											"versionCode": {
+												"timestamp": 1551612760
+											},
+											"timestamp": {
+												"timestamp": 1550911233
+											}
+										}
+									},
+									"state": {
+										"desired": {
+											"freeHeap": -1,
+											"instances": {
+												"0": {
+													"instanceId": 0,
+													"lastAction": "physical",
+													"instanceName": "",
+													"value": 0
+												},
+												"1": {
+													"instanceId": 1,
+													"lastAction": "sync_state_restart",
+													"instanceName": "",
+													"value": 1
+												}
+											},
+											"deviceId": "Atom8-018459fc4a24",
+											"deviceName": "Atom8-018459fc4a24",
+											"ssid": "warpdrive-tp-1",
+											"versionCode": 2.03,
+											"timestamp": 11264
+										},
+										"reported": {
+											"freeHeap": -1,
+											"instances": {
+												"0": {
+													"instanceId": 0,
+													"lastAction": "physical",
+													"instanceName": "",
+													"value": 0
+												},
+												"1": {
+													"instanceId": 1,
+													"lastAction": "sync_state_restart",
+													"instanceName": "",
+													"value": 1
+												}
+											},
+											"deviceId": "Atom8-018459fc4a24",
+											"deviceName": "Atom8-018459fc4a24",
+											"ssid": "warpdrive-tp-1",
+											"versionCode": 2.03,
+											"timestamp": 11264
+										}
+									},
+									"version": 686,
+									"timestamp": 1551628104
+								},
+								{
+									"metadata": {
+										"desired": {
+											"instances": {
+												"0": {
+													"lastAction": {
+														"timestamp": 1551506906
+													},
+													"value": {
+														"timestamp": 1551506906
+													}
+												},
+												"1": {
+													"lastAction": {
+														"timestamp": 1551506908
+													},
+													"value": {
+														"timestamp": 1551506908
+													}
+												}
+											},
+											"deviceName": {
+												"timestamp": 1551506482
+											},
+											"ssid": {
+												"timestamp": 1551506482
+											},
+											"versionCode": {
+												"timestamp": 1551506482
+											},
+											"timestamp": {
+												"timestamp": 1550896391
+											}
+										},
+										"reported": {
+											"instances": {
+												"0": {
+													"lastAction": {
+														"timestamp": 1551506906
+													},
+													"value": {
+														"timestamp": 1551506906
+													}
+												},
+												"1": {
+													"lastAction": {
+														"timestamp": 1551506908
+													},
+													"value": {
+														"timestamp": 1551506908
+													}
+												}
+											},
+											"deviceName": {
+												"timestamp": 1551506482
+											},
+											"ssid": {
+												"timestamp": 1551506482
+											},
+											"versionCode": {
+												"timestamp": 1551506482
+											},
+											"timestamp": {
+												"timestamp": 1550896391
+											}
+										}
+									},
+									"state": {
+										"desired": {
+											"instances": {
+												"0": {
+													"lastAction": "local_network",
+													"value": 0
+												},
+												"1": {
+													"lastAction": "local_network",
+													"value": 0
+												}
+											},
+											"deviceName": "Atom8-0a0469fc4a24",
+											"ssid": "warpdrive-tp-1",
+											"versionCode": 2.02,
+											"timestamp": 21679
+										},
+										"reported": {
+											"instances": {
+												"0": {
+													"lastAction": "local_network",
+													"value": 0
+												},
+												"1": {
+													"lastAction": "local_network",
+													"value": 0
+												}
+											},
+											"deviceName": "Atom8-0a0469fc4a24",
+											"ssid": "warpdrive-tp-1",
+											"versionCode": 2.02,
+											"timestamp": 21679
+										}
+									},
+									"version": 5439,
+									"timestamp": 1551628104
+								},
+								{
+									"metadata": {
+										"desired": {
+											"freeHeap": {
+												"timestamp": 1551627270
+											},
+											"instances": {
+												"0": {
+													"lastAction": {
+														"timestamp": 1551627270
+													},
+													"value": {
+														"timestamp": 1551627270
+													}
+												},
+												"1": {
+													"lastAction": {
+														"timestamp": 1551627270
+													},
+													"value": {
+														"timestamp": 1551627270
+													}
+												}
+											},
+											"deviceName": {
+												"timestamp": 1551627270
+											},
+											"ssid": {
+												"timestamp": 1551627270
+											},
+											"versionCode": {
+												"timestamp": 1551612537
+											},
+											"timestamp": {
+												"timestamp": 1550911283
+											}
+										},
+										"reported": {
+											"freeHeap": {
+												"timestamp": 1551627270
+											},
+											"instances": {
+												"0": {
+													"lastAction": {
+														"timestamp": 1551627270
+													},
+													"value": {
+														"timestamp": 1551627270
+													}
+												},
+												"1": {
+													"lastAction": {
+														"timestamp": 1551627270
+													},
+													"value": {
+														"timestamp": 1551627270
+													}
+												}
+											},
+											"deviceName": {
+												"timestamp": 1551627270
+											},
+											"ssid": {
+												"timestamp": 1551627270
+											},
+											"versionCode": {
+												"timestamp": 1551612537
+											},
+											"timestamp": {
+												"timestamp": 1550911283
+											}
+										}
+									},
+									"state": {
+										"desired": {
+											"freeHeap": -1,
+											"instances": {
+												"0": {
+													"lastAction": "physical",
+													"value": 0
+												},
+												"1": {
+													"lastAction": "physical",
+													"value": 0
+												}
+											},
+											"deviceName": "Atom8-020459fc4a24",
+											"ssid": "warpdrive-tp-1",
+											"versionCode": 2.03,
+											"timestamp": 16612
+										},
+										"reported": {
+											"freeHeap": -1,
+											"instances": {
+												"0": {
+													"lastAction": "physical",
+													"value": 0
+												},
+												"1": {
+													"lastAction": "physical",
+													"value": 0
+												}
+											},
+											"deviceName": "Atom8-020459fc4a24",
+											"ssid": "warpdrive-tp-1",
+											"versionCode": 2.03,
+											"timestamp": 16612
+										}
+									},
+									"version": 1449,
+									"timestamp": 1551628105
+								}
+							]
+						}
+					},
+					"stackTrace": null,
+					"auditInfo": {
+						"startTimestamp": 16388045725466,
+						"endTimestamp": 16388045728221
+					}
+				}
+			]
+		},	
+		"AWSSSMNode": {
+			"nodeName": "AWSSSMNode",
+			"nodeClass": "com.github.piedpiper.node.aws.ssm.AWSSSMNode",
+			"nodeSpecification": {},	
+			"parameterMap": {
+				"projectName": {
+					"parameterName": "projectName",
+					"parameterType": "CONSTANT",
+					"parameterFormat": null,
+					"parameterValue": "Atom8",
+					"referenceNodeName": "",
+					"attributeMap": null
+				}
+			},
+			"nodeInputList": [
+				{
+					"nodeSpecification": null,
+					"input": {
+						"keyName": {
+							"value": "AccessKeyNameWhoseValueIsToBeMasked"
+						}
+					}
+				}
+			],
+			"nodeExecutorList": [],
+			"nodeOutputList": [
+				{
+					"nodeName": "Authorize",
+					"nodeSpecification": null,
+					"output": {
+						"secureValue": "ABC"	
+					},
+					"stackTrace": null,
+					"auditInfo": {
+						"startTimestamp": 16382211673031,
+						"endTimestamp": 16385288006522
+					}
+				}
+			]
+		},
+		"Authorize": {
+			"nodeName": "Authorize",
+			"nodeClass": "com.github.piedpiper.node.piedpiper.SubGraphNode",
+			"nodeSpecification": {
+				"includeOutput": false
+			},
+			"parameterMap": {
+				"projectName": {
+					"parameterName": "projectName",
+					"parameterType": "CONSTANT",
+					"parameterFormat": null,
+					"parameterValue": "Atom8",
+					"referenceNodeName": "",
+					"attributeMap": null
+				},
+				"graphName": {
+					"parameterName": "graphName",
+					"parameterType": "CONSTANT",
+					"parameterFormat": null,
+					"parameterValue": "Authorize",
+					"referenceNodeName": "",
+					"attributeMap": null
+				},
+				"tableName": {
+					"parameterName": "tableName",
+					"parameterType": "CONSTANT",
+					"parameterFormat": null,
+					"parameterValue": "AlmightyTable",
+					"referenceNodeName": "",
+					"attributeMap": null
+				},
+				"authToken": {
+					"parameterName": "authToken",
+					"parameterType": "CONSTANT",
+					"parameterFormat": null,
+					"parameterValue": "${input.authToken}",
+					"referenceNodeName": "",
+					"attributeMap": null
+				}
+			},
+			"nodeInputList": [
+				{
+					"nodeSpecification": null,
+					"input": {
+						"projectName": {
+							"value": "Atom8"
+						},
+						"graphName": {
+							"value": "Authorize"
+						},
+						"tableName": {
+							"value": "AlmightyTable"
+						},
+						"authToken": {
+							"value": "7846e2af-3a8f-11e9-8806-0200cd936042"
+						}
+					}
+				}
+			],
+			"nodeExecutorList": [],
+			"nodeOutputList": [
+				{
+					"nodeName": "Authorize",
+					"nodeSpecification": null,
+					"output": {
+						"statusText": "OK",
+						"headers": {
+							"x-amz-apigw-id": [
+								"V-OSqE6FIAMFjuQ="
+							],
+							"Access-Control-Allow-Origin": [
+								"*"
+							],
+							"Connection": [
+								"keep-alive"
+							],
+							"x-amzn-RequestId": [
+								"c4e8d817-3dcb-11e9-8c04-d95e80bef62e"
+							],
+							"Content-Length": [
+								"4438"
+							],
+							"Date": [
+								"Sun, 03 Mar 2019 15:48:23 GMT"
+							],
+							"X-Amzn-Trace-Id": [
+								"Root=1-5c7bf744-296df5cee95e89b2144576bd;Sampled=0"
+							],
+							"Content-Type": [
+								"application/json"
+							]
+						},
+						"rawBody": {
+							
+						},
+						"body": {
+							"exceptionTrace": null,
+							"graphName": "Authorize",
+							"projectName": "Atom8",
+							"nodeMap": {
+								"GetAuthorizationDetailsFromDynamo": {
+									"nodeName": "GetAuthorizationDetailsFromDynamo",
+									"nodeClass": "com.github.piedpiper.node.aws.dynamo.DynamoDBReaderNode",
+									"nodeExecutorList": [],
+									"nodeInputList": [
+										{
+											"input": {
+												"secretKey": {
+													"value": ""
+												},
+												"accessKey": {
+													"value": ""
+												},
+												"authToken": {
+													"value": "7846e2af-3a8f-11e9-8806-0200cd936042"
+												},
+												"filterQueryExpression": {
+													"value": ""
+												},
+												"region": {
+													"value": "us-east-1"
+												},
+												"keyQueryExpression": {
+													"value": "hashKey = :key"
+												},
+												":key": {
+													"value": "auth/7846e2af-3a8f-11e9-8806-0200cd936042"
+												},
+												"tableName": {
+													"value": "AlmightyTable"
+												}
+											},
+											"nodeSpecification": null
+										}
+									],
+									"nodeSpecification": null,
+									"parameterMap": {
+										"secretKey": {
+											"parameterType": "AWS_SSM",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "secretKey",
+											"parameterValue": "SecretKey",
+											"parameterFormat": null
+										},
+										"accessKey": {
+											"parameterType": "AWS_SSM",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "accessKey",
+											"parameterValue": "AccessKey",
+											"parameterFormat": null
+										},
+										"authToken": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "authToken",
+											"parameterValue": "${input.authToken}",
+											"parameterFormat": null
+										},
+										"filterQueryExpression": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "filterQueryExpression",
+											"parameterValue": "",
+											"parameterFormat": null
+										},
+										"region": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "region",
+											"parameterValue": "us-east-1",
+											"parameterFormat": null
+										},
+										"keyQueryExpression": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "keyQueryExpression",
+											"parameterValue": "hashKey = :key",
+											"parameterFormat": null
+										},
+										":key": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": ":key",
+											"parameterValue": "auth/${authToken}",
+											"parameterFormat": null
+										},
+										"tableName": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "tableName",
+											"parameterValue": "AlmightyTable",
+											"parameterFormat": null
+										}
+									},
+									"nodeOutputList": [
+										{
+											"nodeName": "GetAuthorizationDetailsFromDynamo",
+											"output": [
+												{
+													"rangeKey": "811e42d137d812b35480238f3a5744b6dd5014a0",
+													"uid": "811e42d137d812b35480238f3a5744b6dd5014a0",
+													"hashKey": "auth/7846e2af-3a8f-11e9-8806-0200cd936042",
+													"phoneNumber": "+919686705052",
+													"isVerified": "true",
+													"sessionId": "7846e2af-3a8f-11e9-8806-0200cd936042",
+													"region": "us-east-1",
+													"tableName": "AlmightyTable"
+												}
+											],
+											"auditInfo": {
+												"endTimestamp": 75154645873,
+												"startTimestamp": 74827490926
+											},
+											"stackTrace": null,
+											"nodeSpecification": null
+										}
+									]
+								},
+								"IsAuthorizedBusinessLogicNode": {
+									"nodeName": "IsAuthorizedBusinessLogicNode",
+									"nodeClass": "com.github.piedpiper.node.business.NodeJsNode",
+									"nodeExecutorList": [],
+									"nodeInputList": [
+										{
+											"input": {
+												"dynamoDBItemList": {
+													"value": [
+														{
+															"rangeKey": "811e42d137d812b35480238f3a5744b6dd5014a0",
+															"uid": "811e42d137d812b35480238f3a5744b6dd5014a0",
+															"hashKey": "auth/7846e2af-3a8f-11e9-8806-0200cd936042",
+															"phoneNumber": "+919686705052",
+															"isVerified": "true",
+															"sessionId": "7846e2af-3a8f-11e9-8806-0200cd936042",
+															"region": "us-east-1",
+															"tableName": "AlmightyTable"
+														}
+													]
+												},
+												"nodeJsBusinessLogic": {
+													"value": "function execute(input) {\n    var itemList = input.dynamoDBItemList.value\n    if(itemList.length == 1) {\n        var uid = itemList[0].uid\n        return { \n            'status': 'success',\n            'uid': uid\n        }\n    }\n    return {}\n}"
+												}
+											},
+											"nodeSpecification": null
+										}
+									],
+									"nodeSpecification": null,
+									"parameterMap": {
+										"dynamoDBItemList": {
+											"parameterType": "REFERENCE_FROM_ANOTHER_NODE",
+											"referenceNodeName": "GetAuthorizationDetailsFromDynamo",
+											"attributeMap": {
+												"DATA_TYPE": "asJson"
+											},
+											"parameterName": "dynamoDBItemList",
+											"parameterValue": "$.nodeOutputList[0].output",
+											"parameterFormat": null
+										},
+										"nodeJsBusinessLogic": {
+											"parameterType": "CONSTANT",
+											"referenceNodeName": "",
+											"attributeMap": null,
+											"parameterName": "nodeJsBusinessLogic",
+											"parameterValue": "function execute(input) {\n    var itemList = input.dynamoDBItemList.value\n    if(itemList.length == 1) {\n        var uid = itemList[0].uid\n        return { \n            'status': 'success',\n            'uid': uid\n        }\n    }\n    return {}\n}",
+											"parameterFormat": "JAVASCRIPT"
+										}
+									},
+									"nodeOutputList": [
+										{
+											"nodeName": "IsAuthorizedBusinessLogicNode",
+											"output": {
+												"uid": "811e42d137d812b35480238f3a5744b6dd5014a0",
+												"status": "success"
+											},
+											"auditInfo": {
+												"endTimestamp": 76625134122,
+												"startTimestamp": 75188008048
+											},
+											"stackTrace": null,
+											"nodeSpecification": null
+										}
+									]
+								}
+							}
+						},
+						"status": 200
+					},
+					"stackTrace": null,
+					"auditInfo": {
+						"startTimestamp": 16382211673031,
+						"endTimestamp": 16385288006522
+					}
+				}
+			]
+		}
+	},
+	"exceptionTrace": null
+}

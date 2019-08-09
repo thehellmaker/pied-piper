@@ -1,0 +1,28 @@
+{
+	"accessKey" : {
+		"value" : "AccessKey" 
+	},
+	"secretKey" : {
+		"value" : "SecretKey" 
+	},
+	"region" : {
+		"value" : "us-east-1"
+	},
+	"functionName" : {
+		"value" : "AWSV4SignerFunction"
+	},
+	"payload" : {
+		"value" : {
+			"method" : "GET",
+			"host": "iot.us-east-1.amazonaws.com",
+			"path": "/keys-and-certificate",
+			"accessKey": "",
+			"secretKey": "",
+			"payload": "",
+			"headers": {
+				"x-amz-date": "20180614T073411Z"
+			},
+			"service": "execute-api"
+		}
+	}
+}
