@@ -1,5 +1,6 @@
 package com.github.piedpiper.guice;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
@@ -19,6 +20,7 @@ import com.github.piedpiper.node.NodeListQueryHandler;
 import com.github.piedpiper.node.aws.AWSLambdaFactory;
 import com.github.piedpiper.node.aws.AWSLambdaNode;
 import com.github.piedpiper.node.aws.ILambdaFactory;
+import com.github.piedpiper.node.business.NodeJsNode;
 import com.github.piedpiper.utils.ParameterUtils;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.common.cache.CacheBuilder;
@@ -39,7 +41,7 @@ public class PiedPiperModule extends AbstractModule {
 	
 	private static final String PROD_GOOGLE_CREDENTIAL_PATH = "com/github/piedpiper/node/firebase/atom8-157617-firebase-adminsdk-mbg44-7eb9af3f7b.json";
 	
-	private static final String NODEJS_TEMPLATE_PATH = "com/github/piedpiper/node/business/pied-piper-script.js";
+	private static final String NODEJS_TEMPLATE_PATH = "pied-piper-script.js";
 	
 	public PiedPiperModule() {
 	}
@@ -101,7 +103,7 @@ public class PiedPiperModule extends AbstractModule {
 	@Named(PiedPiperConstants.NODEJS_SCRIPT_TEMPLATE)
 	public String getScriptTemplate() throws IOException {
 		try {
-			InputStream nodeJsTemplateFile = getClass().getClassLoader().getResourceAsStream(NODEJS_TEMPLATE_PATH);
+			InputStream nodeJsTemplateFile = NodeJsNode.class.getResourceAsStream(NODEJS_TEMPLATE_PATH);
 			return IOUtils.toString(nodeJsTemplateFile, Charset.forName("UTF-8")); 
 		} catch (IOException e) {
 			throw e;
