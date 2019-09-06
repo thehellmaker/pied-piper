@@ -1,0 +1,68 @@
+	{
+	"nodeMap": {
+		"FirebaseAdminNode": {
+		"nodeClass": "com.github.piedpiper.node.firebase.FirebaseAdminNode",
+			"parameterMetadataList": [
+				{
+					"parameterName": "method",
+					"allowedValues": [],
+					"required": true
+				},
+				{
+					"parameterName": "config",
+					"allowedValues": [],
+					"required": true
+				}
+			],
+			"nodeName": "FirebaseAdminNode",
+			"parameterMap": {
+				"method": {
+					"parameterName": "method",
+					"parameterType": "CONSTANT",
+					"parameterValue": "GET_USER",
+					"referenceNodeName": "",
+					"required": true,
+					"allowedValues": [],
+					"attributeMap": {
+						
+					}
+				},
+				"config": {
+					"parameterName": "config",
+					"parameterType": "CONSTANT",
+					"parameterValue": {},
+					"referenceNodeName": "",
+					"required": true,
+					"allowedValues": [],
+					"attributeMap": {
+						"DATA_TYPE": "asJson"
+					}
+				},
+				"id": {
+					"parameterName": "id",
+					"parameterType": "CONSTANT",
+					"parameterValue": "",
+					"referenceNodeName": "",
+					"required": true,
+					"allowedValues": [],
+					"attributeMap": {
+						
+					}
+				},
+				"queryType": {
+					"parameterName": "queryType",
+					"parameterType": "CONSTANT",
+					"parameterValue": "uid",
+					"referenceNodeName": "",
+					"required": true,
+					"allowedValues": [],
+					"attributeMap": {
+						
+					}
+				}
+			}
+		}
+	},
+	"graphName": "FirebaseAdminNodeTest",
+	"projectName": "Examples"
+}

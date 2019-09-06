@@ -1,41 +1,28 @@
 package com.github.piedpiper.node.business;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.charset.Charset;
 
-import org.apache.commons.io.FileUtils;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.powermock.core.classloader.annotations.PowerMockIgnore;
 import org.powermock.modules.junit4.PowerMockRunner;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.commons.log.Slf4jLoggerImpl;
-import com.github.piedpiper.common.PiedPiperConstants;
 import com.github.piedpiper.guice.PiedPiperModule;
 import com.github.piedpiper.node.NodeInput;
 import com.github.piedpiper.node.NodeOutput;
 import com.github.piedpiper.node.aws.dynamo.TestConstants;
-import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import com.google.inject.Provides;
-import com.google.inject.Singleton;
-import com.google.inject.name.Named;
 
 @RunWith(PowerMockRunner.class)
+@PowerMockIgnore({ "com.sun.org.apache.xerces.*", "javax.xml.*", "org.xml.*", "org.w3c.*" })
 public class NodeJsNodeTest {
 	
-	private static final String NODEJS_TEMPLATE_SUCCESS = "./src/main/java/com/github/piedpiper/node/business/pied-piper-script.js";
-	
-	private static final String NODEJS_TEMPLATE_NO_END_MARKER_FILE = "./src/test/java/com/github/piedpiper/node/business/pied-piper-script-no-end-marker.js";
-	
-	private static final String NODEJS_TEMPLATE_BLANK_FILE = "./src/test/java/com/github/piedpiper/node/business/pied-piper-script-empty-script.js";
-	
-
 	@Test
 	public void testReturnInputParameterAsJsonSuccess() throws FileNotFoundException, IOException {
 		Injector injector = Guice.createInjector(new PiedPiperModule());

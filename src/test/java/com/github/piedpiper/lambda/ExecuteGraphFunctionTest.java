@@ -13,22 +13,19 @@ import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 import org.powermock.api.mockito.PowerMockito;
+import org.powermock.core.classloader.annotations.PowerMockIgnore;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
 import com.amazonaws.services.lambda.runtime.Context;
-import com.amazonaws.services.simplesystemsmanagement.AWSSimpleSystemsManagement;
 import com.amazonaws.util.StringInputStream;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.github.commons.utils.JsonUtils;
 import com.github.piedpiper.common.PiedPiperConstants;
 import com.github.piedpiper.graph.api.types.ContractInput;
 import com.github.piedpiper.graph.api.types.GraphDefinition;
-import com.github.piedpiper.node.NodeOutput;
-import com.github.piedpiper.node.aws.dynamo.DynamoDBReaderNode;
 import com.github.piedpiper.transformer.ExecuteGraphFunction;
 import com.github.piedpiper.transformer.WarmupHandler;
-import com.github.piedpiper.utils.ParameterUtils;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
@@ -52,6 +49,7 @@ import scala.concurrent.Future;
  */
 @SuppressWarnings("unchecked")
 @RunWith(PowerMockRunner.class)
+@PowerMockIgnore("javax.management.*")
 @PrepareForTest({ Patterns.class, Await.class, ExecuteGraphFunction.class })
 public class ExecuteGraphFunctionTest {
 
@@ -77,7 +75,7 @@ public class ExecuteGraphFunctionTest {
 		definition.setExceptionTrace("dummy");
 		PowerMockito.when(Await.result(Mockito.any(), Mockito.any())).thenReturn(definition);
 		WarmupHandler warmup = Mockito.mock(WarmupHandler.class);
-		Mockito.when(warmup.apply(Mockito.any())).thenReturn(null);
+		Mockito.doNothing().when(warmup).apply(Mockito.any());
 		PowerMockito.whenNew(WarmupHandler.class).withAnyArguments().thenReturn(warmup);
 		ExecuteGraphLambdaFunction handler = new ExecuteGraphLambdaFunction(Lists.newArrayList(new AbstractModule() {
 			@Override
@@ -117,7 +115,7 @@ public class ExecuteGraphFunctionTest {
 				GraphDefinition.class);
 		ArgumentCaptor<ContractInput> contractInputCaptor = ArgumentCaptor.forClass(ContractInput.class);
 		PowerMockito.verifyStatic(Patterns.class);
-		Patterns.ask(Mockito.any(ActorRef.class), contractInputCaptor.capture(), Mockito.any(Timeout.class));
+		Patterns.ask((ActorRef)Mockito.eq(null), contractInputCaptor.capture(), Mockito.any(Timeout.class));
 		Assert.assertEquals("dummy", contractInputCaptor.getValue().getGraphJson().asText());
 		Assert.assertEquals("dummy", output.getExceptionTrace());
 	}
@@ -142,6 +140,21 @@ public class ExecuteGraphFunctionTest {
 			public Map<String, JsonNode> getGraphCache() {
 				return Maps.newHashMap();
 			}
+			@Provides
+			@Singleton
+			@Named(PiedPiperConstants.AWS_SSM_CACHE)
+			public LoadingCache<String, String> getInMemoryAWSSSMCache() {
+				return CacheBuilder.newBuilder().maximumSize(1000).build(new CacheLoader<String, String>() {
+					public String load(String parameterName) {
+						return "";
+					}
+				});
+			}
+			@Provides
+			@Singleton
+			public ExecutorService getExecutorService() {
+				return Executors.newCachedThreadPool();
+			}
 			
 		}));
 		Context ctx = createContext();
@@ -150,7 +163,7 @@ public class ExecuteGraphFunctionTest {
 		GraphDefinition output = JsonUtils.readValueSilent(new String(outputStream.toByteArray()),
 				GraphDefinition.class);
 		// TODO: validate output here if needed.
-		Assert.assertTrue(output.getExceptionTrace().contains("NullPointerException"));
+		Assert.assertTrue(output.getExceptionTrace().contains("Error getting graph json"));
 	}
 
 	

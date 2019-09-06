@@ -26,7 +26,6 @@ import com.github.piedpiper.graph.api.types.NodeDefinition;
 import com.github.piedpiper.node.NodeInput;
 import com.github.piedpiper.node.NodeOutput;
 import com.github.piedpiper.node.aws.dynamo.TestConstants;
-import com.github.piedpiper.transformer.CleanupOutputTransformer;
 import com.github.piedpiper.utils.ParameterUtils;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;

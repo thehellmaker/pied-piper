@@ -40,7 +40,7 @@ public class ParameterDefinition {
 	 * </li>
 	 * </p>
 	 */
-	private String parameterValue;
+	private Object parameterValue;
 
 	private String referenceNodeName;
 
@@ -62,11 +62,11 @@ public class ParameterDefinition {
 		this.parameterType = parameterType;
 	}
 
-	public String getParameterValue() {
+	public Object getParameterValue() {
 		return parameterValue;
 	}
 
-	public void setParameterValue(String parameterValue) {
+	public void setParameterValue(Object parameterValue) {
 		this.parameterValue = parameterValue;
 	}
 

@@ -15,6 +15,9 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.piedpiper.node.NodeInput;
 import com.github.piedpiper.node.NodeOutput;
+import com.google.common.collect.Lists;
+import com.google.inject.AbstractModule;
+import com.google.inject.Guice;
 import com.google.inject.Injector;
 
 
@@ -38,10 +41,13 @@ public class FirebaseAdminNodeTest {
 				return output;
 			}
 		});
-		JsonNode jsonInput = mapper.readTree("{\"method\": { \"value\": \"JWT_VERIFY\"}}");
+		JsonNode jsonInput = mapper.readTree("{\"method\": { \"value\": \"JWT_VERIFY\"}, \"config\": { \"value\": \"{}\"}}");
 		NodeInput nodeInput = new NodeInput();
 		nodeInput.setInput(jsonInput);
-		FirebaseAdminNode adminNode = new FirebaseAdminNode();
+		FirebaseAdminNode adminNode = PowerMockito.spy(new FirebaseAdminNode());
+		adminNode.setInjector(Guice.createInjector(Lists.newArrayList(new AbstractModule() {
+		})));
+		PowerMockito.doNothing().when(adminNode).initializeFirebase(Mockito.anyString());
 		NodeOutput nodeOutput = adminNode.apply(nodeInput);
 		Assert.assertTrue(mapper.writeValueAsString(nodeOutput.getOutput()).equals(EMPTY_JSON_STRING));
 	}

@@ -54,7 +54,7 @@ public class ExecuteGraphFunction implements Function<JsonNode, GraphDefinition>
 			ContractInput contractInput = new ContractInput(getGraphNode(inputJson),
 					inputJson.get(PiedPiperConstants.INPUT));
 			Timeout timeout = new Timeout(Duration.create(90, "seconds"));
-			Future<Object> future = Patterns.ask(graphActorRef, contractInput, timeout);
+			Future<Object> future = Patterns.ask((ActorRef)graphActorRef, contractInput, timeout);
 			GraphDefinition response = (GraphDefinition) Await.result(future, timeout.duration());
 			long endTime = System.currentTimeMillis();
 			AuditInfo auditInfo = new AuditInfo();
@@ -72,7 +72,7 @@ public class ExecuteGraphFunction implements Function<JsonNode, GraphDefinition>
 	protected JsonNode getGraphNode(JsonNode inputJson) throws IOException, ExecutionException, InterruptedException {
 		Boolean isClearCache = Optional.ofNullable(inputJson.get("clearCache"))
 				.map(tableNodeName -> tableNodeName.asBoolean()).orElse(false);
-		new WarmupHandler(injector, logger, isClearCache).apply(null);
+		
 		
 		String projectName = Optional.ofNullable(inputJson.get(PiedPiperConstants.PROJECT_NAME))
 				.map(projectNameNode -> projectNameNode.asText()).orElse(null);
@@ -87,6 +87,7 @@ public class ExecuteGraphFunction implements Function<JsonNode, GraphDefinition>
 			return graphJson;
 		} else if (StringUtils.isNotBlank(projectName) && StringUtils.isNotBlank(graphName)
 				&& StringUtils.isNotBlank(tableName)) {
+			new WarmupHandler(injector, logger, isClearCache).apply(null);
 			return graphCache.get(SearchGraphUtils.getGraphCacheKey(projectName, graphName));
 		}
 		throw new RuntimeException("Error getting graph json");

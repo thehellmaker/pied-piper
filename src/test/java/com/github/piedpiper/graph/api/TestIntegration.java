@@ -36,15 +36,10 @@ import com.github.piedpiper.node.piedpiper.SubGraphNode;
 import com.github.piedpiper.node.rest.RESTPostHandler;
 import com.github.piedpiper.node.rest.RESTServiceNode;
 import com.github.piedpiper.utils.ParameterUtils;
-import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Key;
-import com.google.inject.Provides;
-import com.google.inject.Singleton;
-import com.google.inject.name.Named;
 import com.google.inject.name.Names;
-import com.google.inject.util.Modules;
 
 import akka.actor.ActorSystem;
 import akka.actor.Props;
@@ -73,6 +68,19 @@ public class TestIntegration {
 		GraphDefinition response = (GraphDefinition) Await.result(future, timeout.duration());
 		System.out.println("Response = " + response);
 	}
+	
+	@Test
+	public void testFirebase() throws Exception {
+		JsonNode graph = new ObjectMapper().readTree(new FileInputStream(getFileName("firebaseAdmin.json")));
+		ContractInput input = new ContractInput(graph, mapper.readTree("{}"));
+		Props graphProps = ApiGraphActor.props(Guice.createInjector(new PiedPiperModule()), logger);
+		TestActorRef<ApiGraphActor> ref = TestActorRef.create(system, graphProps, "graphActor1");
+		Timeout timeout = new Timeout(Duration.create(25, "seconds"));
+		Future<Object> future = akka.pattern.Patterns.ask(ref, input, timeout);
+		GraphDefinition response = (GraphDefinition) Await.result(future, timeout.duration());
+		System.out.println("Response = " + JsonUtils.writeValueAsStringSilent(response));
+	}
+
 
 	@Test
 	public void testRESTPost() throws FileNotFoundException, IOException {
@@ -219,16 +227,16 @@ public class TestIntegration {
 		runtimeData.put("thingGroupName", "NIoIgBgyuAVNeaoZVHZxaGAxRZW2");
 		runtimeData.put("idToken", "eyJhbGciOiJSUzI1NiIsImtpZCI6IjY1NmMzZGQyMWQwZmVmODgyZTA5ZTBkODY5MWNhNWM3ZjJiMGQ2MjEiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiQWthc2ggQXNob2siLCJwaWN0dXJlIjoiaHR0cHM6Ly9saDQuZ29vZ2xldXNlcmNvbnRlbnQuY29tLy1vZ2VIaUl1MUJ1VS9BQUFBQUFBQUFBSS9BQUFBQUFBQUw2QS9EMFVXLXZLTzFVYy9zOTYtYy9waG90by5qcGciLCJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vYXRvbTgtMTU3NjE3IiwiYXVkIjoiYXRvbTgtMTU3NjE3IiwiYXV0aF90aW1lIjoxNTU1MDYwMzE0LCJ1c2VyX2lkIjoiTklvSWdCZ3l1QVZOZWFvWlZIWnhhR0F4UlpXMiIsInN1YiI6Ik5Jb0lnQmd5dUFWTmVhb1pWSFp4YUdBeFJaVzIiLCJpYXQiOjE1NTYxNzkzMjMsImV4cCI6MTU1NjE4MjkyMywiZW1haWwiOiJ0aGVoZWxsbWFrZXJAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZ29vZ2xlLmNvbSI6WyIxMTExMzc3NzUzMDM1ODIxMzQ3NzciXSwiZW1haWwiOlsidGhlaGVsbG1ha2VyQGdtYWlsLmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6Imdvb2dsZS5jb20ifX0.VpxjB7CsZFNvgs4pe6a2aonxrNAZieleZoI8Ty93b84n-VCmZNZG9Kmx6JmGk1m-L4gjwo8LfKDloHSkgK6kN0Vvsh3fEfmYApcbesHH7BGIO03b4vO7uJxQqODW0Zh7ToTIr5seCJgL66saZQtFQ5omiNfzapXR5ec6k-YigUBZrOSEphgYSWmZZkiv7jc301I3C0EUeSGX__20uVGCw7JnkWIyYNF6H7nHNqexZ03tAlsDwzWl8CZVcvQuFpTixPxGPieqxLpXCZgRw3ByZBgGOWA3-s45Ud-2rHo3iygqdiee0LigjHCoVwuHL5q9EiV3cbvS09z3d1eu4CCSTA");
 		inputJson.set("input", runtimeData);
-		ExecuteGraphLambdaFunction graphFunction = new ExecuteGraphLambdaFunction(new PiedPiperModule());
-
-		for (int i = 0; i < 1; i++) {
-			ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-			graphFunction.handleRequest(new StringInputStream(inputJson.toString()), outputStream, createContext());
-			GraphDefinition graphResponse = JsonUtils.readValueSilent(new String(outputStream.toByteArray()),
-					GraphDefinition.class);
+//		ExecuteGraphLambdaFunction graphFunction = new ExecuteGraphLambdaFunction(new PiedPiperModule());
+//
+//		for (int i = 0; i < 1; i++) {
+//			ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+//			graphFunction.handleRequest(new StringInputStream(inputJson.toString()), outputStream, createContext());
+//			GraphDefinition graphResponse = JsonUtils.readValueSilent(new String(outputStream.toByteArray()),
+//					GraphDefinition.class);
 //			printAudit(graphResponse);
 //			System.out.println(Jackson.toJsonPrettyString(graphResponse));
-		}
+//		}
 
 	}
 

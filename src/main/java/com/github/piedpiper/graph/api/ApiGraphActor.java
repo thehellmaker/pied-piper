@@ -327,7 +327,7 @@ public class ApiGraphActor extends AbstractActor {
 				});
 	}
 
-	private String resolveConstantParameter(ParameterDefinition paramDef) throws IOException {
+	private Object resolveConstantParameter(ParameterDefinition paramDef) throws IOException {
 		return paramDef.getParameterValue();
 	}
 
@@ -343,7 +343,7 @@ public class ApiGraphActor extends AbstractActor {
 		String nodeName = paramDef.getReferenceNodeName();
 		NodeDefinition referenceNodeDefition = this.graphDefinition.getNodeMap().get(nodeName);
 		String referenceOutput = mapper.writeValueAsString(referenceNodeDefition);
-		Object value = JsonPath.read(referenceOutput, paramDef.getParameterValue());
+		Object value = JsonPath.read(referenceOutput, (String) paramDef.getParameterValue());
 		return value;
 	}
 
@@ -353,3 +353,4 @@ public class ApiGraphActor extends AbstractActor {
 	}
 
 }
+

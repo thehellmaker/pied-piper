@@ -41,7 +41,8 @@ public class GetUserFunctionTest {
 				ObjectMapper mockMapper = Mockito.spy(mapper);
 				ObjectNode node = mapper.createObjectNode();
 				node.put("iron", "man");
-				Mockito.when(mockMapper.valueToTree(Mockito.anyString())).thenReturn(node);
+				Mockito.when(mockMapper.valueToTree(Mockito.any(UserRecord.class))).thenReturn(node);
+				
 				return mockMapper;
 			}
 		});
@@ -122,7 +123,7 @@ public class GetUserFunctionTest {
 				ObjectMapper mockMapper = Mockito.spy(mapper);
 				ObjectNode node = mapper.createObjectNode();
 				node.put("iron", "man");
-				Mockito.when(mockMapper.valueToTree(Mockito.anyString())).thenReturn(node);
+				Mockito.when(mockMapper.valueToTree(Mockito.any(UserRecord.class))).thenReturn(node);
 				return mockMapper;
 			}
 		});

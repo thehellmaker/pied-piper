@@ -36,8 +36,6 @@ import com.google.inject.name.Names;
 import akka.actor.ActorSystem;
 
 public class PiedPiperModule extends AbstractModule {
-
-	private static final String FIREBASE_ENDPOINT = "https://atom8-157617.firebaseio.com/";
 	
 	private static final String PROD_GOOGLE_CREDENTIAL_PATH = "com/github/piedpiper/node/firebase/atom8-157617-firebase-adminsdk-mbg44-7eb9af3f7b.json";
 	
@@ -57,27 +55,10 @@ public class PiedPiperModule extends AbstractModule {
 				.toInstance("https://ms9uc1ppsa.execute-api.us-east-1.amazonaws.com/prod/graph/search");
 		bind(String.class).annotatedWith(Names.named(PiedPiperConstants.PROD_EXECUTE_GRAPH_ENDPOINT))
 				.toInstance("https://ms9uc1ppsa.execute-api.us-east-1.amazonaws.com/prod/graph/run");
-		initializeFirebaseAuth();
+		
 		
 	}
 	
-	private void initializeFirebaseAuth() {
-		if(FirebaseApp.getApps().size() > 0) return;
-		try {
-			InputStream refreshToken = getClass().getClassLoader().getResourceAsStream(PROD_GOOGLE_CREDENTIAL_PATH);
-		
-			GoogleCredentials cred = GoogleCredentials.fromStream(refreshToken);
-
-			FirebaseOptions options = new FirebaseOptions.Builder()
-					.setCredentials(cred)
-					.setDatabaseUrl(FIREBASE_ENDPOINT).build();
-
-			FirebaseApp.initializeApp(options);
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		} 
-	}
-
 	@Provides
 	@Singleton
 	@Named(PiedPiperConstants.GRAPH_ACTOR)
