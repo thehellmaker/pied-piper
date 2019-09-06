@@ -75,7 +75,7 @@ public class ExecuteGraphFunctionTest {
 		definition.setExceptionTrace("dummy");
 		PowerMockito.when(Await.result(Mockito.any(), Mockito.any())).thenReturn(definition);
 		WarmupHandler warmup = Mockito.mock(WarmupHandler.class);
-		Mockito.doNothing().when(warmup).apply(Mockito.any());
+		Mockito.when(warmup.apply(Mockito.any())).thenReturn(null);
 		PowerMockito.whenNew(WarmupHandler.class).withAnyArguments().thenReturn(warmup);
 		ExecuteGraphLambdaFunction handler = new ExecuteGraphLambdaFunction(Lists.newArrayList(new AbstractModule() {
 			@Override
