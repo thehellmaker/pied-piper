@@ -41,7 +41,7 @@ public class PiedPiperModule extends AbstractModule {
 	
 	private static final String PROD_GOOGLE_CREDENTIAL_PATH = "com/github/piedpiper/node/firebase/atom8-157617-firebase-adminsdk-mbg44-7eb9af3f7b.json";
 	
-	private static final String NODEJS_TEMPLATE_PATH = "pied-piper-script.js";
+	private static final String NODEJS_TEMPLATE_PATH = "com/github/piedpiper/node/business/pied-piper-script.js";
 	
 	public PiedPiperModule() {
 	}
@@ -103,8 +103,7 @@ public class PiedPiperModule extends AbstractModule {
 	@Named(PiedPiperConstants.NODEJS_SCRIPT_TEMPLATE)
 	public String getScriptTemplate() throws IOException {
 		try {
-			System.out.println("File "+ new File(".").getAbsolutePath());
-			InputStream nodeJsTemplateFile = NodeJsNode.class.getResourceAsStream(NODEJS_TEMPLATE_PATH);
+			InputStream nodeJsTemplateFile = Thread.currentThread().getContextClassLoader().getResourceAsStream(NODEJS_TEMPLATE_PATH);
 			return IOUtils.toString(nodeJsTemplateFile, Charset.forName("UTF-8")); 
 		} catch (IOException e) {
 			throw e;
