@@ -103,7 +103,7 @@ public class PiedPiperModule extends AbstractModule {
 	@Named(PiedPiperConstants.NODEJS_SCRIPT_TEMPLATE)
 	public String getScriptTemplate() throws IOException {
 		try {
-			InputStream nodeJsTemplateFile = Thread.currentThread().getContextClassLoader().getResourceAsStream(NODEJS_TEMPLATE_PATH);
+			InputStream nodeJsTemplateFile = NodeJsNode.class.getResourceAsStream(NODEJS_TEMPLATE_PATH);
 			return IOUtils.toString(nodeJsTemplateFile, Charset.forName("UTF-8")); 
 		} catch (IOException e) {
 			throw e;
