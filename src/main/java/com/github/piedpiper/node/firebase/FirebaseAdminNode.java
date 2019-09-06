@@ -26,6 +26,7 @@ public class FirebaseAdminNode extends BaseNode {
 		try {
 			String firebaseMethod = ParameterUtils.getParameterData(input.getInput(), METHOD).getValueString();
 			String firebaseConfig = ParameterUtils.getParameterData(input.getInput(), CONFIG).getValueString();
+			System.out.println("Firebase Config = "+firebaseConfig);
 
 			initializeFirebase(firebaseConfig);
 
