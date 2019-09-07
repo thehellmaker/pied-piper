@@ -53,7 +53,7 @@ public class GetUserFunctionTest {
 		Mockito.when(auth.getUserByEmail(Mockito.anyString())).thenReturn(record);
 		PowerMockito.mockStatic(FirebaseAuth.class);
 		PowerMockito.when(FirebaseAuth.getInstance()).thenReturn(auth);
-		GetUserFunction function = (GetUserFunction) injector.getInstance(GetUserFunction.class);
+		FirebaseGetUserFunction function = (FirebaseGetUserFunction) injector.getInstance(FirebaseGetUserFunction.class);
 
 		ObjectNode inputNode = mapper.createObjectNode();
 		ObjectNode idTokenValueNode = mapper.createObjectNode();
@@ -93,7 +93,7 @@ public class GetUserFunctionTest {
 		Mockito.when(auth.getUserByEmail(Mockito.anyString())).thenReturn(record);
 		PowerMockito.mockStatic(FirebaseAuth.class);
 		PowerMockito.when(FirebaseAuth.getInstance()).thenReturn(auth);
-		GetUserFunction function = (GetUserFunction) injector.getInstance(GetUserFunction.class);
+		FirebaseGetUserFunction function = (FirebaseGetUserFunction) injector.getInstance(FirebaseGetUserFunction.class);
 
 		ObjectNode inputNode = mapper.createObjectNode();
 		ObjectNode idTokenValueNode = mapper.createObjectNode();
@@ -134,7 +134,7 @@ public class GetUserFunctionTest {
 		Mockito.when(auth.getUser(Mockito.anyString())).thenReturn(record);
 		PowerMockito.mockStatic(FirebaseAuth.class);
 		PowerMockito.when(FirebaseAuth.getInstance()).thenReturn(auth);
-		GetUserFunction function = (GetUserFunction) injector.getInstance(GetUserFunction.class);
+		FirebaseGetUserFunction function = (FirebaseGetUserFunction) injector.getInstance(FirebaseGetUserFunction.class);
 
 		ObjectNode inputNode = mapper.createObjectNode();
 		ObjectNode idTokenValueNode = mapper.createObjectNode();
@@ -174,7 +174,7 @@ public class GetUserFunctionTest {
 		Mockito.when(auth.getUserByEmail(Mockito.anyString())).thenReturn(record);
 		PowerMockito.mockStatic(FirebaseAuth.class);
 		PowerMockito.when(FirebaseAuth.getInstance()).thenReturn(auth);
-		GetUserFunction function = (GetUserFunction) injector.getInstance(GetUserFunction.class);
+		FirebaseGetUserFunction function = (FirebaseGetUserFunction) injector.getInstance(FirebaseGetUserFunction.class);
 
 		ObjectNode inputNode = mapper.createObjectNode();
 		ObjectNode idTokenValueNode = mapper.createObjectNode();
@@ -202,7 +202,7 @@ public class GetUserFunctionTest {
 		FirebaseAuth auth = Mockito.mock(FirebaseAuth.class);
 		PowerMockito.mockStatic(FirebaseAuth.class);
 		PowerMockito.when(FirebaseAuth.getInstance()).thenReturn(auth);
-		GetUserFunction function = (GetUserFunction) injector.getInstance(GetUserFunction.class);
+		FirebaseGetUserFunction function = (FirebaseGetUserFunction) injector.getInstance(FirebaseGetUserFunction.class);
 
 		ObjectNode inputNode = mapper.createObjectNode();
 		ObjectNode idTokenValueNode = mapper.createObjectNode();
@@ -231,7 +231,7 @@ public class GetUserFunctionTest {
 		FirebaseAuth auth = Mockito.mock(FirebaseAuth.class);
 		PowerMockito.mockStatic(FirebaseAuth.class);
 		PowerMockito.when(FirebaseAuth.getInstance()).thenReturn(auth);
-		GetUserFunction function = (GetUserFunction) injector.getInstance(GetUserFunction.class);
+		FirebaseGetUserFunction function = (FirebaseGetUserFunction) injector.getInstance(FirebaseGetUserFunction.class);
 
 		ObjectNode inputNode = mapper.createObjectNode();
 		NodeInput input = new NodeInput();

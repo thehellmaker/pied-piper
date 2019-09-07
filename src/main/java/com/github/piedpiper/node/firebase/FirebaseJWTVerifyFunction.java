@@ -15,14 +15,14 @@ import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseToken;
 import com.google.inject.Inject;
 
-public class JWTVerifyFunction implements Function<NodeInput, NodeOutput> {
+public class FirebaseJWTVerifyFunction implements Function<NodeInput, NodeOutput> {
 
 	private static final ParameterMetadata ID_TOKEN = new ParameterMetadata("idToken", ParameterMetadata.OPTIONAL);
 	
 	private ObjectMapper mapper;
 
 	@Inject
-	public JWTVerifyFunction(ObjectMapper mapper) {
+	public FirebaseJWTVerifyFunction(ObjectMapper mapper) {
 		this.mapper = mapper;
 		
 	}

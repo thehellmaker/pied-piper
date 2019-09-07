@@ -14,7 +14,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.UserRecord;
 import com.google.inject.Inject;
 
-public class GetUserFunction implements Function<NodeInput, NodeOutput> {
+public class FirebaseGetUserFunction implements Function<NodeInput, NodeOutput> {
 
 	private static final ParameterMetadata QUERY_TYPE_PARAMETER = new ParameterMetadata("queryType",
 			ParameterMetadata.OPTIONAL);
@@ -28,7 +28,7 @@ public class GetUserFunction implements Function<NodeInput, NodeOutput> {
 	private ObjectMapper mapper;
 
 	@Inject
-	public GetUserFunction(ObjectMapper mapper) throws IOException {
+	public FirebaseGetUserFunction(ObjectMapper mapper) throws IOException {
 		this.mapper = mapper;
 
 	}

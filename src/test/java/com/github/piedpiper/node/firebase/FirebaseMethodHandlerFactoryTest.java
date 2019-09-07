@@ -19,8 +19,8 @@ public class FirebaseMethodHandlerFactoryTest {
 				
 			}
 		});
-		Assert.assertTrue(FirebaseMethodHandlerFactory.getHandler(injector, PiedPiperConstants.JWT_VERIFY) instanceof JWTVerifyFunction);
-		Assert.assertTrue(FirebaseMethodHandlerFactory.getHandler(injector, PiedPiperConstants.GET_USER) instanceof GetUserFunction);
+		Assert.assertTrue(FirebaseMethodHandlerFactory.getHandler(injector, PiedPiperConstants.JWT_VERIFY) instanceof FirebaseJWTVerifyFunction);
+		Assert.assertTrue(FirebaseMethodHandlerFactory.getHandler(injector, PiedPiperConstants.GET_USER) instanceof FirebaseGetUserFunction);
 	}
 	
 	@Test

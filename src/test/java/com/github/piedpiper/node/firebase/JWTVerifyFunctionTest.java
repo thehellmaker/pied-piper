@@ -37,8 +37,8 @@ public class JWTVerifyFunctionTest {
 		FirebaseAuth auth = Mockito.mock(FirebaseAuth.class);
 		PowerMockito.mockStatic(FirebaseAuth.class);
 		PowerMockito.when(FirebaseAuth.getInstance()).thenReturn(auth);
-		JWTVerifyFunction function = (JWTVerifyFunction) injector.getInstance(JWTVerifyFunction.class);
-		JWTVerifyFunction spyFunction = Mockito.spy(function);
+		FirebaseJWTVerifyFunction function = (FirebaseJWTVerifyFunction) injector.getInstance(FirebaseJWTVerifyFunction.class);
+		FirebaseJWTVerifyFunction spyFunction = Mockito.spy(function);
 
 		ObjectNode inputNode = mapper.createObjectNode();
 		ObjectNode idTokenValueNode = mapper.createObjectNode();
@@ -61,7 +61,7 @@ public class JWTVerifyFunctionTest {
 
 			}
 		});
-		JWTVerifyFunction function = injector.getInstance(JWTVerifyFunction.class);
+		FirebaseJWTVerifyFunction function = injector.getInstance(FirebaseJWTVerifyFunction.class);
 		NodeInput input = new NodeInput();
 		input.setInput(mapper.createObjectNode());
 		try {

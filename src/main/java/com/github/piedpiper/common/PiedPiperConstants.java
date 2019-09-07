@@ -67,5 +67,7 @@ public class PiedPiperConstants {
 	public static final String JWT_VERIFY = "JWT_VERIFY";
 
 	public static final String GET_USER = "GET_USER";
+
+	public static final String CUSTOM_TOKEN = "CUSTOM_TOKEN";
 	
 }
