@@ -53,9 +53,9 @@ public class ExecuteGraphLambdaFunction implements RequestStreamHandler {
 			
 			JsonNode inputJson = JsonUtils.mapper.readTree(inputStream);
 			validateNotLambdaWarmUp(inputJson, logger);
-			logger.log("Input Thundra: " + inputJson);
+//			logger.log("Input Thundra: " + inputJson);
 			GraphDefinition response = new ExecuteGraphFunction(logger, injector).apply(inputJson);
-			logger.log("Response = " + response);
+//			logger.log("Response = " + response);
 			outputStream.write(JsonUtils.mapper.writeValueAsBytes(response));
 		} catch (Exception e) {
 			logger.log(ExceptionUtils.getStackTrace(e));
