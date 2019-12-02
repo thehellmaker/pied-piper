@@ -197,13 +197,18 @@ public class ApiGraphActor extends AbstractActor {
 				for (Entry<String, ParameterDefinition> eachParameter : nodeDefinition.getParameterMap().entrySet()) {
 					Map<String, String> substitutionMap = getSubstitutionMap(inputNode);
 					// Resolve constant parameter for placeholder substitution
-
-					for (Entry<String, ParameterDefinition> eachParameterForSubstition : nodeDefinition
-							.getParameterMap().entrySet()) {
-						ParameterDefinition paramDef = eachParameterForSubstition.getValue();
-						Object paramValue = resolveParameter(paramDef, substitutionMap);
-						inputNode.set(paramDef.getParameterName(), ParameterUtils.createParamValueNode(paramValue));
-					}
+//					try {
+						for (Entry<String, ParameterDefinition> eachParameterForSubstition : nodeDefinition
+								.getParameterMap().entrySet()) {
+							ParameterDefinition paramDef = eachParameterForSubstition.getValue();
+							Object paramValue = resolveParameter(paramDef, substitutionMap);
+							inputNode.set(paramDef.getParameterName(), ParameterUtils.createParamValueNode(paramValue));
+						}
+//					} catch(Exception e) {
+//						logger.log(String.format("Node = %s, Param = %s, Exception = %s", nodeDefinition.getNodeName(), 
+//								eachParameter.getKey(),
+//								ExceptionUtils.getStackTrace(e)));
+//					}
 
 				}
 				Iterator<Entry<String, JsonNode>> jsonNodeIterator = inputNode.fields();

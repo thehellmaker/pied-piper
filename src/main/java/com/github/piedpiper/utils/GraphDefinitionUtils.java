@@ -74,11 +74,11 @@ public class GraphDefinitionUtils {
 		NodeDefinition nodeDef = graphDefinition.getNodeMap().get(nodeName);
 		if(nodeDef.getNodeStatus() != NodeStatus.COMPLETE) return false;
 		
-		if (GraphDefinitionUtils.isNodeExecutionError(nodeDef)) {
-			throw new DependentNodeException(String.format(
-					"The node execution has failed because a dependentNode: %s errored out during execution",
-					nodeName));
-		}
+//		if (GraphDefinitionUtils.isNodeExecutionError(nodeDef)) {
+//			throw new DependentNodeException(String.format(
+//					"The node execution has failed because a dependentNode: %s errored out during execution",
+//					nodeName));
+//		}
 		return true;
 	}
 	
