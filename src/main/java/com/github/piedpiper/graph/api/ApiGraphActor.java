@@ -246,8 +246,8 @@ public class ApiGraphActor extends AbstractActor {
 
 			return inputNodeList;
 		} catch (Exception e) {
-			logger.log(String.format("Node = %s, Exception = %s", nodeDefinition.getNodeName(),
-					ExceptionUtils.getStackTrace(e)));
+//			logger.log(String.format("Node = %s, Exception = %s", nodeDefinition.getNodeName(),
+//					ExceptionUtils.getStackTrace(e)));
 			nodeDefinition.setStackTrace(ExceptionUtils.getStackTrace(e));
 			throw e;
 		}
