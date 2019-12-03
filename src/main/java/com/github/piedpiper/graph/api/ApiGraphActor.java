@@ -154,7 +154,7 @@ public class ApiGraphActor extends AbstractActor {
 					executeNode(nodeDef);
 				}
 			} catch (Exception e) {
-				logger.log(ExceptionUtils.getStackTrace(e));
+//				logger.log(ExceptionUtils.getStackTrace(e));
 				nodeDef.setStackTrace(ExceptionUtils.getStackTrace(e));
 				nodeDef.setNodeStatus(NodeStatus.COMPLETE);
 				foundNodesWithException = true;
