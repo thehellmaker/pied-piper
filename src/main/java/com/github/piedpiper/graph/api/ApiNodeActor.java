@@ -51,8 +51,8 @@ public class ApiNodeActor extends AbstractActor {
 				NodeOutput nodeOutput = new NodeOutput();
 				nodeOutput.setStackTrace(ExceptionUtils.getStackTrace(e));
 				nodeOutput.setNodeName(nodeExecutor.getNodeDefinition().getNodeName());
-				logger.log(String.format("Exception while executing node actor execution for nodeDefinition = %s",
-						mapper.writeValueAsString(nodeOutput)));
+//				logger.log(String.format("Exception while executing node actor execution for nodeDefinition = %s",
+//						mapper.writeValueAsString(nodeOutput)));
 				getSender().tell(nodeOutput, getSelf());
 			}
 		}).build();

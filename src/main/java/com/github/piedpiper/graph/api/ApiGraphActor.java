@@ -42,6 +42,9 @@ import com.google.common.collect.Maps;
 import com.google.inject.Injector;
 import com.jayway.jsonpath.JsonPath;
 
+import akka.routing.RoundRobinPool;
+import akka.routing.RoundRobinRoutingLogic;
+
 import akka.actor.AbstractActor;
 import akka.actor.ActorRef;
 import akka.actor.Props;
@@ -166,13 +169,13 @@ public class ApiGraphActor extends AbstractActor {
 
 	private void executeNode(NodeDefinition nodeDefinition) throws JsonProcessingException {
 		nodeDefinition.setNodeStatus(NodeStatus.IN_PROGRESS);
+		ActorRef nodeExecutorRouter = getContext().actorOf(new RoundRobinPool(20).props(ApiNodeActor.props(injector, logger)), "parallelizmRouter");
 		for (NodeInput input : nodeDefinition.getNodeInputList()) {
-			ActorRef nodeExecutorActor = getContext().actorOf(ApiNodeActor.props(injector, logger));
 			NodeExecutor nodeExecutor = new NodeExecutor();
 			nodeExecutor.setNodeDefinition(nodeDefinition);
 			nodeExecutor.setNodeInput(input);
 //			logger.log(String.format("Starting Node actor for executor: %s", mapper.writeValueAsString(nodeExecutor)));
-			nodeExecutorActor.tell(nodeExecutor, getSelf());
+			nodeExecutorRouter.tell(nodeExecutor, getSelf());
 		}
 
 	}
