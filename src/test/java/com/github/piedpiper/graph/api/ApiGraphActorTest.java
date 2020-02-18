@@ -116,7 +116,9 @@ public class ApiGraphActorTest {
 
 
 		Assert.assertEquals("akash/ashokValueBased/constant", node3.getNodeInputList().get(0).getInput().get("param1").get("value").asText());
+		
 		Assert.assertEquals("ashokValueBased", node3.getNodeInputList().get(0).getInput().get("runtimeValueParameterValueBased").get("value").asText());
+		Assert.assertEquals("", node3.getNodeInputList().get(0).getInput().get("constantValueEmpty").get("value").asText());
 		Assert.assertEquals("sexyValue", node3.getNodeInputList().get(0).getInput().get("param3").get("value").asText());
 		Assert.assertEquals("sexyValue2", node3.getNodeInputList().get(0).getInput().get("param4").get("value").asText());
 		Assert.assertEquals("akash", node3.getNodeInputList().get(0).getInput().get("param6").get("value").get("name").asText());
@@ -216,7 +218,7 @@ public class ApiGraphActorTest {
 		GraphDefinition executedGraphDefinition = (GraphDefinition) Await.result(future, timeout.duration());
 		Assert.assertNotNull(executedGraphDefinition);
 		Assert.assertTrue(StringUtils.contains(executedGraphDefinition.getNodeMap().get("Node2").getNodeOutputList().get(0).getStackTrace(), "java.lang.ClassNotFoundException"));
-		Assert.assertTrue(StringUtils.contains(executedGraphDefinition.getNodeMap().get("Node3").getStackTrace(), "DependentNodeException"));
+		Assert.assertTrue(StringUtils.contains(executedGraphDefinition.getNodeMap().get("Node3").getStackTrace(), "PathNotFoundException"));
 	}
 
 	@Test

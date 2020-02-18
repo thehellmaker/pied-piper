@@ -6,10 +6,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.function.Function;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.MapUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.commons.lang3.reflect.MethodUtils;
 import org.apache.commons.text.StrSubstitutor;
@@ -37,6 +39,7 @@ import com.github.piedpiper.transformer.CleanupOutputTransformer;
 import com.github.piedpiper.utils.GraphDefinitionUtils;
 import com.github.piedpiper.utils.ParameterUtils;
 import com.github.piedpiper.utils.RegExUtils;
+import com.google.api.client.repackaged.com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.inject.Injector;
@@ -169,7 +172,7 @@ public class ApiGraphActor extends AbstractActor {
 
 	private void executeNode(NodeDefinition nodeDefinition) throws JsonProcessingException {
 		nodeDefinition.setNodeStatus(NodeStatus.IN_PROGRESS);
-		ActorRef nodeExecutorRouter = getContext().actorOf(new RoundRobinPool(20).props(ApiNodeActor.props(injector, logger)), "parallelizmRouter");
+		ActorRef nodeExecutorRouter = getContext().actorOf(new RoundRobinPool(20).props(ApiNodeActor.props(injector, logger)), UUID.randomUUID().toString());
 		for (NodeInput input : nodeDefinition.getNodeInputList()) {
 			NodeExecutor nodeExecutor = new NodeExecutor();
 			nodeExecutor.setNodeDefinition(nodeDefinition);
@@ -310,6 +313,7 @@ public class ApiGraphActor extends AbstractActor {
 			Map<String, String> substitutionMap) throws IOException {
 		JsonNode node;
 		if (resolveConstantParameter instanceof String) {
+			if(StringUtils.isBlank((String)resolveConstantParameter)) return StringUtils.EMPTY;
 			String substitutedString = new StrSubstitutor(substitutionMap).replace((String) resolveConstantParameter);
 			node = getValue(substitutedString);
 		} else {

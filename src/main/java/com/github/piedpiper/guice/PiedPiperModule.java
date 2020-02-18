@@ -1,8 +1,15 @@
 package com.github.piedpiper.guice;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URISyntaxException;
 import java.nio.charset.Charset;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ExecutorService;
@@ -99,13 +106,18 @@ public class PiedPiperModule extends AbstractModule {
 	@Provides
 	@Singleton
 	@Named(PiedPiperConstants.NODEJS_SCRIPT_TEMPLATE)
-	public String getScriptTemplate() throws IOException {
+	public String getScriptTemplate() throws IOException, URISyntaxException {
 		try {
-			InputStream nodeJsTemplateFile = getClass().getClassLoader().getResourceAsStream(NODEJS_TEMPLATE_PATH);
-			return IOUtils.toString(nodeJsTemplateFile, Charset.forName("UTF-8")); 
-		} catch (IOException e) {
-			throw e;
+			return readPath(NODEJS_TEMPLATE_PATH);
+		} catch (Exception e) {
+			// This is the path used if its run as a part of lambda
+			return readPath("com/github/piedpiper/guice/"+NODEJS_TEMPLATE_PATH);
 		}
+	}
+	
+	private String readPath(String path) throws IOException {
+		InputStream nodeJsTemplateFile = getClass().getClassLoader().getResourceAsStream(path);
+		return IOUtils.toString(nodeJsTemplateFile, Charset.forName("UTF-8"));
 	}
 	
 }

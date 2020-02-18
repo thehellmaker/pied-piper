@@ -29,6 +29,11 @@
 					"parameterType": "CONSTANT",
 					"parameterValue": "constant"
 				},
+				"constantValueEmpty": {
+					"parameterName": "constantValueEmpty",
+					"parameterType": "CONSTANT",
+					"parameterValue": ""
+				},
 				"param3": {
 					"parameterName": "param3",
 					"parameterType": "REFERENCE_FROM_ANOTHER_NODE",
