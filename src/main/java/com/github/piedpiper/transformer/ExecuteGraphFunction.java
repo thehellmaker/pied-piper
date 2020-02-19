@@ -88,7 +88,8 @@ public class ExecuteGraphFunction implements Function<JsonNode, GraphDefinition>
 		} else if (StringUtils.isNotBlank(projectName) && StringUtils.isNotBlank(graphName)
 				&& StringUtils.isNotBlank(tableName)) {
 			new WarmupHandler(injector, logger, isClearCache).apply(null);
-			return graphCache.get(SearchGraphUtils.getGraphCacheKey(projectName, graphName));
+			String graphKey = SearchGraphUtils.getGraphCacheKey(projectName, graphName);
+			if(graphCache.containsKey(graphKey)) return graphCache.get(graphKey);
 		}
 		throw new RuntimeException("Error getting graph json");
 	}
@@ -99,3 +100,4 @@ public class ExecuteGraphFunction implements Function<JsonNode, GraphDefinition>
 	}
 
 }
+

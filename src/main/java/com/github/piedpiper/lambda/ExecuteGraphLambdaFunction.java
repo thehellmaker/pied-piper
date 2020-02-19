@@ -4,10 +4,12 @@ package com.github.piedpiper.lambda;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.ExecutionException;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 
 import com.amazonaws.services.lambda.runtime.Context;
@@ -49,16 +51,16 @@ public class ExecuteGraphLambdaFunction implements RequestStreamHandler {
 	public void handleRequest(InputStream inputStream, OutputStream outputStream, Context context)
 			throws JsonProcessingException, IOException {
 		ILogger logger = new LambdaLoggerImpl(context.getLogger());
+		String inputJsonStr="";
 		try {
-			
-			JsonNode inputJson = JsonUtils.mapper.readTree(inputStream);
+			inputJsonStr = IOUtils.toString(inputStream, StandardCharsets.UTF_8); 
+			JsonNode inputJson = JsonUtils.mapper.readTree(inputJsonStr);
 			validateNotLambdaWarmUp(inputJson, logger);
-//			logger.log("Input Thundra: " + inputJson);
 			GraphDefinition response = new ExecuteGraphFunction(logger, injector).apply(inputJson);
 //			logger.log("Response = " + response);
 			outputStream.write(JsonUtils.mapper.writeValueAsBytes(response));
 		} catch (Exception e) {
-			logger.log(ExceptionUtils.getStackTrace(e));
+			logger.log(String.format("Input Thundra: %s, Error: %s", inputJsonStr, ExceptionUtils.getStackTrace(e)));
 			GraphDefinition response = new GraphDefinition();
 			response.setExceptionTrace(ExceptionUtils.getStackTrace(e));
 			outputStream.write(JsonUtils.mapper.writeValueAsBytes(response));
