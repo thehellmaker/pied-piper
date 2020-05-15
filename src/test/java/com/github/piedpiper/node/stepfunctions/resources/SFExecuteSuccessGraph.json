@@ -1,0 +1,23 @@
+{
+	"method":{
+		"value":"EXECUTE"
+	},
+	"region":{
+		"value":"sample_region"
+	},
+	"access key":{
+		"value":"sample_access_key"
+	},
+	"secret key":{
+		"value":"sample_secret_key"
+	},
+	"name":{
+		"value":"test1"
+	},
+	"arn":{
+		"value":"sample_arn"
+	},
+	"input":{
+		"value":"{}"
+	}
+}
