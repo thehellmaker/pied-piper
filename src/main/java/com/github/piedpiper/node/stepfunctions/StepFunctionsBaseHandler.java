@@ -7,19 +7,17 @@ import com.github.piedpiper.node.NodeInput;
 import com.github.piedpiper.node.NodeOutput;
 
 public abstract class StepFunctionsBaseHandler extends StepFunctionsBaseNode {
-	protected AWSStepFunctions stepFunctionsClient; 
-	private void setStepFunctionsClient(NodeInput input) throws Exception{
-		this.stepFunctionsClient = AWSStepFunctionsClientBuilder.standard()
-									.withRegion(getRegion(input))
-									.withCredentials(new AccessKeySecretKeyCredentialProvider(getAccessKey(input),getSecretKey(input)))
-									.build();
+	protected AWSStepFunctions stepFunctionsClient;
+	private AWSStepFunctions getStepFunctionsClient(NodeInput input) throws Exception{
+		return AWSStepFunctionsClientBuilder.standard()
+					.build();
 		
 	}
 	
 	@Override
 	public NodeOutput apply(NodeInput input){
 		try{
-			setStepFunctionsClient(input);
+			this.stepFunctionsClient = getStepFunctionsClient(input);
 			NodeOutput output = new NodeOutput();
 			output = stepFunctionsRequestHandler(input);
 			return output;
