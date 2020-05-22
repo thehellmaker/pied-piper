@@ -1,63 +1,70 @@
 package com.github.piedpiper.node.stepfunctions;
 
-import com.github.piedpiper.node.NodeOutput;
-
-
 import java.util.Optional;
 
-
+import com.amazonaws.services.stepfunctions.AWSStepFunctions;
 import com.amazonaws.services.stepfunctions.model.StartExecutionRequest;
 import com.amazonaws.services.stepfunctions.model.StartExecutionResult;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.github.commons.utils.JsonUtils;
 import com.github.piedpiper.common.PiedPiperConstants;
+import com.github.piedpiper.node.INode;
 import com.github.piedpiper.node.NodeInput;
+import com.github.piedpiper.node.NodeOutput;
 import com.github.piedpiper.node.ParameterMetadata;
+import com.github.piedpiper.node.aws.IStepFunctionsFactory;
 import com.github.piedpiper.utils.ParameterUtils;
+import com.google.inject.Inject;
 
+public class StepFunctionsExecute implements INode {
 
-public class StepFunctionsExecute extends StepFunctionsBaseHandler {
-	private static ParameterMetadata NAME = new ParameterMetadata("name",ParameterMetadata.MANDATORY);
-	private static ParameterMetadata ARN = new ParameterMetadata("arn",ParameterMetadata.MANDATORY);
-	private static ParameterMetadata INPUT = new ParameterMetadata("input");
+	private static final ParameterMetadata ARN = new ParameterMetadata("arn");
+	private static final ParameterMetadata NAME = new ParameterMetadata("name");
+	private static final ParameterMetadata INPUT = new ParameterMetadata("input");
+
+	private AWSStepFunctions stepFunctionsClient;
+
+	@Inject
+	public StepFunctionsExecute(IStepFunctionsFactory stepFunctionFactory) {
+		this.stepFunctionsClient = stepFunctionFactory.getStepFunctionsClient();
+	}
 
 	@Override
-	protected NodeOutput stepFunctionsRequestHandler(NodeInput input) throws Exception {
-		
-		String stateMachineName = ParameterUtils.getParameterData(input.getInput(), NAME).getValueString();
-		String stateMachineARN = ParameterUtils.getParameterData(input.getInput(), ARN).getValueString();
-		String stateMachineInput = getStateMachineInput(input);
-		
-		
-		StartExecutionRequest startExecutionRequest = getStartExecutionRequest();
-		startExecutionRequest.setStateMachineArn(stateMachineARN);
-		startExecutionRequest.setName(stateMachineName);
-		startExecutionRequest.setInput(stateMachineInput);
+	public NodeOutput apply(NodeInput input) {
 
-		
-		StartExecutionResult startExecutionResult = this.stepFunctionsClient.startExecution(startExecutionRequest);
-		
-		NodeOutput output = new NodeOutput();
-		ObjectNode outputNode = (ObjectNode) JsonUtils.mapper.valueToTree(startExecutionResult);
-		output.setOutput(outputNode);
-		return output;
+		try {
+
+			String stateMachineName = ParameterUtils.getParameterData(input.getInput(), NAME).getValueString();
+			String stateMachineARN = ParameterUtils.getParameterData(input.getInput(), ARN).getValueString();
+			String stateMachineInput = getStateMachineInput(input);
+
+			StartExecutionRequest startExecutionRequest = getStartExecutionRequest();
+			startExecutionRequest.setStateMachineArn(stateMachineARN);
+			startExecutionRequest.setName(stateMachineName);
+			startExecutionRequest.setInput(stateMachineInput);
+
+			StartExecutionResult startExecutionResult = this.stepFunctionsClient.startExecution(startExecutionRequest);
+
+			NodeOutput output = new NodeOutput();
+			ObjectNode outputNode = (ObjectNode) JsonUtils.mapper.valueToTree(startExecutionResult);
+			output.setOutput(outputNode);
+			return output;
+
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+
 	}
-	
-	protected StartExecutionRequest getStartExecutionRequest(){
+
+	protected StartExecutionRequest getStartExecutionRequest() {
 		return new StartExecutionRequest();
 	}
-	
-	private String getStateMachineInput(NodeInput input){
-		String stateMachineInput = Optional.ofNullable(input).map(node -> node.getInput())
-									.map(inputJsonNode -> inputJsonNode.get(INPUT.getParameterName()))
-									.map(value -> value.get(PiedPiperConstants.VALUE))
-									.map(value -> value.asText())
-									.orElse("{}");
-		//input has to be in JSON string format
-		if(stateMachineInput.isEmpty()){
-			stateMachineInput = "{}";
-		}
-		return stateMachineInput;
+
+	private String getStateMachineInput(NodeInput input) {
+		return Optional.ofNullable(input).map(node -> node.getInput())
+				.map(inputJsonNode -> inputJsonNode.get(INPUT.getParameterName()))
+				.map(value -> value.get(PiedPiperConstants.VALUE)).map(value -> value.asText()).orElse("{}");
+
 	}
-		
+
 }

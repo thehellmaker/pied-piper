@@ -25,7 +25,9 @@ import com.github.piedpiper.common.PiedPiperConstants;
 import com.github.piedpiper.node.NodeListQueryHandler;
 import com.github.piedpiper.node.aws.AWSLambdaFactory;
 import com.github.piedpiper.node.aws.AWSLambdaNode;
+import com.github.piedpiper.node.aws.AWSStepFunctionsFactory;
 import com.github.piedpiper.node.aws.ILambdaFactory;
+import com.github.piedpiper.node.aws.IStepFunctionsFactory;
 import com.github.piedpiper.utils.ParameterUtils;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.common.cache.CacheBuilder;
@@ -55,6 +57,7 @@ public class PiedPiperModule extends AbstractModule {
 	@Override
 	protected void configure() {
 		
+		bind(IStepFunctionsFactory.class).to(AWSStepFunctionsFactory.class).in(Singleton.class);
 		bind(Function.class).annotatedWith(Names.named(NodeListQueryHandler.class.getName()))
 				.to(NodeListQueryHandler.class);
 		bind(ILambdaFactory.class).to(AWSLambdaFactory.class);
