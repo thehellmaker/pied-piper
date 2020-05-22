@@ -1,6 +1,7 @@
 package com.github.piedpiper.node.stepfunctions;
 
 import java.util.Optional;
+import java.util.function.Function;
 
 import com.amazonaws.services.stepfunctions.AWSStepFunctions;
 import com.amazonaws.services.stepfunctions.model.StartExecutionRequest;
@@ -8,15 +9,13 @@ import com.amazonaws.services.stepfunctions.model.StartExecutionResult;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.github.commons.utils.JsonUtils;
 import com.github.piedpiper.common.PiedPiperConstants;
-import com.github.piedpiper.node.INode;
 import com.github.piedpiper.node.NodeInput;
 import com.github.piedpiper.node.NodeOutput;
 import com.github.piedpiper.node.ParameterMetadata;
-import com.github.piedpiper.node.aws.IStepFunctionsFactory;
 import com.github.piedpiper.utils.ParameterUtils;
 import com.google.inject.Inject;
 
-public class StepFunctionsExecute implements INode {
+public class StepFunctionsExecute implements Function<NodeInput, NodeOutput> {
 
 	private static final ParameterMetadata ARN = new ParameterMetadata("arn");
 	private static final ParameterMetadata NAME = new ParameterMetadata("name");
@@ -25,11 +24,10 @@ public class StepFunctionsExecute implements INode {
 	private AWSStepFunctions stepFunctionsClient;
 
 	@Inject
-	public StepFunctionsExecute(IStepFunctionsFactory stepFunctionFactory) {
-		this.stepFunctionsClient = stepFunctionFactory.getStepFunctionsClient();
+	public StepFunctionsExecute(AWSStepFunctions stepFunctionsClient) {
+		this.stepFunctionsClient = stepFunctionsClient;
 	}
 
-	@Override
 	public NodeOutput apply(NodeInput input) {
 
 		try {

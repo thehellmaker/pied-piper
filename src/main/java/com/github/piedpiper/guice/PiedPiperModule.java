@@ -14,14 +14,14 @@ import org.apache.commons.io.IOUtils;
 
 import com.amazonaws.services.simplesystemsmanagement.AWSSimpleSystemsManagement;
 import com.amazonaws.services.simplesystemsmanagement.AWSSimpleSystemsManagementClientBuilder;
+import com.amazonaws.services.stepfunctions.AWSStepFunctions;
+import com.amazonaws.services.stepfunctions.AWSStepFunctionsClientBuilder;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.github.piedpiper.common.PiedPiperConstants;
 import com.github.piedpiper.node.NodeListQueryHandler;
 import com.github.piedpiper.node.aws.AWSLambdaFactory;
 import com.github.piedpiper.node.aws.AWSLambdaNode;
-import com.github.piedpiper.node.aws.AWSStepFunctionsFactory;
 import com.github.piedpiper.node.aws.ILambdaFactory;
-import com.github.piedpiper.node.aws.IStepFunctionsFactory;
 import com.github.piedpiper.utils.ParameterUtils;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
@@ -47,7 +47,6 @@ public class PiedPiperModule extends AbstractModule {
 	@Override
 	protected void configure() {
 
-		bind(IStepFunctionsFactory.class).to(AWSStepFunctionsFactory.class).in(Singleton.class);
 		bind(Function.class).annotatedWith(Names.named(NodeListQueryHandler.class.getName()))
 				.to(NodeListQueryHandler.class);
 		bind(ILambdaFactory.class).to(AWSLambdaFactory.class);
@@ -71,6 +70,12 @@ public class PiedPiperModule extends AbstractModule {
 	@Singleton
 	public AWSSimpleSystemsManagement getAWSSimpleSystemsManagementClient() {
 		return AWSSimpleSystemsManagementClientBuilder.standard().withRegion("us-east-1").build();
+	}
+
+	@Provides
+	@Singleton
+	public AWSStepFunctions getAWSStepFunctionsClient() {
+		return AWSStepFunctionsClientBuilder.standard().build();
 	}
 
 	@Provides
