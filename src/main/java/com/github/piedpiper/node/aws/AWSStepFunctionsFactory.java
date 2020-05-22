@@ -8,7 +8,7 @@ public class AWSStepFunctionsFactory implements IStepFunctionsFactory {
 	private AWSStepFunctions AWSStepFunctionsClient;
 
 	public AWSStepFunctionsFactory() {
-		AWSStepFunctionsClient = AWSStepFunctionsClientBuilder.standard().build();
+		this.AWSStepFunctionsClient = AWSStepFunctionsClientBuilder.standard().build();
 	}
 
 	@Override
