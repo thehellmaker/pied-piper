@@ -1,0 +1,8 @@
+{
+	"method":{
+		"value":"DESCRIBE"
+	},
+	"arn":{
+		"value":"sample_arn"
+	}
+}
