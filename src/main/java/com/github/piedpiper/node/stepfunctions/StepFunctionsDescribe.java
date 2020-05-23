@@ -15,7 +15,7 @@ import com.google.inject.Inject;
 
 public class StepFunctionsDescribe implements Function<NodeInput, NodeOutput> {
 
-	private static final ParameterMetadata ARN = new ParameterMetadata("arn");
+	private static final ParameterMetadata ARN = new ParameterMetadata("arn", ParameterMetadata.MANDATORY);
 
 	private AWSStepFunctions stepFunctionsClient;
 
