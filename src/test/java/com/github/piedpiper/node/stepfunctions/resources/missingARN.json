@@ -1,11 +1,11 @@
 {
-	"method":{
-		"value":"EXECUTE"
+	"method": {
+		"value": "EXECUTE"
 	},
-	"name":{
-		"value":"sample_name"
+	"name": {
+		"value": "sample_name"
 	},
-	"input":{
-		"value":"{}"
+	"input": {
+		"value": "{}"
 	}
 }

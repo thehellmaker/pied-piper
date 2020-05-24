@@ -1,12 +1,11 @@
 {
-	"method":{
-		"value":"EXECUTE"
+	"method": {
+		"value": "EXECUTE"
 	},
-
-	"name":{
-		"value":"test1"
+	"name": {
+		"value": "test1"
 	},
-	"arn":{
-		"value":"sample_arn"
+	"arn": {
+		"value": "sample_arn"
 	}
 }

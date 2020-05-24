@@ -13,7 +13,7 @@ import com.google.common.collect.Lists;
 public class StepFunctionsServiceNode extends AWSNode {
 
 	public static final ParameterMetadata METHOD = new ParameterMetadata("method", ParameterMetadata.MANDATORY,
-			Lists.newArrayList("EXECUTE", "DESCRIBE", "DESCRIBE_EXECUTION"));
+			Lists.newArrayList("EXECUTE", "DESCRIBE", "DESCRIBE_EXECUTION", "SEND_TASK_SUCCESS"));
 
 	@Override
 	public NodeOutput apply(NodeInput nodeInput) {
@@ -30,6 +30,8 @@ public class StepFunctionsServiceNode extends AWSNode {
 				return injector.getInstance(StepFunctionsDescribe.class);
 			case "DESCRIBE_EXECUTION":
 				return injector.getInstance(StepFunctionsDescribeExecution.class);
+			case "SEND_TASK_SUCCESS":
+				return injector.getInstance(StepFunctionsSendTaskSuccess.class);
 			default:
 				throw new IllegalArgumentException(String.format("Unsupported StepFunctions Method = %s", method));
 			}

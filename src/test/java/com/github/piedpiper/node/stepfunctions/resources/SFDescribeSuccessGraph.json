@@ -1,8 +1,8 @@
 {
-	"method":{
-		"value":"DESCRIBE"
+	"method": {
+		"value": "DESCRIBE"
 	},
-	"arn":{
-		"value":"sample_arn"
+	"arn": {
+		"value": "sample_arn"
 	}
 }
