@@ -29,7 +29,7 @@ public class StepFunctionsServiceNode extends AWSNode {
 			case "DESCRIBE":
 				return injector.getInstance(StepFunctionsDescribe.class);
 			case "DESCRIBE_EXECUTION":
-				return injector.getInstance(StepFunctionsDescribe.class);
+				return injector.getInstance(StepFunctionsDescribeExecution.class);
 			default:
 				throw new IllegalArgumentException(String.format("Unsupported StepFunctions Method = %s", method));
 			}

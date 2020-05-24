@@ -77,6 +77,35 @@ public class StepFunctionsServiceNodeTest {
 	}
 
 	@Test
+	public void testDescribeExecutionMethod() throws FileNotFoundException, IOException {
+		StepFunctionsServiceNode sfNode = new StepFunctionsServiceNode();
+		sfNode.setILogger(new Slf4jLoggerImpl());
+		Injector injector = Guice.createInjector(Lists.newArrayList(new AbstractModule() {
+			@Override
+			protected void configure() {
+
+			}
+
+			@Provides
+			@Singleton
+			public StepFunctionsDescribeExecution providesHandler() throws IOException {
+				StepFunctionsDescribeExecution handler = Mockito.mock(StepFunctionsDescribeExecution.class);
+				NodeOutput output = new NodeOutput();
+				output.setOutput(JsonUtils.mapper.readTree("{\"method\":\"DESCRIBE_EXECUTION\"}"));
+				Mockito.when(handler.apply(Mockito.any(NodeInput.class))).thenReturn(output);
+				return handler;
+			}
+		}));
+		sfNode.setInjector(injector);
+		NodeInput input = new NodeInput();
+		input.setInput(
+				JsonUtils.mapper.readTree(new FileInputStream(getFileName("SFDescribeExecutionSuccessGraph.json"))));
+		NodeOutput output = sfNode.apply(input);
+		Assert.assertEquals(output.getOutput().get("method").asText(), "DESCRIBE_EXECUTION");
+
+	}
+
+	@Test
 	public void testIllegalArgumentException() throws FileNotFoundException, IOException {
 		StepFunctionsServiceNode sfNode = new StepFunctionsServiceNode();
 		sfNode.setILogger(new Slf4jLoggerImpl());
