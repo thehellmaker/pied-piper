@@ -27,7 +27,7 @@ public class StepFunctionsServiceNode extends AWSNode {
 			case "EXECUTE":
 				return injector.getInstance(StepFunctionsExecute.class);
 			case "DESCRIBE":
-				return injector.getInstance(StepFunctionsDescribe.class);
+				return injector.getInstance(StepFunctionsDescribeHandler.class);
 			case "DESCRIBE_EXECUTION":
 				return injector.getInstance(StepFunctionsDescribeExecution.class);
 			case "SEND_TASK_SUCCESS":

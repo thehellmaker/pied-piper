@@ -61,7 +61,8 @@ public class StepFunctionsExecute implements Function<NodeInput, NodeOutput> {
 	private String getStateMachineInput(NodeInput input) {
 		return Optional.ofNullable(input).map(node -> node.getInput())
 				.map(inputJsonNode -> inputJsonNode.get(INPUT.getParameterName()))
-				.map(value -> value.get(PiedPiperConstants.VALUE)).map(value -> value.asText()).orElse("{}");
+				.map(value -> value.get(PiedPiperConstants.VALUE)).map(value -> value.asText())
+				.orElse(PiedPiperConstants.EMPTY_JSON_STRING);
 
 	}
 

@@ -25,7 +25,7 @@ import com.google.inject.Provides;
 import com.google.inject.Singleton;
 
 @RunWith(PowerMockRunner.class)
-public class StepFunctionsDescribeTest {
+public class StepFunctionsDescribeHandlerTest {
 
 	@Mock
 	private AWSStepFunctions sfClient;
@@ -63,11 +63,12 @@ public class StepFunctionsDescribeTest {
 	@Test
 	public void testSuccess() throws Exception {
 
-		StepFunctionsDescribe sfDescribe = getStepFunctionsDescribeNode();
+		StepFunctionsDescribeHandler sfDescribe = getStepFunctionsDescribeHandlerNode();
 		Mockito.doReturn(sfDescribeRequest).when(sfDescribe).getDescribeStateMachineRequest();
 
 		NodeInput input = new NodeInput();
-		input.setInput(JsonUtils.mapper.readTree(new FileInputStream(getFileName("sfDescribeSuccessGraph.json"))));
+		input.setInput(
+				JsonUtils.mapper.readTree(new FileInputStream(getFileName("sfDescribeHandlerSuccessGraph.json"))));
 		NodeOutput output = sfDescribe.apply(input);
 
 		Assert.assertNotNull(output.getOutput());
@@ -78,17 +79,18 @@ public class StepFunctionsDescribeTest {
 
 	@Test(expected = RuntimeException.class)
 	public void testRuntimeException() throws Exception {
-		StepFunctionsDescribe sfDescribe = getStepFunctionsDescribeNode();
+		StepFunctionsDescribeHandler sfDescribe = getStepFunctionsDescribeHandlerNode();
 		Mockito.doReturn(new RuntimeException()).when(sfDescribe).getDescribeStateMachineRequest();
 		NodeInput input = new NodeInput();
-		input.setInput(JsonUtils.mapper.readTree(new FileInputStream(getFileName("sfDescribeSuccessGraph.json"))));
+		input.setInput(
+				JsonUtils.mapper.readTree(new FileInputStream(getFileName("sfDescribeHandlerSuccessGraph.json"))));
 		sfDescribe.apply(input);
 	}
 
 	@Test
 	public void testParameterValidation() throws FileNotFoundException, IOException {
 
-		StepFunctionsDescribe sfDescribe = getStepFunctionsDescribeNode();
+		StepFunctionsDescribeHandler sfDescribe = getStepFunctionsDescribeHandlerNode();
 		Mockito.doReturn(sfDescribeRequest).when(sfDescribe).getDescribeStateMachineRequest();
 		NodeInput input = new NodeInput();
 		input.setInput(JsonUtils.mapper.readTree(new FileInputStream(getFileName("emptyInput.json"))));
@@ -102,9 +104,9 @@ public class StepFunctionsDescribeTest {
 
 	}
 
-	private StepFunctionsDescribe getStepFunctionsDescribeNode() {
-		StepFunctionsDescribe sfDescribe = this.injector.getInstance(StepFunctionsDescribe.class);
-		StepFunctionsDescribe spysfDescribe = Mockito.spy(sfDescribe);
+	private StepFunctionsDescribeHandler getStepFunctionsDescribeHandlerNode() {
+		StepFunctionsDescribeHandler sfDescribe = this.injector.getInstance(StepFunctionsDescribeHandler.class);
+		StepFunctionsDescribeHandler spysfDescribe = Mockito.spy(sfDescribe);
 		return spysfDescribe;
 	}
 

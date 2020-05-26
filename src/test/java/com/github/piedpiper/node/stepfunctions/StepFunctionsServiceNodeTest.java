@@ -49,7 +49,7 @@ public class StepFunctionsServiceNodeTest {
 	}
 
 	@Test
-	public void testDescribeMethod() throws FileNotFoundException, IOException {
+	public void testDescribeHandlerMethod() throws FileNotFoundException, IOException {
 		StepFunctionsServiceNode sfNode = new StepFunctionsServiceNode();
 		sfNode.setILogger(new Slf4jLoggerImpl());
 		Injector injector = Guice.createInjector(Lists.newArrayList(new AbstractModule() {
@@ -60,8 +60,8 @@ public class StepFunctionsServiceNodeTest {
 
 			@Provides
 			@Singleton
-			public StepFunctionsDescribe providesHandler() throws IOException {
-				StepFunctionsDescribe handler = Mockito.mock(StepFunctionsDescribe.class);
+			public StepFunctionsDescribeHandler providesHandler() throws IOException {
+				StepFunctionsDescribeHandler handler = Mockito.mock(StepFunctionsDescribeHandler.class);
 				NodeOutput output = new NodeOutput();
 				output.setOutput(JsonUtils.mapper.readTree("{\"method\":\"DESCRIBE\"}"));
 				Mockito.when(handler.apply(Mockito.any(NodeInput.class))).thenReturn(output);
@@ -70,7 +70,8 @@ public class StepFunctionsServiceNodeTest {
 		}));
 		sfNode.setInjector(injector);
 		NodeInput input = new NodeInput();
-		input.setInput(JsonUtils.mapper.readTree(new FileInputStream(getFileName("SFDescribeSuccessGraph.json"))));
+		input.setInput(
+				JsonUtils.mapper.readTree(new FileInputStream(getFileName("SFDescribeHandlerSuccessGraph.json"))));
 		NodeOutput output = sfNode.apply(input);
 		Assert.assertEquals(output.getOutput().get("method").asText(), "DESCRIBE");
 

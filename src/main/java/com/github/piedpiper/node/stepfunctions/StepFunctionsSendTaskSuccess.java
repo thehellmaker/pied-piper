@@ -59,7 +59,8 @@ public class StepFunctionsSendTaskSuccess implements Function<NodeInput, NodeOut
 	private String getStateMachineOutput(NodeInput input) {
 		return Optional.ofNullable(input).map(node -> node.getInput())
 				.map(inputJsonNode -> inputJsonNode.get(OUTPUT.getParameterName()))
-				.map(value -> value.get(PiedPiperConstants.VALUE)).map(value -> value.asText()).orElse("{}");
+				.map(value -> value.get(PiedPiperConstants.VALUE)).map(value -> value.asText())
+				.orElse(PiedPiperConstants.EMPTY_JSON_STRING);
 
 	}
 
