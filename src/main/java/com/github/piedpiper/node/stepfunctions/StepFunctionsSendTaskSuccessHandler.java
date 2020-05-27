@@ -15,7 +15,7 @@ import com.github.piedpiper.node.ParameterMetadata;
 import com.github.piedpiper.utils.ParameterUtils;
 import com.google.inject.Inject;
 
-public class StepFunctionsSendTaskSuccess implements Function<NodeInput, NodeOutput> {
+public class StepFunctionsSendTaskSuccessHandler implements Function<NodeInput, NodeOutput> {
 
 	private static final ParameterMetadata TASKTOKEN = new ParameterMetadata("taskToken", ParameterMetadata.MANDATORY);
 	private static final ParameterMetadata OUTPUT = new ParameterMetadata("output");
@@ -23,7 +23,7 @@ public class StepFunctionsSendTaskSuccess implements Function<NodeInput, NodeOut
 	private AWSStepFunctions stepFunctionsClient;
 
 	@Inject
-	public StepFunctionsSendTaskSuccess(AWSStepFunctions stepFunctionsClient) {
+	public StepFunctionsSendTaskSuccessHandler(AWSStepFunctions stepFunctionsClient) {
 		this.stepFunctionsClient = stepFunctionsClient;
 	}
 

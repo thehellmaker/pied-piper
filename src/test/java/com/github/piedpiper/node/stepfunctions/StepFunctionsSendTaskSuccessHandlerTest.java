@@ -25,7 +25,7 @@ import com.google.inject.Provides;
 import com.google.inject.Singleton;
 
 @RunWith(PowerMockRunner.class)
-public class StepFunctionsSendTaskSuccessTest {
+public class StepFunctionsSendTaskSuccessHandlerTest {
 
 	@Mock
 	private AWSStepFunctions sfClient;
@@ -63,7 +63,7 @@ public class StepFunctionsSendTaskSuccessTest {
 	@Test
 	public void testSuccess() throws Exception {
 
-		StepFunctionsSendTaskSuccess sfSendTaskSuccess = getSendTaskSuccessNode();
+		StepFunctionsSendTaskSuccessHandler sfSendTaskSuccess = getSendTaskSuccessNode();
 		Mockito.doReturn(sfSendTaskSuccessRequest).when(sfSendTaskSuccess).getSendTaskSuccessRequest();
 
 		NodeInput input = new NodeInput();
@@ -78,7 +78,7 @@ public class StepFunctionsSendTaskSuccessTest {
 
 	@Test(expected = RuntimeException.class)
 	public void testRuntimeException() throws Exception {
-		StepFunctionsSendTaskSuccess sfSendTaskSuccess = getSendTaskSuccessNode();
+		StepFunctionsSendTaskSuccessHandler sfSendTaskSuccess = getSendTaskSuccessNode();
 		Mockito.doReturn(new RuntimeException()).when(sfSendTaskSuccess).getSendTaskSuccessRequest();
 		NodeInput input = new NodeInput();
 		input.setInput(JsonUtils.mapper.readTree(new FileInputStream(getFileName("sfSendTaskSuccessGraph.json"))));
@@ -88,7 +88,7 @@ public class StepFunctionsSendTaskSuccessTest {
 	@Test
 	public void testParameterValidation() throws FileNotFoundException, IOException {
 
-		StepFunctionsSendTaskSuccess sfSendTaskSuccess = getSendTaskSuccessNode();
+		StepFunctionsSendTaskSuccessHandler sfSendTaskSuccess = getSendTaskSuccessNode();
 		Mockito.doReturn(sfSendTaskSuccessRequest).when(sfSendTaskSuccess).getSendTaskSuccessRequest();
 		NodeInput input = new NodeInput();
 		// this will also check the the taskToken parameter as its first
@@ -111,9 +111,9 @@ public class StepFunctionsSendTaskSuccessTest {
 
 	}
 
-	private StepFunctionsSendTaskSuccess getSendTaskSuccessNode() {
-		StepFunctionsSendTaskSuccess sfSendTaskSuccess = this.injector.getInstance(StepFunctionsSendTaskSuccess.class);
-		StepFunctionsSendTaskSuccess spySfSendTaskSuccess = Mockito.spy(sfSendTaskSuccess);
+	private StepFunctionsSendTaskSuccessHandler getSendTaskSuccessNode() {
+		StepFunctionsSendTaskSuccessHandler sfSendTaskSuccess = this.injector.getInstance(StepFunctionsSendTaskSuccessHandler.class);
+		StepFunctionsSendTaskSuccessHandler spySfSendTaskSuccess = Mockito.spy(sfSendTaskSuccess);
 		return spySfSendTaskSuccess;
 	}
 

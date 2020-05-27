@@ -15,7 +15,7 @@ import com.github.piedpiper.node.ParameterMetadata;
 import com.github.piedpiper.utils.ParameterUtils;
 import com.google.inject.Inject;
 
-public class StepFunctionsExecute implements Function<NodeInput, NodeOutput> {
+public class StepFunctionsExecuteHandler implements Function<NodeInput, NodeOutput> {
 
 	private static final ParameterMetadata ARN = new ParameterMetadata("arn", ParameterMetadata.MANDATORY);
 	private static final ParameterMetadata NAME = new ParameterMetadata("name", ParameterMetadata.MANDATORY);
@@ -24,7 +24,7 @@ public class StepFunctionsExecute implements Function<NodeInput, NodeOutput> {
 	private AWSStepFunctions stepFunctionsClient;
 
 	@Inject
-	public StepFunctionsExecute(AWSStepFunctions stepFunctionsClient) {
+	public StepFunctionsExecuteHandler(AWSStepFunctions stepFunctionsClient) {
 		this.stepFunctionsClient = stepFunctionsClient;
 	}
 

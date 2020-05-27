@@ -32,8 +32,8 @@ public class StepFunctionsServiceNodeTest {
 
 			@Provides
 			@Singleton
-			public StepFunctionsExecute providesHandler() throws IOException {
-				StepFunctionsExecute handler = Mockito.mock(StepFunctionsExecute.class);
+			public StepFunctionsExecuteHandler providesHandler() throws IOException {
+				StepFunctionsExecuteHandler handler = Mockito.mock(StepFunctionsExecuteHandler.class);
 				NodeOutput output = new NodeOutput();
 				output.setOutput(JsonUtils.mapper.readTree("{\"method\":\"EXECUTE\"}"));
 				Mockito.when(handler.apply(Mockito.any(NodeInput.class))).thenReturn(output);
@@ -89,8 +89,8 @@ public class StepFunctionsServiceNodeTest {
 
 			@Provides
 			@Singleton
-			public StepFunctionsDescribeExecution providesHandler() throws IOException {
-				StepFunctionsDescribeExecution handler = Mockito.mock(StepFunctionsDescribeExecution.class);
+			public StepFunctionsDescribeExecutionHandler providesHandler() throws IOException {
+				StepFunctionsDescribeExecutionHandler handler = Mockito.mock(StepFunctionsDescribeExecutionHandler.class);
 				NodeOutput output = new NodeOutput();
 				output.setOutput(JsonUtils.mapper.readTree("{\"method\":\"DESCRIBE_EXECUTION\"}"));
 				Mockito.when(handler.apply(Mockito.any(NodeInput.class))).thenReturn(output);
@@ -118,8 +118,8 @@ public class StepFunctionsServiceNodeTest {
 
 			@Provides
 			@Singleton
-			public StepFunctionsSendTaskSuccess providesHandler() throws IOException {
-				StepFunctionsSendTaskSuccess handler = Mockito.mock(StepFunctionsSendTaskSuccess.class);
+			public StepFunctionsSendTaskSuccessHandler providesHandler() throws IOException {
+				StepFunctionsSendTaskSuccessHandler handler = Mockito.mock(StepFunctionsSendTaskSuccessHandler.class);
 				NodeOutput output = new NodeOutput();
 				output.setOutput(JsonUtils.mapper.readTree("{\"method\":\"SEND_TASK_SUCCESS\"}"));
 				Mockito.when(handler.apply(Mockito.any(NodeInput.class))).thenReturn(output);

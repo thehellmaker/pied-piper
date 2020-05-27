@@ -25,7 +25,7 @@ import com.google.inject.Provides;
 import com.google.inject.Singleton;
 
 @RunWith(PowerMockRunner.class)
-public class StepFunctionsExecuteTest {
+public class StepFunctionsExecuteHandlerTest {
 
 	@Mock
 	private AWSStepFunctions sfClient;
@@ -65,7 +65,7 @@ public class StepFunctionsExecuteTest {
 	@Test
 	public void testSuccess() throws Exception {
 
-		StepFunctionsExecute sfExecute = getStepFunctionsExecuteNode();
+		StepFunctionsExecuteHandler sfExecute = getStepFunctionsExecuteNode();
 		Mockito.doReturn(sfExecuteRequest).when(sfExecute).getStartExecutionRequest();
 
 		NodeInput input = new NodeInput();
@@ -82,7 +82,7 @@ public class StepFunctionsExecuteTest {
 
 	@Test(expected = RuntimeException.class)
 	public void testRuntimeException() throws Exception {
-		StepFunctionsExecute sfExecute = getStepFunctionsExecuteNode();
+		StepFunctionsExecuteHandler sfExecute = getStepFunctionsExecuteNode();
 		Mockito.doReturn(new RuntimeException()).when(sfExecute).getStartExecutionRequest();
 		NodeInput input = new NodeInput();
 		input.setInput(JsonUtils.mapper.readTree(new FileInputStream(getFileName("SFExecuteSuccessGraph.json"))));
@@ -92,7 +92,7 @@ public class StepFunctionsExecuteTest {
 	@Test
 	public void testParameterValidation() throws FileNotFoundException, IOException {
 
-		StepFunctionsExecute sfExecute = getStepFunctionsExecuteNode();
+		StepFunctionsExecuteHandler sfExecute = getStepFunctionsExecuteNode();
 		Mockito.doReturn(sfExecuteRequest).when(sfExecute).getStartExecutionRequest();
 		NodeInput input = new NodeInput();
 		input.setInput(JsonUtils.mapper.readTree(new FileInputStream(getFileName("emptyInput.json"))));
@@ -120,9 +120,9 @@ public class StepFunctionsExecuteTest {
 		}
 	}
 
-	private StepFunctionsExecute getStepFunctionsExecuteNode() {
-		StepFunctionsExecute sfExecute = this.injector.getInstance(StepFunctionsExecute.class);
-		StepFunctionsExecute spySfExecute = Mockito.spy(sfExecute);
+	private StepFunctionsExecuteHandler getStepFunctionsExecuteNode() {
+		StepFunctionsExecuteHandler sfExecute = this.injector.getInstance(StepFunctionsExecuteHandler.class);
+		StepFunctionsExecuteHandler spySfExecute = Mockito.spy(sfExecute);
 		return spySfExecute;
 	}
 

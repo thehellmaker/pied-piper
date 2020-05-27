@@ -25,13 +25,13 @@ public class StepFunctionsServiceNode extends AWSNode {
 			String method = getStepFunctionsMethod(nodeInput);
 			switch (method) {
 			case "EXECUTE":
-				return injector.getInstance(StepFunctionsExecute.class);
+				return injector.getInstance(StepFunctionsExecuteHandler.class);
 			case "DESCRIBE":
 				return injector.getInstance(StepFunctionsDescribeHandler.class);
 			case "DESCRIBE_EXECUTION":
-				return injector.getInstance(StepFunctionsDescribeExecution.class);
+				return injector.getInstance(StepFunctionsDescribeExecutionHandler.class);
 			case "SEND_TASK_SUCCESS":
-				return injector.getInstance(StepFunctionsSendTaskSuccess.class);
+				return injector.getInstance(StepFunctionsSendTaskSuccessHandler.class);
 			default:
 				throw new IllegalArgumentException(String.format("Unsupported StepFunctions Method = %s", method));
 			}

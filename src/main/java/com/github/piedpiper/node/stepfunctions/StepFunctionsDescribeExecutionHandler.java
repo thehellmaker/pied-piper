@@ -13,14 +13,14 @@ import com.github.piedpiper.node.ParameterMetadata;
 import com.github.piedpiper.utils.ParameterUtils;
 import com.google.inject.Inject;
 
-public class StepFunctionsDescribeExecution implements Function<NodeInput, NodeOutput> {
+public class StepFunctionsDescribeExecutionHandler implements Function<NodeInput, NodeOutput> {
 
 	private static final ParameterMetadata ARN = new ParameterMetadata("arn", ParameterMetadata.MANDATORY);
 
 	private AWSStepFunctions stepFunctionsClient;
 
 	@Inject
-	public StepFunctionsDescribeExecution(AWSStepFunctions stepFunctionsClient) {
+	public StepFunctionsDescribeExecutionHandler(AWSStepFunctions stepFunctionsClient) {
 		this.stepFunctionsClient = stepFunctionsClient;
 	}
 
