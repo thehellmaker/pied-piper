@@ -1,0 +1,11 @@
+{
+	"method": {
+		"value": "SEND_TASK_SUCCESS"
+	},
+	"taskToken": {
+		"value": "sample_taskToken"
+	},
+	"output": {
+		"value": "{\"sampleOutput\":\"op\"}"
+	}
+}

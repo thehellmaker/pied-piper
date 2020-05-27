@@ -13,13 +13,13 @@ public class PiedPiperConstants {
 	public static final String GRAPH_NAME = "graphName";
 
 	public static final String PROJECT_NAME = "projectName";
-	
+
 	public static final String WARM_UP = "warmUp";
 
 	public static final String ALMIGHTY_TABLE_HASH_KEY = "hashKey";
 
 	public static final String ALMIGHTY_TABLE_RANGE_KEY = "rangeKey";
-	
+
 	public static final String ALMIGHTY_TABLE_NAME = "AlmightyTable";
 
 	public static final String VALUE = "value";
@@ -59,9 +59,9 @@ public class PiedPiperConstants {
 	public static String CONTAINS_FILTER_FORMAT = "contains(%s, %s)";
 
 	public static String OR_SEPARATOR = " or ";
-	
+
 	public static String REQUIRED_PARAM_ERROR_FORMAT = "parameter: %s required but not present";
-	
+
 	public static final String HASH_KEY_QUERY = "hashKey = :hashKey";
 
 	public static final String JWT_VERIFY = "JWT_VERIFY";
@@ -69,5 +69,7 @@ public class PiedPiperConstants {
 	public static final String GET_USER = "GET_USER";
 
 	public static final String CUSTOM_TOKEN = "CUSTOM_TOKEN";
-	
+
+	public static final String EMPTY_JSON_STRING = "{}";
+
 }
