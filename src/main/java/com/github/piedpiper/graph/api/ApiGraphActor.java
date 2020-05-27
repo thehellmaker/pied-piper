@@ -26,7 +26,7 @@ import com.github.commons.log.ILogger;
 import com.github.commons.utils.JsonUtils;
 import com.github.piedpiper.common.PiedPiperConstants;
 import com.github.piedpiper.graph.api.types.AttributeType;
-import com.github.piedpiper.graph.api.types.ContractInput;
+import com.github.piedpiper.graph.api.types.GraphInput;
 import com.github.piedpiper.graph.api.types.GraphDefinition;
 import com.github.piedpiper.graph.api.types.NodeDefinition;
 import com.github.piedpiper.graph.api.types.NodeExecutor;
@@ -79,7 +79,7 @@ public class ApiGraphActor extends AbstractActor {
 	@Override
 	public Receive createReceive() {
 		return receiveBuilder()
-				.match(ContractInput.class, input -> handleExeptionAndExecute(new Function<Void, Void>() {
+				.match(GraphInput.class, input -> handleExeptionAndExecute(new Function<Void, Void>() {
 					@Override
 					public Void apply(Void aVoid) {
 						try {

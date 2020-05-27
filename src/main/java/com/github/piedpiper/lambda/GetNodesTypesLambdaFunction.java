@@ -5,7 +5,8 @@ import java.util.List;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 
 import com.amazonaws.services.lambda.runtime.Context;
-import com.amazonaws.services.lambda.runtime.RequestHandler;
+import com.amazonaws.services.lambda.runtime.RequestStreamHandler;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.github.commons.log.ILogger;
 import com.github.commons.log.LambdaLoggerImpl;
 import com.github.commons.utils.JsonUtils;
@@ -16,7 +17,12 @@ import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
-public class GetNodesTypesLambdaFunction implements RequestHandler<Object, String> {
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import com.github.piedpiper.graph.api.types.GraphDefinition;
+
+public class GetNodesTypesLambdaFunction implements RequestStreamHandler {
 
 	private Injector injector;
 
@@ -29,14 +35,15 @@ public class GetNodesTypesLambdaFunction implements RequestHandler<Object, Strin
 	}
 
 	@Override
-	public String handleRequest(Object input, Context context) {
+	public void handleRequest(InputStream inputStream, OutputStream outputStream, Context context) throws JsonProcessingException, IOException {
 		ILogger logger = new LambdaLoggerImpl(context.getLogger());
-		logger.log("Input: " + input);
 		try {
-			return JsonUtils.writeValueAsStringSilent(new GetNodesTypesFunction(logger, injector).apply(null));
+			outputStream.write(JsonUtils.mapper.writeValueAsBytes(new GetNodesTypesFunction(logger, injector).apply(null)));
 		} catch (Exception e) {
-			logger.log(ExceptionUtils.getStackTrace(e));
-			return ExceptionUtils.getStackTrace(e);
+			logger.log(String.format("Error: %s", ExceptionUtils.getStackTrace(e)));
+			GraphDefinition response = new GraphDefinition();
+			response.setExceptionTrace(ExceptionUtils.getStackTrace(e));
+			outputStream.write(JsonUtils.mapper.writeValueAsBytes(response));
 		}
 	}
 

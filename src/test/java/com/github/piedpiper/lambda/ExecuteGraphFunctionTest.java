@@ -22,7 +22,7 @@ import com.amazonaws.util.StringInputStream;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.github.commons.utils.JsonUtils;
 import com.github.piedpiper.common.PiedPiperConstants;
-import com.github.piedpiper.graph.api.types.ContractInput;
+import com.github.piedpiper.graph.api.types.GraphInput;
 import com.github.piedpiper.graph.api.types.GraphDefinition;
 import com.github.piedpiper.transformer.ExecuteGraphFunction;
 import com.github.piedpiper.transformer.WarmupHandler;
@@ -68,7 +68,7 @@ public class ExecuteGraphFunctionTest {
 		PowerMockito.mockStatic(Patterns.class);
 		Future<Object> future = Mockito.mock(Future.class);
 		PowerMockito.when(
-				Patterns.ask(Mockito.any(ActorRef.class), Mockito.any(ContractInput.class), Mockito.any(Timeout.class)))
+				Patterns.ask(Mockito.any(ActorRef.class), Mockito.any(GraphInput.class), Mockito.any(Timeout.class)))
 				.thenReturn(future);
 		PowerMockito.mockStatic(Await.class);
 		GraphDefinition definition = new GraphDefinition();
@@ -113,7 +113,7 @@ public class ExecuteGraphFunctionTest {
 		handler.handleRequest(new StringInputStream("{\"graph\": \"dummy\"}"), outputStream, ctx);
 		GraphDefinition output = JsonUtils.readValueSilent(new String(outputStream.toByteArray()),
 				GraphDefinition.class);
-		ArgumentCaptor<ContractInput> contractInputCaptor = ArgumentCaptor.forClass(ContractInput.class);
+		ArgumentCaptor<GraphInput> contractInputCaptor = ArgumentCaptor.forClass(GraphInput.class);
 		PowerMockito.verifyStatic(Patterns.class);
 		Patterns.ask((ActorRef)Mockito.eq(null), contractInputCaptor.capture(), Mockito.any(Timeout.class));
 		Assert.assertEquals("dummy", contractInputCaptor.getValue().getGraphJson().asText());
@@ -173,7 +173,7 @@ public class ExecuteGraphFunctionTest {
 		PowerMockito.mockStatic(Patterns.class);
 		Future<Object> future = Mockito.mock(Future.class);
 		PowerMockito
-				.when(Patterns.ask(Mockito.any(ActorRef.class), Mockito.any(ContractInput.class), Mockito.anyLong()))
+				.when(Patterns.ask(Mockito.any(ActorRef.class), Mockito.any(GraphInput.class), Mockito.anyLong()))
 				.thenReturn(future);
 		PowerMockito.mockStatic(Await.class);
 		PowerMockito.when(Await.result(Mockito.any(), Mockito.any())).thenReturn("{}");

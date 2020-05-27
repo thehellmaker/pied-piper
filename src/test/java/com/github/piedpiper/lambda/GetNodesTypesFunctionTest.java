@@ -4,11 +4,13 @@ import java.io.IOException;
 import java.util.List;
 import java.util.function.Function;
 
+import org.apache.commons.io.output.ByteArrayOutputStream;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.amazonaws.services.lambda.runtime.Context;
+import com.amazonaws.util.StringInputStream;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.github.commons.utils.JsonUtils;
 import com.github.piedpiper.node.NodeListQueryHandler;
@@ -55,8 +57,9 @@ public class GetNodesTypesFunctionTest {
 						});
 			}
 		}));
-		String output = handler.handleRequest(input, ctx);
-		ArrayNode array = (ArrayNode) JsonUtils.mapper.readTree(output);
+		ByteArrayOutputStream output = new ByteArrayOutputStream();
+		handler.handleRequest(new StringInputStream(""), output, ctx);
+		ArrayNode array = (ArrayNode) JsonUtils.mapper.readTree(new String(output.toByteArray()));
 		Assert.assertEquals(2, array.size());
 	}
 
@@ -76,8 +79,9 @@ public class GetNodesTypesFunctionTest {
 						});
 			}
 		}));
-		String output = handler.handleRequest(input, ctx);
-		Assert.assertTrue(output.contains("RuntimeException"));
+		ByteArrayOutputStream output = new ByteArrayOutputStream();
+		handler.handleRequest(new StringInputStream(""), output, ctx);
+		Assert.assertTrue(new String(output.toByteArray()).contains("RuntimeException"));
 	}
 
 }

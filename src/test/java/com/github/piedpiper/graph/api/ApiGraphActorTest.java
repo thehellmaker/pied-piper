@@ -20,7 +20,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.github.commons.log.ILogger;
 import com.github.commons.log.Slf4jLoggerImpl;
-import com.github.piedpiper.graph.api.types.ContractInput;
+import com.github.piedpiper.graph.api.types.GraphInput;
 import com.github.piedpiper.graph.api.types.GraphDefinition;
 import com.github.piedpiper.graph.api.types.NodeDefinition;
 import com.github.piedpiper.node.NodeInput;
@@ -88,7 +88,7 @@ public class ApiGraphActorTest {
 	@Test
 	public void testSuccess() throws Exception {
 		JsonNode graph = new ObjectMapper().readTree(new FileInputStream(getFileName("successGraph.json")));
-		ContractInput input = new ContractInput(graph, mapper.readTree("{ \"runtimeValueParameterValueBasedInput\": \"ashokValueBased\"}"));
+		GraphInput input = new GraphInput(graph, mapper.readTree("{ \"runtimeValueParameterValueBasedInput\": \"ashokValueBased\"}"));
 		Props graphProps = ApiGraphActor.props(injector, logger);
 		TestActorRef<ApiGraphActor> ref = TestActorRef.create(system, graphProps, "graphActor1");
 		Timeout timeout = new Timeout(Duration.create(5, "seconds"));
@@ -136,7 +136,7 @@ public class ApiGraphActorTest {
 	@Test
 	public void testSubstitutionInputMissingError() throws Exception {
 		JsonNode graph = new ObjectMapper().readTree(new FileInputStream(getFileName("substitutionInputMissingError.json")));
-		ContractInput input = new ContractInput(graph, mapper.readTree("{}"));
+		GraphInput input = new GraphInput(graph, mapper.readTree("{}"));
 		Props graphProps = ApiGraphActor.props(injector, logger);
 		TestActorRef<ApiGraphActor> ref = TestActorRef.create(system, graphProps, "graphActorSubstitutionInputMissing");
 		Timeout timeout = new Timeout(Duration.create(5, "seconds"));
@@ -155,7 +155,7 @@ public class ApiGraphActorTest {
 	@Test
 	public void testNodeException() throws Exception {
 		JsonNode graph = new ObjectMapper().readTree(new FileInputStream(getFileName("nodeExceptionGraph.json")));
-		ContractInput input = new ContractInput(graph, mapper.readTree("{\"runtimeValue\": \"ashok\"}"));
+		GraphInput input = new GraphInput(graph, mapper.readTree("{\"runtimeValue\": \"ashok\"}"));
 		Props graphProps = ApiGraphActor.props(injector, logger);
 		TestActorRef<ApiGraphActor> ref = TestActorRef.create(system, graphProps, "graphActor2");
 		Timeout timeout = new Timeout(Duration.create(5, "seconds"));
@@ -169,7 +169,7 @@ public class ApiGraphActorTest {
 	@Test
 	public void testDataTypeAttributeException() throws Exception {
 		JsonNode graph = new ObjectMapper().readTree(new FileInputStream(getFileName("dataTypeAttributeExceptionGraph.json")));
-		ContractInput input = new ContractInput(graph, mapper.readTree("{\"runtimeValue\": \"ashok\"}"));
+		GraphInput input = new GraphInput(graph, mapper.readTree("{\"runtimeValue\": \"ashok\"}"));
 		Props graphProps = ApiGraphActor.props(injector, logger);
 		TestActorRef<ApiGraphActor> ref = TestActorRef.create(system, graphProps, "graphActorDataType");
 		Timeout timeout = new Timeout(Duration.create(5, "seconds"));
@@ -183,7 +183,7 @@ public class ApiGraphActorTest {
 	@Test
 	public void testGraphException() throws Exception {
 		JsonNode graph = new ObjectMapper().readTree(new FileInputStream(getFileName("graphExceptionGraph.json")));
-		ContractInput input = new ContractInput(graph, mapper.readTree("{\"runtimeValue\": \"ashok\"}"));
+		GraphInput input = new GraphInput(graph, mapper.readTree("{\"runtimeValue\": \"ashok\"}"));
 		Props graphProps = ApiGraphActor.props(injector, logger);
 		TestActorRef<ApiGraphActor> ref = TestActorRef.create(system, graphProps, "graphActor3");
 		Timeout timeout = new Timeout(Duration.create(5, "seconds"));
@@ -196,7 +196,7 @@ public class ApiGraphActorTest {
 	@Test
 	public void testGraphUnknownParameterTypeException() throws Exception {
 		JsonNode graph = new ObjectMapper().readTree(new FileInputStream(getFileName("invalidParameterType.json")));
-		ContractInput input = new ContractInput(graph, mapper.readTree("{\"runtimeValue\": \"ashok\"}"));
+		GraphInput input = new GraphInput(graph, mapper.readTree("{\"runtimeValue\": \"ashok\"}"));
 		Props graphProps = ApiGraphActor.props(injector, logger);
 		TestActorRef<ApiGraphActor> ref = TestActorRef.create(system, graphProps, "graphActor4");
 		Timeout timeout = new Timeout(Duration.create(5, "seconds"));
@@ -210,7 +210,7 @@ public class ApiGraphActorTest {
 	@Test
 	public void testGraphDependentNodeException() throws Exception {
 		JsonNode graph = new ObjectMapper().readTree(new FileInputStream(getFileName("dependentNodeException.json")));
-		ContractInput input = new ContractInput(graph, mapper.readTree("{\"runtimeValue\": \"ashok\"}"));
+		GraphInput input = new GraphInput(graph, mapper.readTree("{\"runtimeValue\": \"ashok\"}"));
 		Props graphProps = ApiGraphActor.props(injector, logger);
 		TestActorRef<ApiGraphActor> ref = TestActorRef.create(system, graphProps, "graphActor5");
 		Timeout timeout = new Timeout(Duration.create(5, "seconds"));
@@ -239,7 +239,7 @@ public class ApiGraphActorTest {
 
 		});
 		JsonNode graph = new ObjectMapper().readTree(new FileInputStream(getFileName("dependentNodeException.json")));
-		ContractInput input = new ContractInput(graph, mapper.readTree("{\"runtimeValue\": \"ashok\"}"));
+		GraphInput input = new GraphInput(graph, mapper.readTree("{\"runtimeValue\": \"ashok\"}"));
 		Props graphProps = ApiGraphActor.props(mockedInjector, logger);
 		TestActorRef<ApiGraphActor> ref = TestActorRef.create(system, graphProps, "graphActor6");
 		Timeout timeout = new Timeout(Duration.create(5, "seconds"));
@@ -269,7 +269,7 @@ public class ApiGraphActorTest {
 
 		});
 		JsonNode graph = new ObjectMapper().readTree(new FileInputStream(getFileName("dependentNodeException.json")));
-		ContractInput input = new ContractInput(graph, mapper.readTree("{\"runtimeValue\": \"ashok\"}"));
+		GraphInput input = new GraphInput(graph, mapper.readTree("{\"runtimeValue\": \"ashok\"}"));
 		Props graphProps = ApiGraphActor.props(mockedInjector, logger);
 		TestActorRef<ApiGraphActor> ref = TestActorRef.create(system, graphProps, "graphActor7");
 		Timeout timeout = new Timeout(Duration.create(5, "seconds"));
@@ -282,7 +282,7 @@ public class ApiGraphActorTest {
 	@Test
 	public void testParallelizeBasic() throws Exception {
 		JsonNode graph = new ObjectMapper().readTree(new FileInputStream(getFileName("parallelizeNodeExecutionGraph.json")));
-		ContractInput input = new ContractInput(graph, null);
+		GraphInput input = new GraphInput(graph, null);
 		Props graphProps = ApiGraphActor.props(injector, logger);
 		TestActorRef<ApiGraphActor> ref = TestActorRef.create(system, graphProps, "graphActorParallelize");
 		Timeout timeout = new Timeout(Duration.create(5, "seconds"));
@@ -310,7 +310,7 @@ public class ApiGraphActorTest {
 	@Test
 	public void testMultipleParametersParallelize() throws Exception {
 		JsonNode graph = new ObjectMapper().readTree(new FileInputStream(getFileName("multipleParametersWithParallelizeAttribute.json")));
-		ContractInput input = new ContractInput(graph, null);
+		GraphInput input = new GraphInput(graph, null);
 		Props graphProps = ApiGraphActor.props(injector, logger);
 		TestActorRef<ApiGraphActor> ref = TestActorRef.create(system, graphProps, "graphActorMultipleParametersParallelize");
 		Timeout timeout = new Timeout(Duration.create(5, "seconds"));

@@ -13,7 +13,7 @@ import com.github.commons.log.ILogger;
 import com.github.piedpiper.common.PiedPiperConstants;
 import com.github.piedpiper.graph.api.ApiGraphActor;
 import com.github.piedpiper.graph.api.types.AuditInfo;
-import com.github.piedpiper.graph.api.types.ContractInput;
+import com.github.piedpiper.graph.api.types.GraphInput;
 import com.github.piedpiper.graph.api.types.GraphDefinition;
 import com.github.piedpiper.node.aws.dynamo.DynamoDBBaseNode;
 import com.github.piedpiper.utils.SearchGraphUtils;
@@ -51,10 +51,10 @@ public class ExecuteGraphFunction implements Function<JsonNode, GraphDefinition>
 		ActorRef graphActorRef = getActorSystem().actorOf(ApiGraphActor.props(injector, logger));
 		try {
 			long startTime = System.currentTimeMillis();
-			ContractInput contractInput = new ContractInput(getGraphNode(inputJson),
+			GraphInput graphInput = new GraphInput(getGraphNode(inputJson),
 					inputJson.get(PiedPiperConstants.INPUT));
 			Timeout timeout = new Timeout(Duration.create(90, "seconds"));
-			Future<Object> future = Patterns.ask((ActorRef)graphActorRef, contractInput, timeout);
+			Future<Object> future = Patterns.ask((ActorRef)graphActorRef, graphInput, timeout);
 			GraphDefinition response = (GraphDefinition) Await.result(future, timeout.duration());
 			long endTime = System.currentTimeMillis();
 			AuditInfo auditInfo = new AuditInfo();

@@ -4,13 +4,13 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.JsonNode;
 
 @JsonIgnoreProperties(ignoreUnknown=true)
-public class ContractInput {
+public class GraphInput {
 	
 	private JsonNode graphJson;
 	
 	private JsonNode inputJson;
 
-	public ContractInput(JsonNode graphJson, JsonNode inputJson) {
+	public GraphInput(JsonNode graphJson, JsonNode inputJson) {
 		this.graphJson = graphJson;
 		this.inputJson = inputJson;
 	}
