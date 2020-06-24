@@ -24,6 +24,22 @@
 					"parameterType": "CONSTANT",
 					"parameterValue": "${input.runtimeValueParameterValueBasedInput}"
 				}, 
+				"runtimeValueParameterJsonObjectBasedInput": {
+					"parameterName": "runtimeValueParameterJsonObjectBasedInput",
+					"parameterType": "CONSTANT",
+					"parameterValue": "${input.runtimeValueParameterJsonObjectBasedInput}",
+					"attributeMap": {
+						"DATA_TYPE": "asJson"
+					}
+				},
+				"runtimeValueParameterJsonArrayBasedInput": {
+					"parameterName": "runtimeValueParameterJsonArrayBasedInput",
+					"parameterType": "CONSTANT",
+					"parameterValue": "${input.runtimeValueParameterJsonArrayBasedInput}",
+					"attributeMap": {
+						"DATA_TYPE": "asJson"
+					}
+				}, 
 				"constantValue": {
 					"parameterName": "constantValue",
 					"parameterType": "CONSTANT",

@@ -20,6 +20,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.github.commons.log.ILogger;
 import com.github.commons.log.Slf4jLoggerImpl;
+import com.github.commons.utils.JsonUtils;
 import com.github.piedpiper.graph.api.types.GraphInput;
 import com.github.piedpiper.graph.api.types.GraphDefinition;
 import com.github.piedpiper.graph.api.types.NodeDefinition;
@@ -88,13 +89,18 @@ public class ApiGraphActorTest {
 	@Test
 	public void testSuccess() throws Exception {
 		JsonNode graph = new ObjectMapper().readTree(new FileInputStream(getFileName("successGraph.json")));
-		GraphInput input = new GraphInput(graph, mapper.readTree("{ \"runtimeValueParameterValueBasedInput\": \"ashokValueBased\"}"));
+		GraphInput input = new GraphInput(graph, mapper.readTree("{ "
+				+ "\"runtimeValueParameterValueBasedInput\": \"ashokValueBased\","
+				+ "\"runtimeValueParameterJsonArrayBasedInput\": [\"ashokValueBased\"],"
+				+ "\"runtimeValueParameterJsonObjectBasedInput\": { \"name\": \"ashokValueBased\"}"
+				+ "}"));
 		Props graphProps = ApiGraphActor.props(injector, logger);
 		TestActorRef<ApiGraphActor> ref = TestActorRef.create(system, graphProps, "graphActor1");
 		Timeout timeout = new Timeout(Duration.create(5, "seconds"));
 		Future<Object> future = akka.pattern.Patterns.ask(ref, input, timeout);
 		GraphDefinition executedGraphDefinition = (GraphDefinition) Await.result(future, timeout.duration());
 		Assert.assertNotNull(executedGraphDefinition);
+		System.out.println(JsonUtils.writeValueAsStringSilent(executedGraphDefinition));
 		NodeDefinition node1 = executedGraphDefinition.getNodeMap().get("Node1");
 		NodeDefinition node2 = executedGraphDefinition.getNodeMap().get("Node2");
 		NodeDefinition node3 = executedGraphDefinition.getNodeMap().get("Node3");
@@ -118,6 +124,8 @@ public class ApiGraphActorTest {
 		Assert.assertEquals("akash/ashokValueBased/constant", node3.getNodeInputList().get(0).getInput().get("param1").get("value").asText());
 		
 		Assert.assertEquals("ashokValueBased", node3.getNodeInputList().get(0).getInput().get("runtimeValueParameterValueBased").get("value").asText());
+		Assert.assertEquals("ashokValueBased", node3.getNodeInputList().get(0).getInput().get("runtimeValueParameterJsonObjectBasedInput").get("value").get("name").asText());
+		Assert.assertEquals("ashokValueBased", node3.getNodeInputList().get(0).getInput().get("runtimeValueParameterJsonArrayBasedInput").get("value").get(0).asText());
 		Assert.assertEquals("", node3.getNodeInputList().get(0).getInput().get("constantValueEmpty").get("value").asText());
 		Assert.assertEquals("sexyValue", node3.getNodeInputList().get(0).getInput().get("param3").get("value").asText());
 		Assert.assertEquals("sexyValue2", node3.getNodeInputList().get(0).getInput().get("param4").get("value").asText());

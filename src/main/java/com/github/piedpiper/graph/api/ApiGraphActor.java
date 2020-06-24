@@ -286,14 +286,20 @@ public class ApiGraphActor extends AbstractActor {
 				if (RegExUtils.isNotSubstitutorString(node.asText())) {
 					substitutionMap.put(eachEntry.getKey(), node.asText());
 				}
-			}
+			} 
 		}
 		if (this.inputJson != null) {
 			jsonNodeIterator = this.inputJson.fields();
 			while (jsonNodeIterator.hasNext()) {
 				Entry<String, JsonNode> eachEntry = jsonNodeIterator.next();
-				String inputValue = eachEntry.getValue().asText();
-				substitutionMap.put("input." + eachEntry.getKey(), inputValue);
+				if(eachEntry.getValue() instanceof TextNode) {
+					String inputValue = eachEntry.getValue().asText();
+					substitutionMap.put("input." + eachEntry.getKey(), inputValue);
+				} else if(eachEntry.getValue() instanceof ObjectNode || eachEntry.getValue() instanceof ArrayNode) {
+					String inputValue = eachEntry.getValue().toString();
+					substitutionMap.put("input." + eachEntry.getKey(), inputValue);
+				}
+				
 			}
 		}
 		return substitutionMap;
@@ -312,6 +318,8 @@ public class ApiGraphActor extends AbstractActor {
 	private Object convertDataTypes(ParameterDefinition paramDef, Object resolveConstantParameter,
 			Map<String, String> substitutionMap) throws IOException {
 		JsonNode node;
+		
+		
 		if (resolveConstantParameter instanceof String) {
 			if(StringUtils.isBlank((String)resolveConstantParameter)) return StringUtils.EMPTY;
 			String substitutedString = new StrSubstitutor(substitutionMap).replace((String) resolveConstantParameter);
