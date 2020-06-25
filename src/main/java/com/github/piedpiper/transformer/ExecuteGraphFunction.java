@@ -80,7 +80,7 @@ public class ExecuteGraphFunction implements Function<JsonNode, GraphDefinition>
 				.map(graphNameNode -> graphNameNode.asText()).orElse(null);
 		String tableName = Optional.ofNullable(inputJson.get(DynamoDBBaseNode.TABLE_NAME.getParameterName()))
 				.map(tableNodeName -> tableNodeName.asText()).orElse(PiedPiperConstants.ALMIGHTY_TABLE_NAME);
-				JsonNode graphJson = inputJson.get(PiedPiperConstants.GRAPH);
+		JsonNode graphJson = inputJson.get(PiedPiperConstants.GRAPH);
 
 		
 		if (graphJson != null) {

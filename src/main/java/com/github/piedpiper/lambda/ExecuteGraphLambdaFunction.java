@@ -55,25 +55,15 @@ public class ExecuteGraphLambdaFunction implements RequestStreamHandler {
 		try {
 			inputJsonStr = IOUtils.toString(inputStream, StandardCharsets.UTF_8); 
 			JsonNode inputJson = JsonUtils.mapper.readTree(inputJsonStr);
-			validateNotLambdaWarmUp(inputJson, logger);
 			GraphDefinition response = new ExecuteGraphFunction(logger, injector).apply(inputJson);
 //			logger.log("Response = " + response);
 			outputStream.write(JsonUtils.mapper.writeValueAsBytes(response));
 		} catch (Exception e) {
-			logger.log(String.format("Input Thundra: %s, Error: %s", inputJsonStr, ExceptionUtils.getStackTrace(e)));
+			logger.log(String.format("Input: %s, Error: %s", inputJsonStr, ExceptionUtils.getStackTrace(e)));
 			GraphDefinition response = new GraphDefinition();
 			response.setExceptionTrace(ExceptionUtils.getStackTrace(e));
 			outputStream.write(JsonUtils.mapper.writeValueAsBytes(response));
 		}
 	}
 	
-	private void validateNotLambdaWarmUp(JsonNode inputJson, ILogger logger) throws ExecutionException, InterruptedException {
-		Boolean isWarmUp = Optional.ofNullable(inputJson.get(PiedPiperConstants.WARM_UP))
-				.map(warmUpNode -> warmUpNode.asBoolean()).orElse(false);
-		if(isWarmUp) {
-			new WarmupHandler(injector, logger, false).apply(null);
-			throw new RuntimeException("Warm Up function. Not Executing");
-		}
-	}
-
 }

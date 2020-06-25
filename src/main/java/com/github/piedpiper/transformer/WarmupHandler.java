@@ -44,7 +44,11 @@ public class WarmupHandler implements Function<Void, Void> {
 	@Override
 	public Void apply(Void t) {
 		try {
-			refreshGraphCache();
+			Map<String, JsonNode> graphCache = injector.getInstance(Key.get(new TypeLiteral<Map<String, JsonNode>>() {
+			}, Names.named(PiedPiperConstants.GRAPH_CACHE)));
+			if(isClearCache) graphCache.clear();
+			
+			refreshGraphCache(graphCache);
 			refreshSSMCache();
 		} catch (JsonProcessingException | ExecutionException | InterruptedException e) {
 			throw new RuntimeException(e);
@@ -77,11 +81,10 @@ public class WarmupHandler implements Function<Void, Void> {
 		futureSecretKey.get();
 	}
 
-	private void refreshGraphCache() throws JsonProcessingException, ExecutionException, InterruptedException {
-		Map<String, JsonNode> graphCache = injector.getInstance(Key.get(new TypeLiteral<Map<String, JsonNode>>() {
-		}, Names.named(PiedPiperConstants.GRAPH_CACHE)));
-		if (!graphCache.isEmpty() && !isClearCache) return;
-			
+	private void refreshGraphCache(Map<String, JsonNode> graphCache) throws JsonProcessingException, ExecutionException, InterruptedException {
+		if (!graphCache.isEmpty())
+			return;
+
 		DynamoDBReaderNode readerNode = (DynamoDBReaderNode) injector.getInstance(DynamoDBReaderNode.class);
 		readerNode.setILogger(logger);
 		readerNode.setInjector(injector);
