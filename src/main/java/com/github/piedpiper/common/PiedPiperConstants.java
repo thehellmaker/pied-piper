@@ -21,7 +21,9 @@ public class PiedPiperConstants {
 	public static final String ALMIGHTY_TABLE_RANGE_KEY = "rangeKey";
 
 	public static final String ALMIGHTY_TABLE_NAME = "AlmightyTable";
-
+	
+	public static final String VERSION = "version";
+	
 	public static final String VALUE = "value";
 
 	public static final String AS_JSON = "asJson";
@@ -63,6 +65,8 @@ public class PiedPiperConstants {
 	public static String REQUIRED_PARAM_ERROR_FORMAT = "parameter: %s required but not present";
 
 	public static final String HASH_KEY_QUERY = "hashKey = :hashKey";
+	
+	public static final String VERSION_QUERY = "hashKey = :hashKey AND rangeKey > :rangeKey ";
 
 	public static final String JWT_VERIFY = "JWT_VERIFY";
 
