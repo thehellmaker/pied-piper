@@ -22,6 +22,8 @@ import com.github.piedpiper.node.NodeListQueryHandler;
 import com.github.piedpiper.node.aws.AWSLambdaFactory;
 import com.github.piedpiper.node.aws.AWSLambdaNode;
 import com.github.piedpiper.node.aws.ILambdaFactory;
+import com.github.piedpiper.storage.DynamoDBStorage;
+import com.github.piedpiper.storage.IGraphStorage;
 import com.github.piedpiper.utils.ParameterUtils;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
@@ -50,6 +52,7 @@ public class PiedPiperModule extends AbstractModule {
 		bind(Function.class).annotatedWith(Names.named(NodeListQueryHandler.class.getName()))
 				.to(NodeListQueryHandler.class);
 		bind(ILambdaFactory.class).to(AWSLambdaFactory.class);
+		bind(IGraphStorage.class).to(DynamoDBStorage.class);
 		bind(AWSLambdaNode.class).annotatedWith(Names.named(PiedPiperConstants.SEARCH_GRAPH_LAMBDA_NODE_NAME))
 				.toInstance(new AWSLambdaNode());
 		bind(String.class).annotatedWith(Names.named(PiedPiperConstants.PROD_SEARCH_ENDPOINT))
