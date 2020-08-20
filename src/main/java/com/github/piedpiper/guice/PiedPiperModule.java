@@ -12,12 +12,16 @@ import java.util.function.Function;
 
 import org.apache.commons.io.IOUtils;
 
+import com.amazonaws.auth.EnvironmentVariableCredentialsProvider;
 import com.amazonaws.services.simplesystemsmanagement.AWSSimpleSystemsManagement;
 import com.amazonaws.services.simplesystemsmanagement.AWSSimpleSystemsManagementClientBuilder;
 import com.amazonaws.services.stepfunctions.AWSStepFunctions;
 import com.amazonaws.services.stepfunctions.AWSStepFunctionsClientBuilder;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.github.commons.utils.JsonUtils;
 import com.github.piedpiper.common.PiedPiperConstants;
+import com.github.piedpiper.graph.storage.IGraphStorage;
+import com.github.piedpiper.graph.storage.dynamo.DynamoDBGraphStorageImpl;
 import com.github.piedpiper.node.NodeListQueryHandler;
 import com.github.piedpiper.node.aws.AWSLambdaFactory;
 import com.github.piedpiper.node.aws.AWSLambdaNode;
@@ -37,8 +41,6 @@ import akka.actor.ActorSystem;
 
 public class PiedPiperModule extends AbstractModule {
 
-	private static final String PROD_GOOGLE_CREDENTIAL_PATH = "com/github/piedpiper/node/firebase/atom8-157617-firebase-adminsdk-mbg44-7eb9af3f7b.json";
-
 	private static final String NODEJS_TEMPLATE_PATH = "pied-piper-script.js";
 
 	public PiedPiperModule() {
@@ -50,6 +52,7 @@ public class PiedPiperModule extends AbstractModule {
 		bind(Function.class).annotatedWith(Names.named(NodeListQueryHandler.class.getName()))
 				.to(NodeListQueryHandler.class);
 		bind(ILambdaFactory.class).to(AWSLambdaFactory.class);
+		bind(IGraphStorage.class).to(DynamoDBGraphStorageImpl.class);
 		bind(AWSLambdaNode.class).annotatedWith(Names.named(PiedPiperConstants.SEARCH_GRAPH_LAMBDA_NODE_NAME))
 				.toInstance(new AWSLambdaNode());
 		bind(String.class).annotatedWith(Names.named(PiedPiperConstants.PROD_SEARCH_ENDPOINT))
@@ -68,8 +71,11 @@ public class PiedPiperModule extends AbstractModule {
 
 	@Provides
 	@Singleton
-	public AWSSimpleSystemsManagement getAWSSimpleSystemsManagementClient() {
-		return AWSSimpleSystemsManagementClientBuilder.standard().withRegion("us-east-1").build();
+	public AWSSimpleSystemsManagement getAWSSimpleSystemsManagementClient(
+			@Named(PiedPiperConstants.GLOBAL_CONFIG) JsonNode globalConfig) {
+		String region = globalConfig.get(PiedPiperConstants.REGION).asText();
+		return AWSSimpleSystemsManagementClientBuilder.standard()
+				.withCredentials(new EnvironmentVariableCredentialsProvider()).withRegion(region).build();
 	}
 
 	@Provides
@@ -111,6 +117,18 @@ public class PiedPiperModule extends AbstractModule {
 		} catch (Exception e) {
 			// This is the path used if its run as a part of lambda
 			return readPath("com/github/piedpiper/guice/" + NODEJS_TEMPLATE_PATH);
+		}
+	}
+
+	@Provides
+	@Singleton
+	@Named(PiedPiperConstants.GLOBAL_CONFIG)
+	public JsonNode getGlobalConfig() {
+		try {
+			String globalConfigString = readPath("global-config.json");
+			return JsonUtils.mapper.readTree(globalConfigString);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
 		}
 	}
 

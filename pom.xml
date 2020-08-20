@@ -13,8 +13,8 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		 <maven.compiler.target>1.8</maven.compiler.target>
-        <maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<maven.compiler.source>1.8</maven.compiler.source>
 	</properties>
 
 	<dependencies>
@@ -27,11 +27,11 @@
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/com.google.inject.extensions/guice-assistedinject -->
 		<dependency>
-    		<groupId>com.google.inject.extensions</groupId>
-    		<artifactId>guice-assistedinject</artifactId>
-    		<version>4.2.2</version>
+			<groupId>com.google.inject.extensions</groupId>
+			<artifactId>guice-assistedinject</artifactId>
+			<version>4.2.2</version>
 		</dependency>
-		
+
 		<!-- https://mvnrepository.com/artifact/org.powermock/powermock-module-junit4 -->
 		<dependency>
 			<groupId>org.powermock</groupId>
@@ -56,13 +56,13 @@
 		<dependency>
 			<groupId>com.amazonaws</groupId>
 			<artifactId>aws-java-sdk</artifactId>
-			<version>1.11.535</version>
+			<version>1.11.845</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/com.google.inject/guice -->
 		<dependency>
-		    <groupId>com.google.inject</groupId>
-		    <artifactId>guice</artifactId>
-		    <version>4.2.2</version>
+			<groupId>com.google.inject</groupId>
+			<artifactId>guice</artifactId>
+			<version>4.2.2</version>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
@@ -79,9 +79,9 @@
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/com.typesafe.akka/akka-actor -->
 		<dependency>
-		    <groupId>com.typesafe.akka</groupId>
-		    <artifactId>akka-actor_2.12</artifactId>
-		    <version>2.6.3</version>
+			<groupId>com.typesafe.akka</groupId>
+			<artifactId>akka-actor_2.12</artifactId>
+			<version>2.6.3</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/com.typesafe.akka/akka-testkit -->
 		<dependency>
@@ -92,25 +92,25 @@
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/com.typesafe.akka/akka-slf4j -->
 		<dependency>
-		    <groupId>com.typesafe.akka</groupId>
-		    <artifactId>akka-slf4j_2.12</artifactId>
-		    <version>2.6.3</version>
+			<groupId>com.typesafe.akka</groupId>
+			<artifactId>akka-slf4j_2.12</artifactId>
+			<version>2.6.3</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/com.typesafe.akka/akka-stream -->
 		<dependency>
-		    <groupId>com.typesafe.akka</groupId>
-		    <artifactId>akka-stream_2.12</artifactId>
-		    <version>2.6.3</version>
+			<groupId>com.typesafe.akka</groupId>
+			<artifactId>akka-stream_2.12</artifactId>
+			<version>2.6.3</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/com.typesafe.akka/akka-parsing -->
 		<dependency>
-		    <groupId>com.typesafe.akka</groupId>
-		    <artifactId>akka-parsing_2.12</artifactId>
-		    <version>10.1.11</version>
+			<groupId>com.typesafe.akka</groupId>
+			<artifactId>akka-parsing_2.12</artifactId>
+			<version>10.1.11</version>
 		</dependency>
-		
-		
-		
+
+
+
 		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-collections4 -->
 		<dependency>
 			<groupId>org.apache.commons</groupId>
@@ -152,15 +152,15 @@
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/io.apigee.trireme/trireme-jar -->
 		<dependency>
-		    <groupId>io.apigee.trireme</groupId>
-		    <artifactId>trireme-jar</artifactId>
-		    <version>0.9.4</version>
+			<groupId>io.apigee.trireme</groupId>
+			<artifactId>trireme-jar</artifactId>
+			<version>0.9.4</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/com.google.firebase/firebase-admin -->
 		<dependency>
-		    <groupId>com.google.firebase</groupId>
-		    <artifactId>firebase-admin</artifactId>
-		    <version>6.8.0</version>
-		</dependency>				
+			<groupId>com.google.firebase</groupId>
+			<artifactId>firebase-admin</artifactId>
+			<version>6.8.0</version>
+		</dependency>
 	</dependencies>
 </project>

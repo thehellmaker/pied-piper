@@ -1,13 +1,14 @@
 package com.github.piedpiper.node;
 
 import com.github.commons.log.ILogger;
+import com.github.commons.log.Slf4jLoggerImpl;
 import com.github.piedpiper.graph.api.ApiNodeActor;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 
 public abstract class BaseNode implements INode {
 
-	protected ILogger logger;
+	protected ILogger logger = new Slf4jLoggerImpl();
 
 	protected Injector injector;
 	

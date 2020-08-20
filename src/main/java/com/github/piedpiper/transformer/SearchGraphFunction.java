@@ -55,10 +55,13 @@ public class SearchGraphFunction implements Function<JsonNode, JsonNode>  {
 			DynamoDBReaderNode readerNode = (DynamoDBReaderNode) injector.getInstance(DynamoDBReaderNode.class);
 			readerNode.setILogger(logger);
 			ArrayNode dynamoRecord = (ArrayNode) readerNode.apply(getSearchNodeInput(inputJson)).getOutput();
+			logger.log("Got Output");
 			// Dynamo stores the graphJson as a string and hence returns a list of strings. The below loop iterates through the 
 			// string graph jsons and converts them info json objects.
 			for (JsonNode eachDynamoRecord : dynamoRecord) {
-				JsonNode graphJson = JsonUtils.mapper.readTree(eachDynamoRecord.get(PiedPiperConstants.GRAPH).asText());
+				String graphJsonStr = eachDynamoRecord.get(PiedPiperConstants.GRAPH).asText();
+				logger.log(graphJsonStr);
+				JsonNode graphJson = JsonUtils.mapper.readTree(graphJsonStr);
 				((ObjectNode) eachDynamoRecord).set(PiedPiperConstants.GRAPH, graphJson);
 			}
 			return JsonUtils.mapper.valueToTree(dynamoRecord);
