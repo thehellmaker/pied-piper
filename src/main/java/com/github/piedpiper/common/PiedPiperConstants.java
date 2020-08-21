@@ -92,4 +92,8 @@ public class PiedPiperConstants {
 
 	public static final String PUBLISHED_VERSION = "publishedVersion";
 
+	public static final String VERSION_TYPE = "versionType";
+
+	public static final String SORT_TYPE = "sortType";
+
 }

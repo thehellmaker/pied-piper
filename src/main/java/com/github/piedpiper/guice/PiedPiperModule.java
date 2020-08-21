@@ -103,13 +103,6 @@ public class PiedPiperModule extends AbstractModule {
 
 	@Provides
 	@Singleton
-	@Named(PiedPiperConstants.GRAPH_CACHE)
-	public Map<String, JsonNode> getGraphCache() {
-		return Maps.newHashMap();
-	}
-
-	@Provides
-	@Singleton
 	@Named(PiedPiperConstants.NODEJS_SCRIPT_TEMPLATE)
 	public String getScriptTemplate() throws IOException, URISyntaxException {
 		try {

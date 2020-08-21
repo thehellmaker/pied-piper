@@ -5,8 +5,10 @@ import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.github.piedpiper.common.PiedPiperConstants;
-import com.github.piedpiper.graph.storage.GetGraphVersionInput;
+import com.github.piedpiper.graph.storage.QueryGraphInput;
+import com.github.piedpiper.graph.storage.QueryGraphInput.SortType;
 import com.github.piedpiper.graph.storage.IGraphStorage;
 import com.github.piedpiper.graph.storage.PutGraphVersionInput;
 import com.github.piedpiper.graph.storage.VersionType;
@@ -34,18 +36,23 @@ public class DynamoDBGraphStorageImpl implements IGraphStorage {
 
 	private DynamoDBPutGraphVersionFunction putGraphVersionFunction;
 
-	private DynamoDBGetGraphVersionFunction getGraphVersionFunction;
+	private DynamoDBGetGraphFunction getGraphFunction;
 
+	private DynamoDBQueryGraphFunction queryGraphFunction;
+	
 	@Inject
 	public DynamoDBGraphStorageImpl(DynamoDBPutGraphVersionFunction putGraphVersionFunction,
-			DynamoDBGetGraphVersionFunction getGraphVersionFunction) {
+			DynamoDBQueryGraphFunction queryGraphFunction,
+			DynamoDBGetGraphFunction getGraphFunction) {
 		this.putGraphVersionFunction = putGraphVersionFunction;
-		this.getGraphVersionFunction = getGraphVersionFunction;
+		this.queryGraphFunction = queryGraphFunction;
+		this.getGraphFunction = getGraphFunction;
 	}
 
 	@Override
-	public JsonNode search(String projectName, String graphName) {
-		return null;
+	public ArrayNode search(String projectName, String graphName, VersionType versionType, String alias, Long version, SortType sortType) {
+		return queryGraphFunction.apply(new QueryGraphInput(projectName, graphName, versionType, alias, version, sortType));
+		
 	}
 
 	@Override
@@ -53,11 +60,14 @@ public class DynamoDBGraphStorageImpl implements IGraphStorage {
 			String versionDescription) {
 		JsonNode latestVersionRecord = getLatestStagingVersion(projectName, graphName);
 		
-		String graphLatestVersion = latestVersionRecord.get(PiedPiperConstants.GRAPH).asText();
-		
-		if(graphJson.hashCode() == graphLatestVersion.hashCode()) {
-			throw new RuntimeException("No change in graph. New Staging Version not created");
+		if(latestVersionRecord != null) {
+			String graphLatestVersion = latestVersionRecord.get(PiedPiperConstants.GRAPH).asText();
+			
+			if(graphJson.hashCode() == graphLatestVersion.hashCode()) {
+				throw new RuntimeException("No change in graph. New Staging Version not created");
+			}
 		}
+		
 
 		long latestVersion = getLatestStagingVersionNumber(projectName, graphName);
 		
@@ -111,8 +121,8 @@ public class DynamoDBGraphStorageImpl implements IGraphStorage {
 
 	@Override
 	public JsonNode getPublishedVersion(String projectName, String graphName, Long version) {
-		return getGraphVersionFunction
-				.apply(new GetGraphVersionInput(projectName, graphName, VersionType.PublishedVersion, version));
+		return getGraphFunction
+				.apply(new QueryGraphInput(projectName, graphName, VersionType.PublishedVersion, version, SortType.Descending));
 	}
 
 	@Override
@@ -156,13 +166,13 @@ public class DynamoDBGraphStorageImpl implements IGraphStorage {
 		if(StringUtils.isBlank(alias)) {
 			throw new RuntimeException("alias cannot be empty");
 		}
-		return getGraphVersionFunction.apply(new GetGraphVersionInput(projectName, graphName, alias, version));
+		return getGraphFunction.apply(new QueryGraphInput(projectName, graphName, alias, version, SortType.Descending));
 	}
 
 	@Override
 	public JsonNode getStagingVersion(String projectName, String graphName, Long version) {
-		return getGraphVersionFunction
-				.apply(new GetGraphVersionInput(projectName, graphName, VersionType.StagingVersion, version));
+		return getGraphFunction
+				.apply(new QueryGraphInput(projectName, graphName, VersionType.StagingVersion, version, SortType.Descending));
 	}
 
 	@Override

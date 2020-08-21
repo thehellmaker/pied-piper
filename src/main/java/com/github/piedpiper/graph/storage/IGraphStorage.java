@@ -1,10 +1,10 @@
 package com.github.piedpiper.graph.storage;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.github.piedpiper.graph.storage.QueryGraphInput.SortType;
 
 public interface IGraphStorage {
-
-	JsonNode search(String projectName, String graphName);
 
 	/**
 	 * This method saves the graphJson as the latest version in the database. On
@@ -47,5 +47,8 @@ public interface IGraphStorage {
 	JsonNode getLatestPublishedVersion(String projectName, String graphName);
 
 	JsonNode postStagingVersion(String projectName, String graphName, String graphJson, String versionDescription);
+
+	ArrayNode search(String projectName, String graphName, VersionType versionType, String alias, Long version,
+			SortType sortType);
 
 }
