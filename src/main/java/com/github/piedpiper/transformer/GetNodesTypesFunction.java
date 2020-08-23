@@ -25,7 +25,6 @@ public class GetNodesTypesFunction implements Function<Void, JsonNode> {
 
 	@Override
 	public JsonNode apply(Void aVoid) {
-
 		@SuppressWarnings("unchecked")
 		Function<Class<?>, NodeMetadata> nodeMetadataQueryFunction = injector
 				.getInstance(Key.get(Function.class, Names.named(NodeListQueryHandler.class.getName())));

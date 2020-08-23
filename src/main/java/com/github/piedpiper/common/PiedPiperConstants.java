@@ -82,9 +82,11 @@ public class PiedPiperConstants {
 
 	public static final String GRAPH_VERSION_TABLE_NAME = "graphVersionTableName";
 
-	public static final String VERSION_DESCRIPTION = "VERSION_DESCRIPTION";
+	public static final String VERSION_DESCRIPTION = "versionDescription";
 
-	public static final String VERSION = "VERSION";
+	public static final String VERSION = "version";
+	
+	public static final String VERSION_STR = "versionStr";
 
 	public static final String ALIAS = "alias";
 
@@ -95,5 +97,23 @@ public class PiedPiperConstants {
 	public static final String VERSION_TYPE = "versionType";
 
 	public static final String SORT_TYPE = "sortType";
+
+	public static final String PREVIOUS_VERSION_DETAILS = "previousVersionDetails";
+	
+	public static final String PREVIOUS_VERSION_DETAILS_JSON = "previousVersionDetailsJson";
+
+	public static final String BRANCH_NAME = "branchName";
+
+	public static final String PREVIOUS_VERSION = "previousVersion";
+
+	public static final String PREVIOUS_PROJECT_NAME = "previousProjectName";
+
+	public static final String PREVIOUS_GRAPH_NAME = "previousGraphName";
+
+	public static final String PREVIOUS_BRANCH_NAME = "previousBranchName";
+
+	public static final String GRAPH_JSON = "graphJson";
+
+	public static final String FILTER_TYPE = "filterType";
 
 }

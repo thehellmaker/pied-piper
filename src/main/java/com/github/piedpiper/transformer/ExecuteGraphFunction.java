@@ -1,8 +1,6 @@
 package com.github.piedpiper.transformer;
 
 import java.io.IOException;
-import java.util.Map;
-import java.util.Optional;
 import java.util.concurrent.ExecutionException;
 import java.util.function.Function;
 
@@ -12,18 +10,17 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.github.commons.log.ILogger;
 import com.github.piedpiper.common.PiedPiperConstants;
+import com.github.piedpiper.graph.AliasType;
 import com.github.piedpiper.graph.api.ApiGraphActor;
 import com.github.piedpiper.graph.api.types.AuditInfo;
+import com.github.piedpiper.graph.api.types.GraphDefinition;
 import com.github.piedpiper.graph.api.types.GraphInput;
 import com.github.piedpiper.graph.storage.IGraphStorage;
-import com.github.piedpiper.graph.storage.VersionType;
+import com.github.piedpiper.graph.storage.QueryGraphInput;
 import com.github.piedpiper.graph.storage.QueryGraphInput.SortType;
-import com.github.piedpiper.graph.api.types.GraphDefinition;
-import com.github.piedpiper.node.aws.dynamo.DynamoDBBaseNode;
 import com.github.piedpiper.utils.SearchGraphUtils;
 import com.google.inject.Injector;
 import com.google.inject.Key;
-import com.google.inject.TypeLiteral;
 import com.google.inject.name.Names;
 
 import akka.actor.ActorRef;
@@ -71,24 +68,29 @@ public class ExecuteGraphFunction implements Function<JsonNode, GraphDefinition>
 		}
 	}
 
-	protected JsonNode getGraphNode(JsonNode inputJson) throws IOException, ExecutionException, InterruptedException {
-				JsonNode graphJson = inputJson.get(PiedPiperConstants.GRAPH);
+	protected JsonNode getGraphNode(JsonNode inputJson) throws Exception {
+		JsonNode graphJson = inputJson.get(PiedPiperConstants.GRAPH);
 		if (graphJson != null) {
 			return graphJson;
 		} else {
 			String projectName = SearchGraphUtils.getProjectName(inputJson);
 			String graphName = SearchGraphUtils.getGraphName(inputJson);
-			VersionType versionType = SearchGraphUtils.getVersionType(inputJson);
-			String alias = SearchGraphUtils.getAlias(inputJson);
+			String branchName = SearchGraphUtils.getBranchName(inputJson);
+			AliasType alias = SearchGraphUtils.getAlias(inputJson);
 			Long version = SearchGraphUtils.getVersion(inputJson);
 			SortType sortType = SearchGraphUtils.getSortType(inputJson);
-			
-			if(versionType == null) {
-				versionType = VersionType.Alias;
-				alias = "PROD";
-				version = null;
+			ArrayNode resultArrayNode;
+			if (version == null && alias == null) {
+				resultArrayNode = this.graphStorage
+						.search(new QueryGraphInput(projectName, graphName, branchName, AliasType.PROD, sortType));
+			} else if (alias != null) {
+				resultArrayNode = this.graphStorage
+						.search(new QueryGraphInput(projectName, graphName, branchName, alias, sortType));
+			} else {
+				resultArrayNode = this.graphStorage
+						.search(new QueryGraphInput(projectName, graphName, branchName, version, sortType));
 			}
-			ArrayNode resultArrayNode = this.graphStorage.search(projectName, graphName, versionType, alias, version, sortType);
+
 			return resultArrayNode.isEmpty() ? null : resultArrayNode.get(0);
 		}
 	}

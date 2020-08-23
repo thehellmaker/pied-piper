@@ -33,8 +33,10 @@ public class DynamoDBWriterNode extends DynamoDBBaseNode {
 			PutItemRequest putItemRequest = new PutItemRequest(getTableName(jsonInput), itemValues);
 
 			String conditionExpression = Optional
-					.ofNullable(ParameterUtils.getParameterData(jsonInput, CONDITION_EXPRESSION).getValueString())
+					.ofNullable(ParameterUtils.getParameterData(jsonInput, CONDITION_EXPRESSION))
+					.map(conditionExprNode -> conditionExprNode.getValueString())
 					.orElse(null);
+			
 			if (StringUtils.isNotBlank(conditionExpression)) {
 				putItemRequest.setConditionExpression(conditionExpression);
 			}
@@ -59,7 +61,9 @@ public class DynamoDBWriterNode extends DynamoDBBaseNode {
 			String eachFieldName = inputIterator.next();
 			if (ACCESS_KEY.getParameterName().equals(eachFieldName)
 					|| SECRET_KEY.getParameterName().equals(eachFieldName)
-					|| CONDITION_EXPRESSION.getParameterName().equals(eachFieldName))
+					|| CONDITION_EXPRESSION.getParameterName().equals(eachFieldName)
+					|| TABLE_NAME.getParameterName().equals(eachFieldName)
+					|| REGION.getParameterName().equals(eachFieldName))
 				continue;
 
 			ParameterData nodeData = ParameterUtils.getParameterData(jsonInput, new ParameterMetadata(eachFieldName));

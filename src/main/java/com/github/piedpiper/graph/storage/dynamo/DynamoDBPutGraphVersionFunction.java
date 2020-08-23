@@ -11,13 +11,12 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.github.commons.utils.JsonUtils;
 import com.github.piedpiper.common.PiedPiperConstants;
+import com.github.piedpiper.graph.AliasType;
 import com.github.piedpiper.graph.storage.PutGraphVersionInput;
-import com.github.piedpiper.graph.storage.VersionType;
 import com.github.piedpiper.node.NodeInput;
 import com.github.piedpiper.node.aws.AWSNode;
 import com.github.piedpiper.node.aws.dynamo.DynamoDBBaseNode;
 import com.github.piedpiper.node.aws.dynamo.DynamoDBWriterNode;
-import com.github.piedpiper.utils.DynamoDBUtils;
 import com.github.piedpiper.utils.ParameterUtils;
 import com.google.common.cache.LoadingCache;
 import com.google.inject.Inject;
@@ -25,7 +24,10 @@ import com.google.inject.name.Named;
 
 public class DynamoDBPutGraphVersionFunction implements Function<PutGraphVersionInput, JsonNode> {
 
-	private static final String PUT_IF_ABSENT_CONDITION_EXPRESSION = "attribute_not_exists(projectName) and attribute_not_exists(graphName_VersionType_Version)";
+	private static final String PUT_IF_ABSENT_CONDITION_EXPRESSION = String.format(
+			"attribute_not_exists(%s) and attribute_not_exists(%s)",
+			DynamoDBGraphStorageImpl.GRAPH_VERSION_TABLE_HASH_KEY_NAME,
+			DynamoDBGraphStorageImpl.GRAPH_VERSION_TABLE_RANGE_KEY_NAME);
 
 	private DynamoDBWriterNode writerNode;
 	private LoadingCache<String, String> cacheLoader;
@@ -58,14 +60,8 @@ public class DynamoDBPutGraphVersionFunction implements Function<PutGraphVersion
 
 		String hashKey = String.format("%s_%s", input.getProjectName(), input.getGraphName());
 
-		String rangeKey;
-		if (input.getVersionType() == VersionType.Alias) {
-			rangeKey = String.format(DynamoDBGraphStorageImpl.GRAPH_ALIAS_VERSION_TYPE_RANGE_KEY_PATTERN,
-					input.getAlias(), DynamoDBUtils.formatWithLongMaxLength(input.getVersion()));
-		} else {
-			rangeKey = String.format(DynamoDBGraphStorageImpl.GRAPH_VERSION_TYPE_RANGE_KEY_PATTERN,
-					input.getVersionType().name(), DynamoDBUtils.formatWithLongMaxLength(input.getVersion()));
-		}
+		String rangeKey = String.format(DynamoDBGraphStorageImpl.GRAPH_BRANCH_VERSION_RANGE_KEY_PATTERN,
+				input.getBranchName(), input.getVersion());
 
 		ObjectNode inputNodeJsonNode = JsonUtils.mapper.createObjectNode();
 		inputNodeJsonNode.set(AWSNode.ACCESS_KEY.getParameterName(), ParameterUtils.createParamValueNode(accessKey));
@@ -82,8 +78,10 @@ public class DynamoDBPutGraphVersionFunction implements Function<PutGraphVersion
 				ParameterUtils.createParamValueNode(rangeKey));
 		inputNodeJsonNode.set(PiedPiperConstants.GRAPH, ParameterUtils.createParamValueNode(input.getGraphJson()));
 
-		inputNodeJsonNode.set(DynamoDBWriterNode.CONDITION_EXPRESSION.getParameterName(),
-				ParameterUtils.createParamValueNode(PUT_IF_ABSENT_CONDITION_EXPRESSION));
+		if (isNotValidAlias(input.getVersion())) {
+			inputNodeJsonNode.set(DynamoDBWriterNode.CONDITION_EXPRESSION.getParameterName(),
+					ParameterUtils.createParamValueNode(PUT_IF_ABSENT_CONDITION_EXPRESSION));
+		}
 
 		if (MapUtils.isNotEmpty(input.getAttributes())) {
 			for (Entry<String, Object> attribute : input.getAttributes().entrySet()) {
@@ -94,6 +92,15 @@ public class DynamoDBPutGraphVersionFunction implements Function<PutGraphVersion
 		NodeInput nodeInput = new NodeInput();
 		nodeInput.setInput(inputNodeJsonNode);
 		return nodeInput;
+	}
+
+	private boolean isNotValidAlias(String aliasType) {
+		try {
+			AliasType.valueOf(aliasType);
+			return false;
+		} catch (Exception e) {
+			return true;
+		}
 	}
 
 }
