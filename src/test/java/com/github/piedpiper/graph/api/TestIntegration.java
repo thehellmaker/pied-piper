@@ -1,54 +1,33 @@
 package com.github.piedpiper.graph.api;
 
 import java.io.ByteArrayOutputStream;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.util.List;
-import java.util.Map.Entry;
 
 import org.junit.Test;
 
+import com.amazonaws.services.dynamodbv2.datamodeling.IDynamoDBMapper;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.util.StringInputStream;
-import com.amazonaws.util.json.Jackson;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.github.commons.log.ILogger;
 import com.github.commons.log.Slf4jLoggerImpl;
 import com.github.commons.utils.JsonUtils;
 import com.github.piedpiper.common.PiedPiperConstants;
-import com.github.piedpiper.graph.api.types.AuditInfo;
-import com.github.piedpiper.graph.api.types.GraphInput;
-import com.github.piedpiper.graph.api.types.GraphDefinition;
-import com.github.piedpiper.graph.api.types.NodeDefinition;
+import com.github.piedpiper.graph.storage.IGraphStorage;
+import com.github.piedpiper.graph.storage.QueryGraphInput.SortType;
+import com.github.piedpiper.graph.storage.VersionType;
+import com.github.piedpiper.graph.storage.dynamo.DynamoDBPutGraphVersionFunction;
 import com.github.piedpiper.guice.PiedPiperModule;
-import com.github.piedpiper.lambda.ExecuteGraphLambdaFunction;
+import com.github.piedpiper.lambda.SearchGraphLambdaFunction;
 import com.github.piedpiper.lambda.TestContext;
-import com.github.piedpiper.node.NodeInput;
-import com.github.piedpiper.node.NodeOutput;
 import com.github.piedpiper.node.aws.dynamo.DynamoDBBaseNode;
 import com.github.piedpiper.node.aws.dynamo.TestConstants;
-import com.github.piedpiper.node.piedpiper.SubGraphNode;
-import com.github.piedpiper.node.rest.RESTPostHandler;
-import com.github.piedpiper.node.rest.RESTServiceNode;
-import com.github.piedpiper.utils.ParameterUtils;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import com.google.inject.Key;
-import com.google.inject.name.Names;
 
 import akka.actor.ActorSystem;
-import akka.actor.Props;
-import akka.testkit.TestActorRef;
-import akka.util.Timeout;
-import scala.concurrent.Await;
-import scala.concurrent.Future;
-import scala.concurrent.duration.Duration;
 
 public class TestIntegration {
 
@@ -57,6 +36,28 @@ public class TestIntegration {
 	private static final ILogger logger = new Slf4jLoggerImpl();
 
 	private static final ActorSystem system = ActorSystem.create("graphExecutor");
+
+	@Test
+	public void testVersioning() {
+		Injector injector = Guice.createInjector(new PiedPiperModule());
+//		GetLatestGraphStagingVersionFunction getLatestGraphStagingVersionFunction = injector
+//				.getInstance(GetLatestGraphStagingVersionFunction.class);
+//		System.out.println(getLatestGraphStagingVersionFunction.apply(new GraphId("Atom8", "Test")));
+//		IGraphStorage graphStorage = injector.getInstance(IGraphStorage.class);
+//		System.out.println(graphStorage.postNewVersion("Atom8", "Test", 3l, "Test"));
+//		System.out.println(graphStorage.getStagingVersion("Atom8", "Test", 4l));
+//		System.out.println(graphStorage.getStagingVersion("Atom8", "Test", null));
+//		System.out.println(graphStorage.getLatestStagingVersion("Atom8", "Test"));
+//		System.out.println(graphStorage.getPublishedVersion("Atom8", "Test", 4l));
+//		System.out.println(graphStorage.getPublishedVersion("Atom8", "Test", null));
+//		System.out.println(graphStorage.getLatestPublishedVersion("Atom8", "Test"));
+		
+		
+//		System.out.println(graphStorage.postStagingVersion("Atom8", "Test123", "{}", "test"));
+//		System.out.println(graphStorage.putAlias("Atom8", "Test", "PROD", 3l, "Alias Publish"));
+//		System.out.println(graphStorage.search("Atom8", "Test", VersionType.PublishedVersion, null, null, SortType.Descending));
+		
+	}
 
 	@Test
 	public void testIntegration() throws Exception {
@@ -150,17 +151,29 @@ public class TestIntegration {
 ////			}
 //
 //		}
-////		
-////		logger.log("Fetched Graoh Json from Dynamo = " + JsonUtils.mapper.writeValueAsString(graphDefinition));
-//
-////		ExecuteGraphFunction graphFunction = new ExecuteGraphFunction();
-////		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-////		graphFunction.handleRequest(new StringInputStream(inputJson.toString()), outputStream, createContext());
-////		GraphDefinition graphResponse = JsonUtils.readValueSilent(new String(outputStream.toByteArray()),
-////				GraphDefinition.class);
-////		printAudit(graphResponse);
-////		System.out.println(Jackson.toJsonPrettyString(graphDefinition));
+
+//		logger.log("Fetched Graoh Json from Dynamo = " + JsonUtils.mapper.writeValueAsString(graphDefinition));
+
+//		ExecuteGraphFunction graphFunction = new ExecuteGraphFunction();
+//		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+//		graphFunction.handleRequest(new StringInputStream(inputJson.toString()), outputStream, createContext());
+//		GraphDefinition graphResponse = JsonUtils.readValueSilent(new String(outputStream.toByteArray()),
+//				GraphDefinition.class);
+//		printAudit(graphResponse);
+//		System.out.println(Jackson.toJsonPrettyString(graphDefinition));
 //	}
+
+	@Test
+	public void testSearchGraphFunction() throws UnsupportedEncodingException, IOException {
+		ObjectNode inputJson = JsonUtils.mapper.createObjectNode();
+		inputJson.put(PiedPiperConstants.PROJECT_NAME, "Atom8");
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		SearchGraphLambdaFunction searchFn = new SearchGraphLambdaFunction();
+		searchFn.handleRequest(new StringInputStream(inputJson.toString()), baos, createContext());
+		String response = new String(baos.toByteArray());
+		System.out.println(response);
+	}
+
 //
 //	@Test
 //	public void testSetupCloudExecuteGraphFunction() throws UnsupportedEncodingException, IOException {

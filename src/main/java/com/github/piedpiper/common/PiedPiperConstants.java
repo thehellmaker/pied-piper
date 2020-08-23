@@ -16,9 +16,13 @@ public class PiedPiperConstants {
 
 	public static final String WARM_UP = "warmUp";
 
-	public static final String ALMIGHTY_TABLE_HASH_KEY = "hashKey";
+	public static final String HASH_KEY_PARAMETER = "hashKey";
 
-	public static final String ALMIGHTY_TABLE_RANGE_KEY = "rangeKey";
+	public static final String RANGE_KEY_PARAMETER = "rangeKey";
+	
+	public static final String RANGE_KEY_BEGIN_PARAMETER = "rangeKeyBegin";
+	
+	public static final String RANGE_KEY_END_PARAMETER = "rangeKeyEnd";
 
 	public static final String ALMIGHTY_TABLE_NAME = "AlmightyTable";
 
@@ -36,15 +40,15 @@ public class PiedPiperConstants {
 
 	public static final String SEARCH_GRAPH_LAMBDA_NODE_NAME = "SearchGraphFunction";
 
-	public static final String DEFAULT_ACCESS_KEY = "AccessKey";
+	public static final String ACCESS_KEY = "AccessKey";
 
-	public static final String DEFAULT_SECRET_KEY = "SecretKey";
+	public static final String SECRET_KEY = "SecretKey";
 
 	public static final String PROD_EXECUTE_GRAPH_ENDPOINT = "prodExecuteGraphEndpoint";
 
 	public static final String PROD_SEARCH_ENDPOINT = "prodSearchEndpoint";
 
-	public static final String TABLE_NAME_PARAMETER = "tableName";
+	public static final String TABLE_NAME = "tableName";
 
 	public static final String AWS_SSM_CACHE = "AWS_SSM_CACHE";
 
@@ -71,5 +75,45 @@ public class PiedPiperConstants {
 	public static final String CUSTOM_TOKEN = "CUSTOM_TOKEN";
 
 	public static final String EMPTY_JSON_STRING = "{}";
+
+	public static final String GLOBAL_CONFIG = "GLOBAL_CONFIG";
+
+	public static final String REGION = "region";
+
+	public static final String GRAPH_VERSION_TABLE_NAME = "graphVersionTableName";
+
+	public static final String VERSION_DESCRIPTION = "versionDescription";
+
+	public static final String VERSION = "version";
+	
+	public static final String VERSION_STR = "versionStr";
+
+	public static final String ALIAS = "alias";
+
+	public static final String STAGING_VERSION = "stagingVersion";
+
+	public static final String PUBLISHED_VERSION = "publishedVersion";
+
+	public static final String VERSION_TYPE = "versionType";
+
+	public static final String SORT_TYPE = "sortType";
+
+	public static final String PREVIOUS_VERSION_DETAILS = "previousVersionDetails";
+	
+	public static final String PREVIOUS_VERSION_DETAILS_JSON = "previousVersionDetailsJson";
+
+	public static final String BRANCH_NAME = "branchName";
+
+	public static final String PREVIOUS_VERSION = "previousVersion";
+
+	public static final String PREVIOUS_PROJECT_NAME = "previousProjectName";
+
+	public static final String PREVIOUS_GRAPH_NAME = "previousGraphName";
+
+	public static final String PREVIOUS_BRANCH_NAME = "previousBranchName";
+
+	public static final String GRAPH_JSON = "graphJson";
+
+	public static final String FILTER_TYPE = "filterType";
 
 }

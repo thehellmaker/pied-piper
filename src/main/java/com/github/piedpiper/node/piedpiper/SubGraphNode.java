@@ -28,7 +28,7 @@ public class SubGraphNode extends BaseNode {
 	public static final ParameterMetadata GRAPH_NAME = new ParameterMetadata(PiedPiperConstants.GRAPH_NAME,
 			ParameterMetadata.MANDATORY);
 
-	public static final ParameterMetadata TABLE_NAME = new ParameterMetadata(PiedPiperConstants.TABLE_NAME_PARAMETER,
+	public static final ParameterMetadata TABLE_NAME = new ParameterMetadata(PiedPiperConstants.TABLE_NAME,
 			ParameterMetadata.OPTIONAL);
 
 	@Override

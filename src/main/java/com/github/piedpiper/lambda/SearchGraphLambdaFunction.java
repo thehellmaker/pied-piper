@@ -23,10 +23,6 @@ import com.google.inject.Injector;
 
 public class SearchGraphLambdaFunction implements RequestStreamHandler {
 
-	public static final String EXACT_RANGE_QUERY = "hashKey = :hashKey and rangeKey = :rangeKey";
-
-	public static final String PREFIX_RANGE_QUERY = "hashKey = :hashKey and begins_with(rangeKey, :rangeKey)";
-
 	private Injector injector;
 
 	public SearchGraphLambdaFunction() {

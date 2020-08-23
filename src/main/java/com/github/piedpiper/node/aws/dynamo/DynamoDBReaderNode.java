@@ -36,6 +36,8 @@ public class DynamoDBReaderNode extends DynamoDBBaseNode {
 
 	public static final ParameterMetadata FILTER_QUERY_EXPRESSION = new ParameterMetadata("filterQueryExpression");
 	
+	public static final ParameterMetadata SCAN_INDEX_FORWARD = new ParameterMetadata("scanIndexForward");
+	
 	/**
 	 * @param input
 	 */
@@ -50,7 +52,10 @@ public class DynamoDBReaderNode extends DynamoDBBaseNode {
 			String filterExpression = Optional.ofNullable(ParameterUtils.getParameterData(jsonInput, FILTER_QUERY_EXPRESSION))
 					.map(parameterData -> parameterData.getValueString())
 					.orElse(StringUtil.EMPTY_STRING);
-
+			Boolean scanIndexForward = Optional.ofNullable(ParameterUtils.getParameterData(jsonInput, SCAN_INDEX_FORWARD))
+					.map(parameterData -> parameterData.getValue().asBoolean())
+					.orElse(Boolean.TRUE);
+			
 			List<Item> itemList;
 			if (StringUtils.isNotBlank(keyQueryExpression)) {
 				// Query
@@ -59,6 +64,7 @@ public class DynamoDBReaderNode extends DynamoDBBaseNode {
 				if (StringUtils.isNotBlank(filterExpression)) {
 					spec.withFilterExpression(filterExpression);
 				}
+				spec.withScanIndexForward(scanIndexForward);
 				ItemCollection<QueryOutcome> itemCollection = table.query(spec);
 				itemList = Lists.newArrayList(itemCollection.iterator());
 			} else {

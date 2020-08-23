@@ -1,25 +1,26 @@
 package com.github.piedpiper.transformer;
 
 import java.io.IOException;
-import java.util.Map;
-import java.util.Optional;
 import java.util.concurrent.ExecutionException;
 import java.util.function.Function;
 
 import org.apache.commons.lang3.StringUtils;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.github.commons.log.ILogger;
 import com.github.piedpiper.common.PiedPiperConstants;
+import com.github.piedpiper.graph.AliasType;
 import com.github.piedpiper.graph.api.ApiGraphActor;
 import com.github.piedpiper.graph.api.types.AuditInfo;
-import com.github.piedpiper.graph.api.types.GraphInput;
 import com.github.piedpiper.graph.api.types.GraphDefinition;
-import com.github.piedpiper.node.aws.dynamo.DynamoDBBaseNode;
+import com.github.piedpiper.graph.api.types.GraphInput;
+import com.github.piedpiper.graph.storage.IGraphStorage;
+import com.github.piedpiper.graph.storage.QueryGraphInput;
+import com.github.piedpiper.graph.storage.QueryGraphInput.SortType;
 import com.github.piedpiper.utils.SearchGraphUtils;
 import com.google.inject.Injector;
 import com.google.inject.Key;
-import com.google.inject.TypeLiteral;
 import com.google.inject.name.Names;
 
 import akka.actor.ActorRef;
@@ -37,13 +38,12 @@ public class ExecuteGraphFunction implements Function<JsonNode, GraphDefinition>
 
 	private Injector injector;
 
-	private Map<String, JsonNode> graphCache;
-	
+	private IGraphStorage graphStorage;
+
 	public ExecuteGraphFunction(ILogger logger, Injector injector) {
 		this.logger = logger;
 		this.injector = injector;
-		this.graphCache = injector.getInstance(Key.get(new TypeLiteral<Map<String, JsonNode>>() {
-		}, Names.named(PiedPiperConstants.GRAPH_CACHE)));
+		this.graphStorage = injector.getInstance(IGraphStorage.class);
 	}
 
 	@Override
@@ -51,10 +51,9 @@ public class ExecuteGraphFunction implements Function<JsonNode, GraphDefinition>
 		ActorRef graphActorRef = getActorSystem().actorOf(ApiGraphActor.props(injector, logger));
 		try {
 			long startTime = System.currentTimeMillis();
-			GraphInput graphInput = new GraphInput(getGraphNode(inputJson),
-					inputJson.get(PiedPiperConstants.INPUT));
+			GraphInput graphInput = new GraphInput(getGraphNode(inputJson), inputJson.get(PiedPiperConstants.INPUT));
 			Timeout timeout = new Timeout(Duration.create(90, "seconds"));
-			Future<Object> future = Patterns.ask((ActorRef)graphActorRef, graphInput, timeout);
+			Future<Object> future = Patterns.ask((ActorRef) graphActorRef, graphInput, timeout);
 			GraphDefinition response = (GraphDefinition) Await.result(future, timeout.duration());
 			long endTime = System.currentTimeMillis();
 			AuditInfo auditInfo = new AuditInfo();
@@ -69,35 +68,35 @@ public class ExecuteGraphFunction implements Function<JsonNode, GraphDefinition>
 		}
 	}
 
-	protected JsonNode getGraphNode(JsonNode inputJson) throws IOException, ExecutionException, InterruptedException {
-		Boolean isClearCache = Optional.ofNullable(inputJson.get("clearCache"))
-				.map(tableNodeName -> tableNodeName.asBoolean()).orElse(false);
-		
-		
-		String projectName = Optional.ofNullable(inputJson.get(PiedPiperConstants.PROJECT_NAME))
-				.map(projectNameNode -> projectNameNode.asText()).orElse(null);
-		String graphName = Optional.ofNullable(inputJson.get(PiedPiperConstants.GRAPH_NAME))
-				.map(graphNameNode -> graphNameNode.asText()).orElse(null);
-		String tableName = Optional.ofNullable(inputJson.get(DynamoDBBaseNode.TABLE_NAME.getParameterName()))
-				.map(tableNodeName -> tableNodeName.asText()).orElse(PiedPiperConstants.ALMIGHTY_TABLE_NAME);
+	protected JsonNode getGraphNode(JsonNode inputJson) throws Exception {
 		JsonNode graphJson = inputJson.get(PiedPiperConstants.GRAPH);
-
-		
 		if (graphJson != null) {
 			return graphJson;
-		} else if (StringUtils.isNotBlank(projectName) && StringUtils.isNotBlank(graphName)
-				&& StringUtils.isNotBlank(tableName)) {
-			new WarmupHandler(injector, logger, isClearCache).apply(null);
-			String graphKey = SearchGraphUtils.getGraphCacheKey(projectName, graphName);
-			if(graphCache.containsKey(graphKey)) return graphCache.get(graphKey);
+		} else {
+			String projectName = SearchGraphUtils.getProjectName(inputJson);
+			String graphName = SearchGraphUtils.getGraphName(inputJson);
+			String branchName = SearchGraphUtils.getBranchName(inputJson);
+			AliasType alias = SearchGraphUtils.getAlias(inputJson);
+			Long version = SearchGraphUtils.getVersion(inputJson);
+			SortType sortType = SearchGraphUtils.getSortType(inputJson);
+			ArrayNode resultArrayNode;
+			if (version == null && alias == null) {
+				resultArrayNode = this.graphStorage
+						.search(new QueryGraphInput(projectName, graphName, branchName, AliasType.PROD, sortType));
+			} else if (alias != null) {
+				resultArrayNode = this.graphStorage
+						.search(new QueryGraphInput(projectName, graphName, branchName, alias, sortType));
+			} else {
+				resultArrayNode = this.graphStorage
+						.search(new QueryGraphInput(projectName, graphName, branchName, version, sortType));
+			}
+
+			return resultArrayNode.isEmpty() ? null : resultArrayNode.get(0);
 		}
-		throw new RuntimeException("Error getting graph json");
 	}
-	
 
 	private ActorRefFactory getActorSystem() {
 		return injector.getInstance(Key.get(ActorSystem.class, Names.named(PiedPiperConstants.GRAPH_ACTOR)));
 	}
 
 }
-
